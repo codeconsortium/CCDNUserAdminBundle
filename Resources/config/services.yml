@@ -8,7 +8,7 @@ parameters:
     ccdn_user_admin.administrate.profile.form.handler.class: CCDNUser\AdminBundle\Form\Handler\AdministrateProfileFormHandler
     ccdn_user_admin.administrate.profile.form.type.class:    CCDNUser\AdminBundle\Form\Type\AdministrateProfileType
 
-    ccdn_user_admin.dashboard_integrator.class:        CCDNUser\AdminBundle\Component\Dashboard\DashboardIntegrator
+    ccdn_user_admin.dashboard.integrator.class:        CCDNUser\AdminBundle\Component\Dashboard\DashboardIntegrator
 
 services:
     ccdn_user_admin.role.form.change.handler:
@@ -33,8 +33,8 @@ services:
         arguments:  [@doctrine]
 
 
-    ccdn_user_admin.dashboard_integrator:
-        class: %ccdn_user_admin.dashboard_integrator.class%
+    ccdn_user_admin.dashboard.integrator:
+        class: %ccdn_user_admin.dashboard.integrator.class%
         arguments: [@service_container]
         tags:
-            - { name: ccdn_component_dashboard.registry }
+            - { name: ccdn_component_dashboard.integrator }
