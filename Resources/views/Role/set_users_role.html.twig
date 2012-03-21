@@ -1,0 +1,61 @@
+{% extends param('ccdn_user_admin.role.layout_templates.set_users_role') %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block title %}{{ 'title.account.edit' |trans({}, 'CCDNUserUserBundle') }}{% endblock %}
+
+{% block sidebar %}
+	{% if is_granted('ROLE_MODERATOR') %}
+	<div class="common_box_5 bg_header_smoke">
+		<div class="common_box_header"><span class="heading_glow">{{ 'sidebar.header.special' | trans({}, 'CCDNComponentCommonBundle') }}</span></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_moderator_forum_cp') }}">{{ 'general.view.link_moderate' | trans({}, 'CCDNComponentCommonBundle') }}</a></div>
+		{% if is_granted('ROLE_ADMIN') %}
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_forum_cp') }}">{{ 'general.view.link_administrate' | trans({}, 'CCDNComponentCommonBundle') }}</a></div>
+		{% endif %}
+	</div>
+	{% endif %}
+
+	<div class="common_box_5 bg_header_smoke">
+		<div class="common_box_header"><span class="heading_glow">{{ 'sidebar.header.admin.user'|trans({}, 'CCDNUserAdminBundle') }}</span></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_newest') }}">{{ 'sidebar.link.user.show_new'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_unactivated') }}">{{ 'sidebar.link.user.show_unactivated'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_banned') }}">{{ 'sidebar.link.user.show_banned'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+	</div>
+{% endblock %}
+
+{% block body %}
+
+{% include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' %}
+
+<div class="common_box_5 bg_header_smoke">
+	<div class="common_box_header">
+		<span class="heading_glow">{{ 'title.account.edit' |trans({}, 'CCDNUserUserBundle') }}</span>
+	</div>
+	<div class="common_box_panel">
+		{% form_theme form param('ccdn_user_user_admin.template.theme') %}
+		<form action="{{ path('cc_admin_user_set_roles', {'user_id': user.id }) }}" {{ form_enctype(form) }} method="POST">
+			{{ form_row(form._token) }}
+			<div class="errors">{{ form_errors(form) }}</div>
+			<table class="common_list">
+				<tbody>
+					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+						<td class="form_label">{{ form_label(form.role, null, { 'label': 'form.label.user.roles' |trans({}, 'CCDNUserAdminBundle')}) }}</td>
+						<td class="form_widget">
+							{{ form_errors(form.role) }}
+							{{ form_widget(form.role) }}
+						</td>
+					</tr>	
+					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+						<td class="form_tool_strip" colspan="2">
+					        <input type="submit" class="widget_submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}">
+					    </td>
+					</tr>
+				</tbody>
+			</table>
+
+		</form>
+	</div>
+</div>
+{% endblock body %}

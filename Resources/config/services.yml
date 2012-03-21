@@ -1,0 +1,30 @@
+parameters:
+    ccdn_user_admin.role.form.change.handler.class:    CCDNUser\AdminBundle\Form\Handler\RoleSetFormHandler
+    ccdn_user_admin.role.form.change.type.class:       CCDNUser\AdminBundle\Form\Type\RoleType
+
+    ccdn_user_admin.account.administrate.form.handler.class: CCDNUser\AdminBundle\Form\Handler\AccountAdministrateFormHandler
+    ccdn_user_admin.account.administrate.form.type.class:    CCDNUser\AdminBundle\Form\Type\AccountAdministrateType
+
+    ccdn_user_admin.dashboard_integrator.class:        CCDNUser\AdminBundle\Component\Dashboard\DashboardIntegrator
+
+services:
+    ccdn_user_admin.role.form.change.handler:
+        class:  %ccdn_user_admin.role.form.change.handler.class%
+        arguments:  [@form.factory, @service_container, @ccdn_user_user.user.manager]
+    ccdn_user_admin.role.form.change.type:
+        class:  %ccdn_user_admin.role.form.change.type.class%
+        arguments:  [@doctrine]
+    
+    ccdn_user_admin.account.administrate.form.handler:
+        class:  %ccdn_user_admin.account.administrate.form.handler.class%
+        arguments:  [@form.factory, @service_container, @ccdn_user_user.user.manager]
+    ccdn_user_admin.account.administrate.form.type:
+        class:  %ccdn_user_admin.account.administrate.form.type.class%
+        arguments:  [@doctrine]
+        
+
+    ccdn_user_admin.dashboard_integrator:
+        class: %ccdn_user_admin.dashboard_integrator.class%
+        arguments: [@service_container]
+        tags:
+            - { name: ccdn_component_dashboard.registry }

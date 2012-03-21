@@ -1,0 +1,76 @@
+{% extends param('ccdn_user_admin.account.layout_templates.show_user') %}
+
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block title %}{{ 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') }}{% endblock %}
+
+{% block sidebar %}
+	{% if is_granted('ROLE_MODERATOR') %}
+	<div class="common_box_5 bg_header_smoke">
+		<div class="common_box_header"><span class="heading_glow">{{ 'sidebar.header.special' | trans({}, 'CCDNComponentCommonBundle') }}</span></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_moderator_forum_cp') }}">{{ 'general.view.link_moderate' | trans({}, 'CCDNComponentCommonBundle') }}</a></div>
+		{% if is_granted('ROLE_ADMIN') %}
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_forum_cp') }}">{{ 'general.view.link_administrate' | trans({}, 'CCDNComponentCommonBundle') }}</a></div>
+		{% endif %}
+	</div>
+	{% endif %}
+
+	<div class="common_box_5 bg_header_smoke">
+		<div class="common_box_header"><span class="heading_glow">{{ 'sidebar.header.admin.user'|trans({}, 'CCDNUserAdminBundle') }}</span></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_newest') }}">{{ 'sidebar.link.user.show_new'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_unactivated') }}">{{ 'sidebar.link.user.show_unactivated'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_banned') }}">{{ 'sidebar.link.user.show_banned'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+	</div>
+
+	<div class="common_box_5 bg_header_smoke">
+		<div class="common_box_header"><span class="heading_glow">{{ 'sidebar.header.admin.user'|trans({}, 'CCDNUserAdminBundle') }}</span></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_activate', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.activate'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_force_reactivation', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.force_reactivation'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		{% if user.locked %}
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_unban', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.unban'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		{% else %}
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_ban', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.ban'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		{% endif %}
+		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_set_roles', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.set_roles'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+	</div>
+{% endblock %}
+
+{% block body %}
+
+{% include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' %}
+
+<div class="common_box_5 bg_header_smoke">
+	<div class="common_box_header">
+		<span class="heading_glow">{{ 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') }}</span>
+	</div>
+	<div class="common_box_panel">
+		<table class="common_list">
+			<tbody>
+				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+					<td class="form_label">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</td>
+					<td class="form_widget">{{ user.username }}</td>
+				</tr>	
+				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+					<td class="form_label">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</td>
+					<td class="form_widget">{{ user.email }}</td>
+				</tr>
+				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+					<td class="form_label">{{ 'profile.show.banned'|trans({}, 'CCDNUserAdminBundle') }}</td>
+					<td class="form_widget">{% if user.locked %}Banned{% else %}No Bans{% endif %}</td>				
+				</tr>
+				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+					<td class="form_label">{{ 'profile.show.activated'|trans({}, 'CCDNUserAdminBundle') }}</td>
+					<td class="form_widget">{% if user.enabled %}Activated{% else %}Not Activated{% endif %}</td>
+				</tr>
+				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+					<td class="form_tool_strip" colspan="2">
+						<a href="{{ path('cc_admin_user_account_edit', {'user_id': user.getId}) }}">{{ 'link.profile.edit' |trans({}, 'CCDNUserProfileBundle') }}</a>
+				    </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock body %}

@@ -1,0 +1,31 @@
+title.user.admin.newest_users: New Users
+title.user.admin.unactivated_users: Unactivated Users
+title.user.admin.banned_users: Banned Users
+
+sidebar.header.admin.user: User Management
+sidebar.link.user.show_new: New Users
+sidebar.link.user.show_unactivated: Unactivated Users
+sidebar.link.user.show_banned: Banned Users
+
+sidebar.link.user.activate: Activate
+sidebar.link.user.force_reactivation: Force Reactivation
+sidebar.link.user.ban: Ban User
+sidebar.link.user.unban: Unban User
+sidebar.link.user.set_roles: Set Roles
+
+flash.user.activate.success: 'User: "%username%" activated.'
+flash.user.force_reactivation.success: 'User: "%username%" pending re-activation.'
+flash.user.ban.success: 'User: "%username%" banned.'
+flash.user.unban.success: 'User: "%username%" unbanned.'
+flash.user.set_roles.success: 'User: "%username%" roles changed.'
+
+form.label.user.roles: 'set roles: '
+form.label.account.locked: 'Account is Banned: '
+form.label.account.enabled: 'Account is Activated: '
+
+user.table.head.status.activation: Activation Status
+user.table.head.email: Email Address
+
+profile.show.banned: 'Ban Status: '
+profile.show.activated: 'Activation Status: '
+
