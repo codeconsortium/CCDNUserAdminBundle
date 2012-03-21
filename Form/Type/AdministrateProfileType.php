@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the CCDN UserAdminBundle
+ * This file is part of the CCDN ProfileBundle
  *
  * (c) CCDN (c) CodeConsortium <http://www.codeconsortium.com/> 
  * 
@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilder;
  * @author Reece Fowell <reece@codeconsortium.com> 
  * @version 1.0
  */
-class AccountAdministrateType extends AbstractType
+class AdministrateProfileType extends AbstractType
 {
 	
 	
@@ -71,7 +71,7 @@ class AccountAdministrateType extends AbstractType
 		return $this;
 	}
 	
-	
+		
 	
 	/**
 	 *
@@ -80,14 +80,24 @@ class AccountAdministrateType extends AbstractType
 	 */
 	public function buildForm(FormBuilder $builder, array $options)
 	{
-		$builder->add('username', 'text');
-		$builder->add('email', 'text');
-		$builder->add('locked'); // banning
-		$builder->add('enabled'); // activation
+		$builder
+			->add('avatar_is_remote')
+			->add('avatar')
+			->add('aim')
+			->add('aim_is_public')
+			->add('msn')
+			->add('msn_is_public')
+			->add('icq')
+			->add('icq_is_public')
+			->add('yahoo')
+			->add('yahoo_is_public')
+			->add('website')
+			->add('bio')
+			->add('location')
+			->add('signature');
 	}
 	
-	
-	
+
 	/**
 	 *
 	 * for creating and replying to topics
@@ -98,14 +108,13 @@ class AccountAdministrateType extends AbstractType
 	public function getDefaultOptions(array $options)
 	{
 		return array(
-			'data_class' => 'CCDNUser\UserBundle\Entity\User',
+			'data_class' => 'CCDNUser\ProfileBundle\Entity\Profile',
 			'csrf_protection' => true,
             'csrf_field_name' => '_token',
             // a unique key to help generate the secret token
-            'intention'       => 'user_administrate_item',
+            'intention'       => 'administrate_profile_item',
 		);
 	}
-
 
 
 	/**
@@ -115,7 +124,7 @@ class AccountAdministrateType extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'AccountAdministrate';
+		return 'AdministrateProfile';
 	}
 	
 }

@@ -2,6 +2,8 @@
 
 {% block stylesheets %}
 	{{ parent() }}
+	<link href="{{ asset('bundles/ccdncomponentcrumbtrail/css/crumbs.css') }}" rel="stylesheet" type="text/css">
+	
 {% endblock %}
 
 {% block title %}{{ 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') }}{% endblock %}
@@ -23,27 +25,32 @@
 		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_unactivated') }}">{{ 'sidebar.link.user.show_unactivated'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
 		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_banned') }}">{{ 'sidebar.link.user.show_banned'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
 	</div>
-
-	<div class="common_box_5 bg_header_smoke">
-		<div class="common_box_header"><span class="heading_glow">{{ 'sidebar.header.admin.user'|trans({}, 'CCDNUserAdminBundle') }}</span></div>
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_activate', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.activate'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_force_reactivation', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.force_reactivation'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
-		{% if user.locked %}
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_unban', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.unban'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
-		{% else %}
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_ban', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.ban'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
-		{% endif %}
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_set_roles', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.set_roles'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
-	</div>
 {% endblock %}
 
 {% block body %}
+
+{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
 
 {% include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' %}
 
 <div class="common_box_5 bg_header_smoke">
 	<div class="common_box_header">
 		<span class="heading_glow">{{ 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') }}</span>
+	</div>
+	<div class="common_tool_strip">
+	{% if user.enabled %}
+		<a class="button_link" href="{{ path('cc_admin_user_force_reactivation', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.force_reactivation'|trans({}, 'CCDNUserAdminBundle') }}</a>
+	{% else %}
+		<a class="button_link" href="{{ path('cc_admin_user_activate', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.activate'|trans({}, 'CCDNUserAdminBundle') }}</a>
+	{% endif %}
+	{% if user.locked %}
+		<a class="button_link" href="{{ path('cc_admin_user_unban', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.unban'|trans({}, 'CCDNUserAdminBundle') }}</a>
+	{% else %}
+		<a class="button_link" href="{{ path('cc_admin_user_ban', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.ban'|trans({}, 'CCDNUserAdminBundle') }}</a>
+	{% endif %}
+	{#	<a class="button_link" href="{{ path('cc_admin_user_set_roles', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.set_roles'|trans({}, 'CCDNUserAdminBundle') }}</a>	#}
+		<a class="button_link" href="{{ path('cc_admin_user_account_edit', {'user_id': user.getId}) }}">{{ 'link.account.edit' |trans({}, 'CCDNUserAdminBundle') }}</a>
+		<a class="button_link" href="{{ path('cc_admin_user_profile_edit', {'user_id': user.getId}) }}">{{ 'link.profile.edit' |trans({}, 'CCDNUserAdminBundle') }}</a>
 	</div>
 	<div class="common_box_panel">
 		<table class="common_list">
@@ -64,13 +71,11 @@
 					<td class="form_label">{{ 'profile.show.activated'|trans({}, 'CCDNUserAdminBundle') }}</td>
 					<td class="form_widget">{% if user.enabled %}Activated{% else %}Not Activated{% endif %}</td>
 				</tr>
-				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-					<td class="form_tool_strip" colspan="2">
-						<a href="{{ path('cc_admin_user_account_edit', {'user_id': user.getId}) }}">{{ 'link.profile.edit' |trans({}, 'CCDNUserProfileBundle') }}</a>
-				    </td>
-				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
+
+{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
+
 {% endblock body %}

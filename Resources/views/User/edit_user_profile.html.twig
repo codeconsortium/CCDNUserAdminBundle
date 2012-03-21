@@ -1,10 +1,16 @@
-{% extends param('ccdn_user_admin.account.layout_templates.edit_user') %}
+{% extends param('ccdn_user_profile.profile.layout_templates.edit') %}
 
 {% block stylesheets %}
 	{{ parent() }}
+	<link href="{{ asset('bundles/ccdncomponentcrumbtrail/css/crumbs.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
-{% block title %}{{ 'title.account.edit' |trans({}, 'CCDNUserUserBundle') }}{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/ccdnuserprofile/js/jquery.profile.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block title %}{{ 'title.profile.edit' | trans({ '%user_name%': user.getUsername }, 'CCDNUserProfileBundle') }}{% endblock %}
 
 {% block sidebar %}
 	{% if is_granted('ROLE_MODERATOR') %}
@@ -16,61 +22,110 @@
 		{% endif %}
 	</div>
 	{% endif %}
-
-	<div class="common_box_5 bg_header_smoke">
-		<div class="common_box_header"><span class="heading_glow">Tools</span></div>
-		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_user_account_show') }}">View Account</a></div>
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_profile_show') }}">View Profile</a></div>
-		{% endif %}
-	</div>
 {% endblock %}
 
 {% block body %}
 
-{% for key, message in app.session.getFlashes() %}
-<div class="common_box_5 padding_5 bg_flash_message">
-	<div class="flash_{{ key }}">
-	    {{ message | trans({}, 'FOSUserBundle') }}
-	</div>
-</div>
-{% endfor %}
+{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
+
+{% include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' %}
 
 <div class="common_box_5 bg_header_smoke">
 	<div class="common_box_header">
-		<span class="heading_glow">{{ 'title.account.edit' |trans({}, 'CCDNUserUserBundle') }}</span>
+		<span class="heading_glow">{{ 'title.profile.edit' | trans({ '%user_name%': user.getUsername }, 'CCDNUserProfileBundle') }}</span>
 	</div>
 	<div class="common_box_panel">
-{#		{% form_theme form param('ccdn_user_user_admin.template.theme') %} #}
-		<form action="{{ path('cc_admin_user_profile_edit', {'user_id': user.id}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+		{% form_theme form param('ccdn_user_profile.template.theme') %}
+		<form action="{{ path('cc_admin_user_profile_edit', {'user_id': user.getId}) }}" {{ form_enctype(form) }} method="POST">
 			{{ form_row(form._token) }}
-			<div class="errors">{{ form_errors(form) }}</div>
 			<table class="common_list">
 				<tbody>
 					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-						<td class="form_label">{{ form_label(form.user.username, null, { 'label': 'fos_user_profile_form_user_username' |trans({}, 'FOSUserBundle')}) }}</td>
-						<td class="form_widget">
-							{{ form_errors(form.user.username) }}
-							{{ form_widget(form.user.username) }}
-						</td>
+						<td class="form_label"><label class="widget_label">{{ 'form.label.profile.edit.username' |trans({}, 'CCDNUserProfileBundle') }}</label></td>
+						<td class="form_widget">{{ user.getUsername }}</td>
 					</tr>	
 					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-						<td class="form_label">{{ form_label(form.user.email, null, { 'label': 'fos_user_profile_form_user_email' |trans({}, 'FOSUserBundle')}) }}</td>
+						<td class="form_label">{{ form_label(form.location, null, { 'label': 'form.label.profile.edit.location' |trans({}, 'CCDNUserProfileBundle') }) }}</td>
 						<td class="form_widget">
-							{{ form_errors(form.user.email) }}
-							{{ form_widget(form.user.email) }}
+							{{ form_errors(form.location) }}
+							{{ form_widget(form.location) }}
 						</td>
 					</tr>
 					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-						<td class="form_label">{{ form_label(form.current, null, { 'label': 'fos_user_profile_form_current' |trans({}, 'FOSUserBundle')}) }}</td>
+						<td class="form_label">{{ form_label(form.website, null, { 'label': 'form.label.profile.edit.website' |trans({}, 'CCDNUserProfileBundle') }) }}</td>
 						<td class="form_widget">
-							{{ form_errors(form.current) }}
-							{{ form_widget(form.current) }}
+							{{ form_errors(form.website) }}
+							{{ form_widget(form.website) }}
+						</td>
+					</tr>
+					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+						<td class="form_label">{{ form_label(form.aim, null, { 'label': 'form.label.profile.edit.aim' |trans({}, 'CCDNUserProfileBundle') }) }}</td>
+						<td class="form_widget">
+							{{ form_errors(form.aim_is_public) }}
+							{{ form_widget(form.aim_is_public) }}{{ form_label(form.aim_is_public, null, { 'attr': {'class': 'checkbox_', 'label': 'form.label.profile.edit.aim_is_public' |trans({}, 'CCDNUserProfileBundle') } }) }}
+							<br>
+							{{ form_errors(form.aim) }}
+							{{ form_widget(form.aim) }}
+						</td>
+					</tr>
+					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+						<td class="form_label">{{ form_label(form.msn, null, { 'label': 'form.label.profile.edit.msn' |trans({}, 'CCDNUserProfileBundle') }) }}</td>
+						<td class="form_widget">
+							{{ form_errors(form.msn_is_public) }}
+							{{ form_widget(form.msn_is_public) }}{{ form_label(form.msn_is_public, null, { 'attr': {'class': 'checkbox_', 'label': 'form.label.profile.edit.msn_is_public' |trans({}, 'CCDNUserProfileBundle') } }) }}
+							<br>
+							{{ form_errors(form.msn) }}
+							{{ form_widget(form.msn) }}
+						</td>
+					</tr>
+					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+						<td class="form_label">{{ form_label(form.icq, null, { 'label': 'form.label.profile.edit.icq' |trans({}, 'CCDNUserProfileBundle') }) }}</td>
+						<td class="form_widget">
+							{{ form_errors(form.icq_is_public) }}
+							{{ form_widget(form.icq_is_public) }}{{ form_label(form.icq_is_public, null, { 'attr': {'class': 'checkbox_', 'label': 'form.label.profile.edit.icq_is_public' |trans({}, 'CCDNUserProfileBundle') } }) }}
+							<br>
+							{{ form_errors(form.icq) }}
+							{{ form_widget(form.icq) }}
+						</td>
+					</tr>
+					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+						<td class="form_label">{{ form_label(form.yahoo, null, { 'label': 'form.label.profile.edit.yahoo'|trans({}, 'CCDNUserProfileBundle') }) }}</td>
+						<td class="form_widget">
+							{{ form_errors(form.yahoo_is_public) }}
+							{{ form_widget(form.yahoo_is_public) }}{{ form_label(form.yahoo_is_public, null, { 'attr': {'class': 'checkbox_', 'label': 'form.label.profile.edit.yahoo_is_public' |trans({}, 'CCDNUserProfileBundle') } }) }}
+							<br>
+							{{ form_errors(form.yahoo) }}
+							{{ form_widget(form.yahoo) }}
+						</td>
+					</tr>
+					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+						<td class="form_label">{{ form_label(form.bio, null, { 'label': 'form.label.profile.edit.bio' |trans({}, 'CCDNUserProfileBundle') }) }}</td>
+						<td class="form_widget">
+							{{ form_errors(form.bio) }}
+							{{ form_widget(form.bio) }}
+						</td>
+					</tr>
+					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+						<td class="form_label">{{ form_label(form.avatar, null, { 'label': 'form.label.profile.edit.avatar' |trans({}, 'CCDNUserProfileBundle') }) }}</td>
+						<td class="form_widget">
+							{{ form_errors(form.avatar_is_remote) }}
+							{{ form_widget(form.avatar_is_remote) }}
+							{{ form_label(form.avatar_is_remote, null, { 'attr': { 'class': 'checkbox_', 'label': 'form.label.profile.edit.avatar_is_remote' |trans({}, 'CCDNUserProfileBundle') }}) }}
+							<br>
+							{{ form_errors(form.avatar) }}
+							{{ form_widget(form.avatar) }}
+						</td>
+					</tr>
+					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
+						<td class="form_label">{{ form_label(form.signature, null, { 'label': 'form.label.profile.edit.signature' |trans({}, 'CCDNUserProfileBundle') }) }}</td>
+						<td class="form_widget">
+							{{ form_errors(form.signature) }}
+							{{ form_widget(form.signature) }}
 						</td>
 					</tr>
 					<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
 						<td class="form_tool_strip" colspan="2">
-					        <input type="submit" class="widget_submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}">
+							<input type="submit" class="widget_submit" value="{{ 'form.button.profile.edit.update' |trans({}, 'CCDNUserProfileBundle') }}">
 					    </td>
 					</tr>
 				</tbody>
@@ -79,4 +134,7 @@
 		</form>
 	</div>
 </div>
+
+{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
+
 {% endblock body %}

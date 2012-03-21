@@ -25,7 +25,7 @@ use CCDNComponent\CommonBundle\Entity\Manager\EntityManagerInterface;
  * @author Reece Fowell <reece@codeconsortium.com> 
  * @version 1.0
  */
-class AccountAdministrateFormHandler
+class AdministrateProfileFormHandler
 {
 	
 	
@@ -165,9 +165,9 @@ class AccountAdministrateFormHandler
 	{
 		if ( ! $this->form)
 		{
-			$userAdministrateType = $this->container->get('ccdn_user_admin.account.administrate.form.type');
+			$userAdministrateType = $this->container->get('ccdn_user_admin.administrate.profile.form.type');
 			$userAdministrateType->setOptions($this->options);
-			$this->form = $this->factory->create($userAdministrateType, $this->defaults['user']);
+			$this->form = $this->factory->create($userAdministrateType, $this->defaults['profile']);
 		}
 		
 		return $this->form;

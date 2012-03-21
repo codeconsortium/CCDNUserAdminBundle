@@ -81,8 +81,14 @@ class UserController extends ContainerAware
             throw new NotFoundHttpException('the user does not exist.');
         }
 
+		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
+			->add($this->container->get('translator')->trans('crumbs.dashboard'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard.admin'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.account', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user->getId())), "user");
+
         return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:show_user.html.' . $this->getEngine(), array(
-			'user' => $user
+			'crumbs' => $crumb_trail,
+			'user' => $user,
 		));
     }
 	
@@ -98,6 +104,7 @@ class UserController extends ContainerAware
 			throw new AccessDeniedException('You do not have permission to access this page!');
 		}
 	}
+	
 	
 	
 	/**
@@ -129,8 +136,8 @@ class UserController extends ContainerAware
 		{
 		    throw new AccessDeniedException('You cannot administrate yourself.');
 		}
-
-        $formHandler = $this->container->get('ccdn_user_admin.account.administrate.form.handler')->setDefaults(array('user' => $user));
+		
+        $formHandler = $this->container->get('ccdn_user_admin.administrate.account.form.handler')->setDefaults(array('user' => $user));
 
         if ($formHandler->process()) {
          //   $this->setFlash('fos_user_success', 'flash.account.updated');
@@ -138,8 +145,15 @@ class UserController extends ContainerAware
             return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user_id)));
         }
 
+		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
+			->add($this->container->get('translator')->trans('crumbs.dashboard'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard.admin'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.account', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user->getId())), "user")
+			->add($this->container->get('translator')->trans('crumbs.account.edit', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_account_edit', array('user_id' => $user->getId())), "edit");		
+
         return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:edit_user_account.html.' . $this->getEngine(),
             array(
+				'crumbs' => $crumb_trail,
 				'form' => $formHandler->getForm()->createView(),
 				'theme' => $this->container->getParameter('fos_user.template.theme'),
 				'user' => $user,
@@ -147,6 +161,73 @@ class UserController extends ContainerAware
         );
     }
 	
+	
+	
+	/**
+	 *
+	 * @access public
+	 * @param int $user_id
+	 * @return RedirectResponse|RenderResponse
+	 */
+	public function editProfileAction($user_id)
+	{
+		if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN'))
+		{
+			throw new AccessDeniedException('You do not have access to this section.');
+		}
+
+		if ( ! $user_id || $user_id == 0)
+		{
+            throw new NotFoundHTTPException('The user does not exist.');
+		}
+
+		$user = $this->container->get('ccdn_user_user.user.repository')->findOneById($user_id);			
+
+		if ( ! is_object($user) || ! $user instanceof UserInterface)
+		{
+            throw new NotFoundHTTPException('The user does not exist.');
+        }
+
+		if ($user->getId() == $this->container->get('security.context')->getToken()->getUser()->getId())
+		{
+		    throw new AccessDeniedException('You cannot administrate yourself.');
+		}
+
+		// get the user associated profile
+		$profile = $user->getProfile();
+
+		// if the profile has no id then it
+		// does not exist, so create one.
+		if ( ! $profile->getId())
+		{
+			$this->container->get('ccdn_user_profile.profile.manager')->insert($profile)->flushNow();
+		}
+		
+        $formHandler = $this->container->get('ccdn_user_admin.administrate.profile.form.handler')->setDefaults(array('profile' => $profile));
+
+        if ($formHandler->process()) {
+         //   $this->setFlash('fos_user_success', 'flash.account.updated');
+
+            return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user_id)));
+        }
+
+		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
+			->add($this->container->get('translator')->trans('crumbs.dashboard'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard.admin'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.account', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user->getId())), "user")
+			->add($this->container->get('translator')->trans('crumbs.profile.edit', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_profile_edit', array('user_id' => $user->getId())), "edit");		
+
+        return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:edit_user_profile.html.' . $this->getEngine(),
+            array(
+				'crumbs' => $crumb_trail,
+				'form' => $formHandler->getForm()->createView(),
+				'theme' => $this->container->getParameter('fos_user.template.theme'),
+				'user' => $user,
+			)
+        );
+    }
+
+
 	
 	/**
 	 *

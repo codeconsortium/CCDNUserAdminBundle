@@ -19,6 +19,9 @@ flash.user.ban.success: 'User: "%username%" banned.'
 flash.user.unban.success: 'User: "%username%" unbanned.'
 flash.user.set_roles.success: 'User: "%username%" roles changed.'
 
+link.account.edit: 'Edit Account'
+link.profile.edit: 'Edit Profile'
+
 form.label.user.roles: 'set roles: '
 form.label.account.locked: 'Account is Banned: '
 form.label.account.enabled: 'Account is Activated: '
