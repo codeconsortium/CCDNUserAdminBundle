@@ -52,7 +52,13 @@ class ActivationController extends ContainerAware
 		
 		$users = $users_paginated->getCurrentPageResults();
 		
+		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
+			->add($this->container->get('translator')->trans('crumbs.dashboard', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.show_unactivated', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show_unactivated'), "users");
+		
 		return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Activation:show_unactivated_users.html.' . $this->getEngine(), array(
+			'crumbs' => $crumb_trail,
 			'user_profile_route' => $this->container->getParameter('ccdn_user_member.user.profile_route'),
 //			'pager_route' => 'cc_members_paginated',
 			'pager' => $users_paginated,

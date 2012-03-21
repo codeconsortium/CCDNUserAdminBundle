@@ -2,6 +2,8 @@
 
 {% block stylesheets %}
 	{{ parent() }}
+	<link href="{{ asset('bundles/ccdncomponentcrumbtrail/css/crumbs.css') }}" rel="stylesheet" type="text/css">
+	
 {% endblock %}
 
 {% block title %}{{ 'title.user.admin.unactivated_users' | trans({}, 'CCDNUserAdminBundle') }}{% endblock %}
@@ -26,6 +28,8 @@
 {% endblock %}
 
 {% block body %}
+
+{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
 
 {% include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' %}
 
@@ -62,5 +66,7 @@
 		{{ pagerfanta(pager, 'default', {'routeName': 'cc_admin_user_show_unactivated_paginated' } ) }}
 	</div>
 </div>	
+
+{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
 
 {% endblock %}

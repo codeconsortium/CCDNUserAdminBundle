@@ -51,8 +51,14 @@ class UserController extends ContainerAware
 		$users_paginated->setCurrentPage($page, false, true);
 		
 		$users = $users_paginated->getCurrentPageResults();
-				
+		
+		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
+			->add($this->container->get('translator')->trans('crumbs.dashboard', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.show_newest', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show_newest'), "users");
+		
 		return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:show_newest_users.html.' . $this->getEngine(), array(
+			'crumbs' => $crumb_trail,
 			'user_profile_route' => $this->container->getParameter('ccdn_user_member.user.profile_route'),
 //			'pager_route' => 'cc_members_paginated',
 			'pager' => $users_paginated,
@@ -82,8 +88,8 @@ class UserController extends ContainerAware
         }
 
 		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
-			->add($this->container->get('translator')->trans('crumbs.dashboard'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
-			->add($this->container->get('translator')->trans('crumbs.dashboard.admin'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
 			->add($this->container->get('translator')->trans('crumbs.account', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user->getId())), "user");
 
         return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:show_user.html.' . $this->getEngine(), array(
@@ -146,8 +152,8 @@ class UserController extends ContainerAware
         }
 
 		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
-			->add($this->container->get('translator')->trans('crumbs.dashboard'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
-			->add($this->container->get('translator')->trans('crumbs.dashboard.admin'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
 			->add($this->container->get('translator')->trans('crumbs.account', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user->getId())), "user")
 			->add($this->container->get('translator')->trans('crumbs.account.edit', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_account_edit', array('user_id' => $user->getId())), "edit");		
 
@@ -212,8 +218,8 @@ class UserController extends ContainerAware
         }
 
 		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
-			->add($this->container->get('translator')->trans('crumbs.dashboard'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
-			->add($this->container->get('translator')->trans('crumbs.dashboard.admin'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
 			->add($this->container->get('translator')->trans('crumbs.account', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user->getId())), "user")
 			->add($this->container->get('translator')->trans('crumbs.profile.edit', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_profile_edit', array('user_id' => $user->getId())), "edit");		
 

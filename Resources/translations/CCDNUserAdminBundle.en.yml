@@ -13,6 +13,16 @@ sidebar.link.user.ban: Ban User
 sidebar.link.user.unban: Unban User
 sidebar.link.user.set_roles: Set Roles
 
+crumbs.dashboard: 'Dashboard'
+crumbs.dashboard.admin: 'Admin Panel'
+crumbs.show_newest: 'Show Newest Users'
+crumbs.show_unactivated: 'Show Unactivated Users'
+crumbs.show_banned: 'Show Banned Users'
+crumbs.account: 'Administrate "%user_name%" Account'
+crumbs.account.edit: 'Edit Account'
+crumbs.profile.edit: 'Edit Profile'
+
+
 flash.user.activate.success: 'User: "%username%" activated.'
 flash.user.force_reactivation.success: 'User: "%username%" pending re-activation.'
 flash.user.ban.success: 'User: "%username%" banned.'
