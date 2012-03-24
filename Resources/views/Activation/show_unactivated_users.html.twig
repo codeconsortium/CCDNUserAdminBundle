@@ -43,20 +43,20 @@
 	<div class="common_box_panel">		
 		<table class="common_list">
 			<thead>
-				<th>{{ 'member.table.head.username' | trans({}, 'CCDNUserMemberBundle') }}</th>
-				<th>{{ 'user.table.head.email' | trans({}, 'CCDNUserAdminBundle') }}</th>
-				<th>{{ 'member.table.head.joined_date' | trans({}, 'CCDNUserMemberBundle') }}</th>				
-				<th>{{ 'user.table.head.status.activation' | trans({}, 'CCDNUserAdminBundle') }}</th>
+				<tr>
+					<th>{{ 'member.table.head.username' | trans({}, 'CCDNUserMemberBundle') }}</th>
+					<th>{{ 'user.table.head.email' | trans({}, 'CCDNUserAdminBundle') }}</th>
+					<th>{{ 'member.table.head.joined_date' | trans({}, 'CCDNUserMemberBundle') }}</th>				
+					<th>{{ 'user.table.head.status.activation' | trans({}, 'CCDNUserAdminBundle') }}</th>
+				</tr>
 			</thead>
-			<tfoot>
-			</tfoot>
 			<tbody>
 			{% for row, user in users %}
 				<tr class="{{ cycle(['row_odd', 'row_even'], row) }}">
-					<td class=""><a href="{{ path('cc_admin_user_show', {'user_id': user.getId }) }}">{{ user.username }}</a></td>
-					<td class="">{{ user.email }}</td>
-					<td class="">{{ user.registeredDate|date("d/m/Y - H:i:s") }}</td>
-					<td class="">{% if user.enabled %}Activated{% else %}Pending Activation{% endif %}</td>
+					<td><a href="{{ path('cc_admin_user_show', {'user_id': user.getId }) }}">{{ user.username }}</a></td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.registeredDate|date("d/m/Y - H:i:s") }}</td>
+					<td>{% if user.enabled %}Activated{% else %}Pending Activation{% endif %}</td>
 				</tr>
 			{% endfor %}
 			</tbody>
