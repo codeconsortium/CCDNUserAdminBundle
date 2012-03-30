@@ -40,7 +40,7 @@ cc_admin_user_show_newest:
     defaults: { _controller: CCDNUserAdminBundle:User:showNewestUsers, _locale: en, page: 1 }
     requirements:
         _locale: en
-
+    
 cc_admin_user_show_newest_paginated:
     pattern: /{_locale}/admin/user/show/newest/page/{page}
     defaults: { _controller: CCDNUserAdminBundle:User:showNewestUsers, _locale: en, page: 1 }
