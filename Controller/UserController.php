@@ -90,6 +90,7 @@ class UserController extends ContainerAware
 		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
 			->add($this->container->get('translator')->trans('crumbs.dashboard', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
 			->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
+			->add($this->container->get('translator')->trans('crumbs.profile', array('%user_name%' => $user->getUsername()), 'CCDNUserProfileBundle'), $this->container->get('router')->generate('cc_profile_show', array('user_id' => $user->getId())), "user")
 			->add($this->container->get('translator')->trans('crumbs.account', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user->getId())), "user");
 
         return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:show_user.html.' . $this->getEngine(), array(
