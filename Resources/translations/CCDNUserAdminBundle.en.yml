@@ -1,6 +1,6 @@
-title.user.admin.newest_users: New Users
-title.user.admin.unactivated_users: Unactivated Users
-title.user.admin.banned_users: Banned Users
+title.user.admin.newest_users: 'New Users.'
+title.user.admin.unactivated_users: 'Unactivated Users.'
+title.user.admin.banned_users: 'Banned Users.'
 
 sidebar.header.admin.user: User Management
 sidebar.link.user.show_new: New Users
@@ -38,6 +38,9 @@ form.label.account.enabled: 'Account is Activated: '
 
 user.table.head.status.activation: Activation Status
 user.table.head.email: Email Address
+users.unactivated.table.empty: 'No users were found.'
+users.banned.table.empty: 'No banned users were found.'
+users.newest.table.empty: 'No new users were found.'
 
 profile.show.banned: 'Ban Status: '
 profile.show.activated: 'Activation Status: '

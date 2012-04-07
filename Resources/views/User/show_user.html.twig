@@ -10,20 +10,20 @@
 
 {% block sidebar %}
 	{% if is_granted('ROLE_MODERATOR') %}
-	<div class="common_box_5 bg_header_smoke">
-		<div class="common_box_header"><span class="heading_glow">{{ 'sidebar.header.special' | trans({}, 'CCDNComponentCommonBundle') }}</span></div>
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_moderator_forum_cp') }}">{{ 'general.view.link_moderate' | trans({}, 'CCDNComponentCommonBundle') }}</a></div>
+	<div class="sidebar">
+		<div class="sidebar_header"><span class="sidebar_header">{{ 'sidebar.header.special' | trans({}, 'CCDNComponentCommonBundle') }}</span></div>
+		<div class="sidebar_panel"><a class="sidebar" href="{{ path('cc_moderator_forum_cp') }}">{{ 'general.view.link_moderate' | trans({}, 'CCDNComponentCommonBundle') }}</a></div>
 		{% if is_granted('ROLE_ADMIN') %}
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_forum_cp') }}">{{ 'general.view.link_administrate' | trans({}, 'CCDNComponentCommonBundle') }}</a></div>
+		<div class="sidebar_panel"><a class="sidebar" href="{{ path('cc_admin_forum_cp') }}">{{ 'general.view.link_administrate' | trans({}, 'CCDNComponentCommonBundle') }}</a></div>
 		{% endif %}
 	</div>
 	{% endif %}
 
-	<div class="common_box_5 bg_header_smoke">
-		<div class="common_box_header"><span class="heading_glow">{{ 'sidebar.header.admin.user'|trans({}, 'CCDNUserAdminBundle') }}</span></div>
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_newest') }}">{{ 'sidebar.link.user.show_new'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_unactivated') }}">{{ 'sidebar.link.user.show_unactivated'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
-		<div class="common_box_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_banned') }}">{{ 'sidebar.link.user.show_banned'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+	<div class="sidebar">
+		<div class="sidebar_header"><span class="sidebar_header">{{ 'sidebar.header.admin.user'|trans({}, 'CCDNUserAdminBundle') }}</span></div>
+		<div class="sidebar_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_newest') }}">{{ 'sidebar.link.user.show_new'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		<div class="sidebar_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_unactivated') }}">{{ 'sidebar.link.user.show_unactivated'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
+		<div class="sidebar_panel"><a class="sidebar" href="{{ path('cc_admin_user_show_banned') }}">{{ 'sidebar.link.user.show_banned'|trans({}, 'CCDNUserAdminBundle') }}</a></div>
 	</div>
 {% endblock %}
 
@@ -33,11 +33,12 @@
 
 {% include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' %}
 
-<div class="common_box_5 bg_header_smoke">
-	<div class="common_box_header">
-		<span class="heading_glow">{{ 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') }}</span>
+<div class="section_wrap_square">
+	<div class="section_header">
+		<h2>{{ 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') }}</h2>
 	</div>
-	<div class="common_tool_strip">
+	
+	<div class="section_tool_strip">
 	{% if user.enabled %}
 		<a class="button_link" href="{{ path('cc_admin_user_force_reactivation', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.force_reactivation'|trans({}, 'CCDNUserAdminBundle') }}</a>
 	{% else %}
@@ -52,24 +53,24 @@
 		<a class="button_link" href="{{ path('cc_admin_user_account_edit', {'user_id': user.getId}) }}">{{ 'link.account.edit' |trans({}, 'CCDNUserAdminBundle') }}</a>
 		<a class="button_link" href="{{ path('cc_admin_user_profile_edit', {'user_id': user.getId}) }}">{{ 'link.profile.edit' |trans({}, 'CCDNUserAdminBundle') }}</a>
 	</div>
-	<div class="common_table_panel">
+	<div class="section_table_panel">
 		<table class="common_list">
 			<tbody>
 				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-					<td class="form_label">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</td>
-					<td class="form_widget">{{ user.username }}</td>
+					<td class="right" style="width: 30%;"><span class="table_label">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</span></td>
+					<td class="left" style="width: 70%;"><span class="table_data">{{ user.username }}</span></td>
 				</tr>	
 				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-					<td class="form_label">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</td>
-					<td class="form_widget">{{ user.email }}</td>
+					<td class="right"><span class="table_label">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</span></td>
+					<td class="left"><span class="table_data">{{ user.email }}</span></td>
 				</tr>
 				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-					<td class="form_label">{{ 'profile.show.banned'|trans({}, 'CCDNUserAdminBundle') }}</td>
-					<td class="form_widget">{% if user.locked %}Banned{% else %}No Bans{% endif %}</td>				
+					<td class="right"><span class="table_label">{{ 'profile.show.banned'|trans({}, 'CCDNUserAdminBundle') }}</span></td>
+					<td class="left"><span class="table_data">{% if user.locked %}Banned{% else %}No Bans{% endif %}</span></td>		
 				</tr>
 				<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-					<td class="form_label">{{ 'profile.show.activated'|trans({}, 'CCDNUserAdminBundle') }}</td>
-					<td class="form_widget">{% if user.enabled %}Activated{% else %}Not Activated{% endif %}</td>
+					<td class="right"><span class="table_label">{{ 'profile.show.activated'|trans({}, 'CCDNUserAdminBundle') }}</span></td>
+					<td class="left"><span class="table_data">{% if user.enabled %}Activated{% else %}Not Activated{% endif %}</span></td>
 				</tr>
 			</tbody>
 		</table>
