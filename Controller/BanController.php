@@ -52,7 +52,7 @@ class BanController extends ContainerAware
 		
 		$users = $users_paginated->getCurrentPageResults();
 		
-		$crumb_trail = $this->container->get('ccdn_component_crumb_trail.crumb_trail')
+		$crumb_trail = $this->container->get('ccdn_component_crumb.trail')
 			->add($this->container->get('translator')->trans('crumbs.dashboard', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
 			->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
 			->add($this->container->get('translator')->trans('crumbs.show_banned', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show_banned'), "users");
