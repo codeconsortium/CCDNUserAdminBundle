@@ -1,4 +1,4 @@
-{% extends param('ccdn_user_admin.activation.layout_templates.show_unactivated_users') %}
+{% extends param('ccdn_user_admin.activation.show_unactivated_users.layout_template') %}
 
 {% block stylesheets %}
 	{{ parent() }}
@@ -53,7 +53,7 @@
 				<tr class="{{ cycle(['row_odd', 'row_even'], row) }}">
 					<td class="left"><span class="table_data"><a href="{{ path('cc_admin_user_show', {'user_id': user.getId }) }}">{{ user.username }}</a></span></td>
 					<td class="left"><span class="table_data">{{ user.email }}</span></td>
-					<td class="center"><span class="table_data">{{ user.registeredDate|date("d/m/Y - H:i:s") }}</span></td>
+					<td class="center"><span class="table_timestamp">{{ user.registeredDate |date(param('ccdn_user_admin.activation.show_unactivated_users.member_since_datetime_format')) }}</span></td>
 					<td class="center"><span class="table_data">{% if user.enabled %}Activated{% else %}Pending Activation{% endif %}</span></td>
 				</tr>
 			{% else %}

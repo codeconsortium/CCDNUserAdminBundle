@@ -55,7 +55,6 @@ class RoleController extends ContainerAware
 		if ($formHandler->process())
 		{	
 			$this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.set_roles.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
-			
 						
 			return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array(
 				'user_id' => $user->getId(),
@@ -69,7 +68,7 @@ class RoleController extends ContainerAware
 				->add($category->getName(),	$this->container->get('router')->generate('cc_forum_category_show', array('category_id' => $category->getId())), "category");*/
 				
 			return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Role:set_users_role.html.' . $this->getEngine(), array(
-			//	'user_profile_route' => $this->container->getParameter('ccdn_forum_admin.user.profile_route'),
+				'user_profile_route' => $this->container->getParameter('ccdn_forum_admin.user.profile_route'),
 				'user' => $user,
 			//	'crumbs' => $crumb_trail,
 				'form' => $formHandler->getForm()->createView(),

@@ -46,22 +46,20 @@ class BanController extends ContainerAware
 				
 		$users_paginated = $this->container->get('ccdn_user_user.user.repository')->findAllBannedPaginated();
 
-		$users_per_page = $this->container->getParameter('ccdn_user_member.members_per_page');
+		$users_per_page = $this->container->getParameter('ccdn_user_admin.ban.show_banned_users.users_per_page');
 		$users_paginated->setMaxPerPage($users_per_page);
 		$users_paginated->setCurrentPage($page, false, true);
 		
 		$users = $users_paginated->getCurrentPageResults();
 		
 		$crumb_trail = $this->container->get('ccdn_component_crumb.trail')
-			->add($this->container->get('translator')->trans('crumbs.dashboard', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_index'), "sitemap")
 			->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
 			->add($this->container->get('translator')->trans('crumbs.show_banned', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show_banned'), "users");
 		
 		
 		return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Ban:show_banned_users.html.' . $this->getEngine(), array(
 			'crumbs' => $crumb_trail,
-			'user_profile_route' => $this->container->getParameter('ccdn_user_member.user.profile_route'),
-//			'pager_route' => 'cc_members_paginated',
+			'user_profile_route' => $this->container->getParameter('ccdn_user_admin.user.profile_route'),
 			'pager' => $users_paginated,
 			'users' => $users,
 		));

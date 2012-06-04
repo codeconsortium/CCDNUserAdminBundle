@@ -44,7 +44,6 @@ class CCDNUserAdminExtension extends Extension
 
 		$container->setParameter('ccdn_user_admin.user.profile_route', $config['user']['profile_route']);
 		$container->setParameter('ccdn_user_admin.template.engine', $config['template']['engine']);
-		$container->setParameter('ccdn_user_admin.template.theme', $config['template']['theme']);
 		
 		$this->getActivationSection($container, $config);
 		$this->getBanSection($container, $config);
@@ -61,7 +60,10 @@ class CCDNUserAdminExtension extends Extension
 	 */
 	private function getActivationSection($container, $config)
 	{
-		$container->setParameter('ccdn_user_admin.activation.layout_templates.show_unactivated_users', $config['activation']['layout_templates']['show_unactivated_users']);
+		$container->setParameter('ccdn_user_admin.activation.show_unactivated_users.layout_template', $config['activation']['show_unactivated_users']['layout_template']);
+		$container->setParameter('ccdn_user_admin.activation.show_unactivated_users.users_per_page', $config['activation']['show_unactivated_users']['users_per_page']);
+		$container->setParameter('ccdn_user_admin.activation.show_unactivated_users.member_since_datetime_format', $config['activation']['show_unactivated_users']['member_since_datetime_format']);
+		
 	}
 	
 	
@@ -73,7 +75,10 @@ class CCDNUserAdminExtension extends Extension
 	 */
 	private function getBanSection($container, $config)
 	{
-		$container->setParameter('ccdn_user_admin.ban.layout_templates.show_banned_users', $config['ban']['layout_templates']['show_banned_users']);
+		$container->setParameter('ccdn_user_admin.ban.show_banned_users.layout_template', $config['ban']['show_banned_users']['layout_template']);
+		$container->setParameter('ccdn_user_admin.ban.show_banned_users.users_per_page', $config['ban']['show_banned_users']['users_per_page']);
+		$container->setParameter('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format', $config['ban']['show_banned_users']['member_since_datetime_format']);
+		
 	}
 
 	
@@ -85,7 +90,8 @@ class CCDNUserAdminExtension extends Extension
 	 */
 	private function getRoleSection($container, $config)
 	{
-		$container->setParameter('ccdn_user_admin.role.layout_templates.set_users_role', $config['role']['layout_templates']['set_users_role']);
+		$container->setParameter('ccdn_user_admin.role.set_users_role.layout_template', $config['role']['set_users_role']['layout_template']);
+		$container->setParameter('ccdn_user_admin.role.set_users_role.form_theme', $config['role']['set_users_role']['form_theme']);
 	}
 
 		
@@ -97,9 +103,19 @@ class CCDNUserAdminExtension extends Extension
 	 */
 	private function getAccountSection($container, $config)
 	{
-		$container->setParameter('ccdn_user_admin.account.layout_templates.edit_user', $config['account']['layout_templates']['edit_user']);
-		$container->setParameter('ccdn_user_admin.account.layout_templates.show_newest_users', $config['account']['layout_templates']['show_newest_users']);
-		$container->setParameter('ccdn_user_admin.account.layout_templates.show_user', $config['account']['layout_templates']['show_user']);
+		$container->setParameter('ccdn_user_admin.account.show_newest_users.layout_template', $config['account']['show_newest_users']['layout_template']);
+		$container->setParameter('ccdn_user_admin.account.show_newest_users.users_per_page', $config['account']['show_newest_users']['users_per_page']);
+		$container->setParameter('ccdn_user_admin.account.show_newest_users.member_since_datetime_format', $config['account']['show_newest_users']['member_since_datetime_format']);
+		
+		$container->setParameter('ccdn_user_admin.account.show_user.layout_template', $config['account']['show_user']['layout_template']);
+		$container->setParameter('ccdn_user_admin.account.show_user.member_since_datetime_format', $config['account']['show_user']['member_since_datetime_format']);	
+
+		$container->setParameter('ccdn_user_admin.account.edit_user_account.layout_template', $config['account']['edit_user_account']['layout_template']);
+		$container->setParameter('ccdn_user_admin.account.edit_user_account.form_theme', $config['account']['edit_user_account']['form_theme']);		
+
+		$container->setParameter('ccdn_user_admin.account.edit_user_profile.layout_template', $config['account']['edit_user_profile']['layout_template']);
+		$container->setParameter('ccdn_user_admin.account.edit_user_profile.form_theme', $config['account']['edit_user_profile']['form_theme']);		
+		
 	}
 	
 }

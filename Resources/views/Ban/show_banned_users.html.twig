@@ -1,4 +1,4 @@
-{% extends param('ccdn_user_admin.ban.layout_templates.show_banned_users') %}
+{% extends param('ccdn_user_admin.ban.show_banned_users.layout_template') %}
 
 {% block stylesheets %}
 	{{ parent() }}
@@ -53,7 +53,7 @@
 				<tr class="{{ cycle(['row_odd', 'row_even'], row) }}">
 					<td class="left"><span class="table_data"><a href="{{ path('cc_admin_user_show', {'user_id': user.getId }) }}">{{ user.username }}</a></td>
 					<td class="left"><span class="table_data">{{ user.email }}</td>
-					<td class="center"><span class="table_data">{{ user.registeredDate|date("d/m/Y - H:i:s") }}</td>
+					<td class="center"><span class="table_timestamp">{{ user.registeredDate |date(param('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format')) }}</td>
 					<td class="center"><span class="table_data">{% if user.enabled %}Activated{% else %}Pending Activation{% endif %}</td>
 				</tr>
 			{% else %}

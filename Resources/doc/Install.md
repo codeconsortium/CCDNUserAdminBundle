@@ -87,7 +87,7 @@ CCDNUserAdminBundle:
 In your app/config/config.yml add:    
 
 ``` yml
-#        
+#
 # for CCDNUser AdminBundle   
 #
 ccdn_user_admin:
@@ -95,21 +95,6 @@ ccdn_user_admin:
         profile_route: cc_profile_show_by_id 
     template:
         engine: twig
-        theme: CCDNUserAdminBundle:Form:fields.html.twig
-    activation:
-        layout_templates:
-            show_unactivated_users: CCDNComponentCommonBundle:Layout:layout_body_left.html.twig
-    ban:
-        layout_templates:
-            show_banned_users: CCDNComponentCommonBundle:Layout:layout_body_left.html.twig
-    role:
-        layout_templates:
-            set_users_role: CCDNComponentCommonBundle:Layout:layout_body_left.html.twig
-    account:
-        layout_templates:
-            edit_user: CCDNComponentCommonBundle:Layout:layout_body_left.html.twig
-            show_newest_users: CCDNComponentCommonBundle:Layout:layout_body_left.html.twig
-            show_user: CCDNComponentCommonBundle:Layout:layout_body_left.html.twig
 
 ```
 
@@ -156,4 +141,5 @@ Installation should now be complete!
 
 If you need further help/support, have suggestions or want to contribute please join the community at [Code Consortium](http://www.codeconsortium.com)
 
-[Return back to the docs index](http://github.com/codeconsortium/CCDNUserAdminBundle/blob/master/Resources/doc/index.md).
+- [Return back to the docs index](index.md).
+- [Configuration Reference](configuration_reference.md).
