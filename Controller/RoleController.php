@@ -49,6 +49,11 @@ class RoleController extends ContainerAware
 		{
             throw new NotFoundHttpException('the user does not exist.');
         }
+		
+		if ($user->getId() == $this->container->get('security.context')->getToken()->getUser()->getId())
+		{
+		    throw new AccessDeniedException('You cannot administrate yourself.');
+		}
 			
 		$formHandler = $this->container->get('ccdn_user_user_admin.role.form.change.handler')->setOptions(array('user' => $user));
 

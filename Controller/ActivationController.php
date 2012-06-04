@@ -84,6 +84,11 @@ class ActivationController extends ContainerAware
             throw new NotFoundHttpException('the user does not exist.');
         }
 		
+		if ($user->getId() == $this->container->get('security.context')->getToken()->getUser()->getId())
+		{
+		    throw new AccessDeniedException('You cannot administrate yourself.');
+		}
+		
 		$this->container->get('ccdn_user_user.user.manager')->activate($user)->flushNow();
 
 		$this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.activate.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
@@ -111,6 +116,11 @@ class ActivationController extends ContainerAware
 		{
             throw new NotFoundHttpException('the user does not exist.');
         }
+		
+		if ($user->getId() == $this->container->get('security.context')->getToken()->getUser()->getId())
+		{
+		    throw new AccessDeniedException('You cannot administrate yourself.');
+		}
 		
 		$this->container->get('ccdn_user_user.user.manager')->forceReActivate($user)->flushNow();
 

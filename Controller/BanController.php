@@ -56,7 +56,6 @@ class BanController extends ContainerAware
 			->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
 			->add($this->container->get('translator')->trans('crumbs.show_banned', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show_banned'), "users");
 		
-		
 		return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Ban:show_banned_users.html.' . $this->getEngine(), array(
 			'crumbs' => $crumb_trail,
 			'user_profile_route' => $this->container->getParameter('ccdn_user_admin.user.profile_route'),
@@ -84,6 +83,11 @@ class BanController extends ContainerAware
 		{
             throw new NotFoundHttpException('the user does not exist.');
         }
+
+		if ($user->getId() == $this->container->get('security.context')->getToken()->getUser()->getId())
+		{
+		    throw new AccessDeniedException('You cannot administrate yourself.');
+		}
 		
 		$this->container->get('ccdn_user_user.user.manager')->ban($user)->flushNow();
 		
@@ -112,6 +116,11 @@ class BanController extends ContainerAware
 		{
             throw new NotFoundHttpException('the user does not exist.');
         }
+		
+		if ($user->getId() == $this->container->get('security.context')->getToken()->getUser()->getId())
+		{
+		    throw new AccessDeniedException('You cannot administrate yourself.');
+		}
 		
 		$this->container->get('ccdn_user_user.user.manager')->unban($user)->flushNow();
 		

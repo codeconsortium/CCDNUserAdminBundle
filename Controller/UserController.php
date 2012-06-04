@@ -59,7 +59,6 @@ class UserController extends ContainerAware
 		return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:show_newest_users.html.' . $this->getEngine(), array(
 			'crumbs' => $crumb_trail,
 			'user_profile_route' => $this->container->getParameter('ccdn_user_admin.user.profile_route'),
-//			'pager_route' => 'cc_members_paginated',
 			'pager' => $users_paginated,
 			'users' => $users,
 		));
@@ -96,6 +95,7 @@ class UserController extends ContainerAware
 			'user' => $user,
 		));
     }
+	
 	
 	
 	/**
@@ -145,8 +145,6 @@ class UserController extends ContainerAware
         $formHandler = $this->container->get('ccdn_user_admin.administrate.account.form.handler')->setDefaults(array('user' => $user));
 
         if ($formHandler->process()) {
-         //   $this->setFlash('fos_user_success', 'flash.account.updated');
-
             return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user_id)));
         }
 
@@ -210,8 +208,6 @@ class UserController extends ContainerAware
         $formHandler = $this->container->get('ccdn_user_admin.administrate.profile.form.handler')->setDefaults(array('profile' => $profile));
 
         if ($formHandler->process()) {
-         //   $this->setFlash('fos_user_success', 'flash.account.updated');
-
             return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user_id)));
         }
 
