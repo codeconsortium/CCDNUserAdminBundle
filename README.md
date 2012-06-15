@@ -42,6 +42,7 @@ AdminBundle Provides the following features:
 	4. Force reactivation of user.
 	5. Edit users account details. (Note: password is always kept secret as it is encrypted and cannot be decrypted.)
 	6. Edit users profile details.
+5. Utilises Twitter-Bootstrap interface by default.
 
 Before installation of this bundle, you can download the [Sandbox](https://github.com/codeconsortium/CCDNSandBox) for testing/development and feature review, or alternatively see the product in use at [CodeConsortium](http://www.codeconsortium.com).
 
