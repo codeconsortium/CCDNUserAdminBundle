@@ -30,11 +30,11 @@
 		<form action="{{ path('cc_admin_user_account_edit', {'user_id': user.id}) }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
 			<fieldset>
 
-				<div class="errors">{{ form_errors(form) }}</div>
+				{{ form_errors(form) }}
 
 				<div class="control-group"><div class="controls row-fluid">{{ form_row(form._token) }}</div></div>
 				
-				<div class="control-group">
+				<div class="control-group{{ (form.username.vars.errors|length > 0) ? ' error': '' }}">
 					{{ form_label(form.username, null, { 'label': 'fos_user_profile_form_user_username' |trans({}, 'FOSUserBundle')}) }}
 					<div class="controls row-fluid">
 						{{ form_errors(form.username) }}
@@ -42,7 +42,7 @@
 					</div>
 				</div>
 				
-				<div class="control-group">
+				<div class="control-group{{ (form.email.vars.errors|length > 0) ? ' error': '' }}">
 					{{ form_label(form.email, null, { 'label': 'fos_user_profile_form_user_email' |trans({}, 'FOSUserBundle')}) }}
 					<div class="controls row-fluid">
 						{{ form_errors(form.email) }}
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				
-				<div class="control-group">
+				<div class="control-group{{ (form.locked.vars.errors|length > 0) ? ' error': '' }}">
 					{{ form_label(form.locked, null, { 'label': 'form.label.account.locked' |trans({}, 'CCDNUserAdminBundle')}) }}
 					<div class="controls row-fluid">
 						{{ form_errors(form.locked) }}
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 				
-				<div class="control-group">
+				<div class="control-group{{ (form.enabled.vars.errors|length > 0) ? ' error': '' }}">
 					{{ form_label(form.enabled, null, { 'label': 'form.label.account.enabled' |trans({}, 'CCDNUserAdminBundle')}) }}
 					<div class="controls row-fluid">
 						{{ form_errors(form.enabled) }}
