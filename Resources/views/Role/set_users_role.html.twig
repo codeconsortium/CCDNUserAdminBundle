@@ -18,32 +18,31 @@
 
 	{% include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' %}
 
-	<h2>{{ 'title.account.edit' |trans({}, 'CCDNUserUserBundle') }}</h2>
+	<h2>{{- 'title.account.edit' |trans({}, 'CCDNUserUserBundle') -}}</h2>
 
-	<div class="well">
-		{% form_theme form param('ccdn_user_admin.role.set_users_role.form_theme') %}
-		
-		<form action="{{ path('cc_admin_user_set_roles', {'user_id': user.id }) }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+	{%- spaceless -%}
+		{%- form_theme form param('ccdn_user_admin.role.set_users_role.form_theme') -%}	
+		<form action="{{- path('cc_admin_user_set_roles', {'user_id': user.id }) -}}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
 			<fieldset>
-				
-				<div class="errors">{{ form_errors(form) }}</div>
-
-				<div class="control-group"><div class="controls row-fluid">{{ form_row(form._token) }}</div></div>
 			
+				<div class="errors">{{- form_errors(form) -}}</div>
+
+				<div class="control-group"><div class="controls row-fluid">{{- form_row(form._token) -}}</div></div>
+		
 				<div class="control-group">
-					{{ form_label(form.role, null, { 'label': 'form.label.user.roles' |trans({}, 'CCDNUserAdminBundle')}) }}</td>
+					{{- form_label(form.role, null, { 'label': 'form.label.user.roles' |trans({}, 'CCDNUserAdminBundle')}) -}}</td>
 					<div class="controls row-fluid">
-						{{ form_errors(form.role) }}
-						{{ form_widget(form.role) }}
+						{{- form_errors(form.role) -}}
+						{{- form_widget(form.role) -}}
 					</div>
 				</div>
-				
+			
 				<div class="form-actions">
-			        <input type="submit" class="btn btn-danger" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}">
+			        <input type="submit" class="btn btn-danger" value="{{- 'profile.edit.submit'|trans({}, 'FOSUserBundle') -}}">
 				</div>
-				
+			
 			</fieldset>
 		</form>
-	</div>
-
+	{%- endspaceless -%}
+	
 {% endblock body %}
