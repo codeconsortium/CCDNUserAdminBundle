@@ -25,7 +25,7 @@
 		<form action="{{- path('cc_admin_user_set_roles', {'user_id': user.id }) -}}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
 			<fieldset>
 			
-				<div class="errors">{{- form_errors(form) -}}</div>
+				{{- form_errors(form) -}}
 
 				<div class="control-group"><div class="controls row-fluid">{{- form_row(form._token) -}}</div></div>
 		
