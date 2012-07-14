@@ -2,63 +2,67 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link href="{{ asset('bundles/ccdncomponentcrumbtrail/css/crumbs.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{- asset('bundles/ccdncomponentcrumbtrail/css/crumbs.css') -}}" rel="stylesheet" type="text/css">
 	
 {% endblock %}
 
-{% block title %}{{ 'title.user.admin.banned_users' | trans({}, 'CCDNUserAdminBundle') }}{% endblock %}
+{% block title %}{{- 'title.user.admin.banned_users' | trans({}, 'CCDNUserAdminBundle') -}}{% endblock %}
 
 {% block sidebar %}
 	{{ parent() }}
 
-	{% include 'CCDNUserAdminBundle:Sidebar:sidebar.html.twig' %}
+	{%- include 'CCDNUserAdminBundle:Sidebar:sidebar.html.twig' -%}
 	
 {% endblock %}
 
 
 {% block body %}
 
-	{% include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' %}
+	{%- spaceless -%}
+	
+	{%- include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' -%}
 
-	{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
+	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
-	<h2>{{ 'title.user.admin.banned_users' | trans({}, 'CCDNUserAdminBundle') }}</h2>
+	<h2>{{- 'title.user.admin.banned_users' | trans({}, 'CCDNUserAdminBundle') -}}</h2>
 
-	{% if pager.haveToPaginate %}
-		{{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'cc_admin_user_show_banned_paginated' } ) }}
-	{% endif %}
+	{%- if pager.haveToPaginate -%}
+		{{- pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'cc_admin_user_show_banned_paginated' } ) -}}
+	{%- endif -%}
 
 	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
-				<th class="left">{{ 'member.table.head.username' | trans({}, 'CCDNUserMemberBundle') }}</th>
-				<th class="left">{{ 'user.table.head.email' | trans({}, 'CCDNUserAdminBundle') }}</th>
-				<th class="center">{{ 'member.table.head.joined_date' | trans({}, 'CCDNUserMemberBundle') }}</th>				
-				<th class="center">{{ 'user.table.head.status.activation' | trans({}, 'CCDNUserAdminBundle') }}</th>
+				<th class="left">{{- 'member.table.head.username' | trans({}, 'CCDNUserMemberBundle') -}}</th>
+				<th class="left">{{- 'user.table.head.email' | trans({}, 'CCDNUserAdminBundle') -}}</th>
+				<th class="center">{{- 'member.table.head.joined_date' | trans({}, 'CCDNUserMemberBundle') -}}</th>				
+				<th class="center">{{- 'user.table.head.status.activation' | trans({}, 'CCDNUserAdminBundle') -}}</th>
 			</tr>
 		</thead>
 		<tbody>
-		{% for row, user in users %}
-			<tr class="{{ cycle(['row_odd', 'row_even'], row) }}">
-				<td class="left"><a href="{{ path('cc_admin_user_show', {'user_id': user.getId }) }}">{{ user.username |capitalize }}</a></td>
-				<td class="left">{{ user.email }}</td>
-				<td class="center">{{ user.registeredDate |date(param('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format')) }}</td>
-				<td class="center">{% if user.enabled %}Activated{% else %}Pending Activation{% endif %}</td>
+		{%- for row, user in users -%}
+			<tr class="{{- cycle(['row_odd', 'row_even'], row) -}}">
+				<td class="left"><a href="{{- path('cc_admin_user_show', {'user_id': user.getId }) -}}">{{- user.username |capitalize -}}</a></td>
+				<td class="left">{{- user.email -}}</td>
+				<td class="center">{{- user.registeredDate |date(param('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format')) -}}</td>
+				<td class="center">{%- if user.enabled -%}Activated{%- else -%}Pending Activation{%- endif -%}</td>
 			</tr>
-		{% else %}
+		{%- else -%}
 			<tr>
 				<td class="center" colspan="4">
-					<div class="well">{{ 'users.banned.table.empty' | trans({}, 'CCDNUserAdminBundle') }}</div>
+					<div class="well">{{- 'users.banned.table.empty' | trans({}, 'CCDNUserAdminBundle') -}}</div>
 				</td>
 			</tr>
-		{% endfor %}
+		{%- endfor -%}
 		</tbody>
 	</table>
 	
-	{% if pager.haveToPaginate %}
-		{{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'cc_admin_user_show_banned_paginated' } ) }}
-	{% endif %}
+	{%- if pager.haveToPaginate -%}
+		{{- pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'cc_admin_user_show_banned_paginated' } ) -}}
+	{%- endif -%}
 
-	{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
+	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
+	{%- endspaceless -%}
+	
 {% endblock %}

@@ -2,69 +2,73 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link href="{{ asset('bundles/ccdncomponentcrumbtrail/css/crumbs.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{- asset('bundles/ccdncomponentcrumbtrail/css/crumbs.css') -}}" rel="stylesheet" type="text/css">
 	
 {% endblock %}
 
-{% block title %}{{ 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') }}{% endblock %}
+{% block title %}{{- 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') -}}{% endblock %}
 
 {% block sidebar %}
 	{{ parent() }}
 
-	{% include 'CCDNUserAdminBundle:Sidebar:sidebar.html.twig' %}
+	{%- include 'CCDNUserAdminBundle:Sidebar:sidebar.html.twig' -%}
 	
 {% endblock %}
 
 
 {% block body %}
 
-	{% include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' %}
+	{%- spaceless -%}
+	
+	{%- include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' -%}
 
-	{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
+	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
-	<h2>{{ 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') }}</h2>
+	<h2>{{- 'title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserUserBundle') -}}</h2>
 
 	<div class="btn-toolbar">
 	{% if user.enabled %}
-		<a class="btn btn-danger" href="{{ path('cc_admin_user_force_reactivation', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.force_reactivation'|trans({}, 'CCDNUserAdminBundle') }}</a>
+		<a class="btn btn-danger" href="{{- path('cc_admin_user_force_reactivation', {'user_id': user.getId }) -}}">{{- 'sidebar.link.user.force_reactivation'|trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;
 	{% else %}
-		<a class="btn btn-danger" href="{{ path('cc_admin_user_activate', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.activate'|trans({}, 'CCDNUserAdminBundle') }}</a>
+		<a class="btn btn-danger" href="{{- path('cc_admin_user_activate', {'user_id': user.getId }) -}}">{{- 'sidebar.link.user.activate'|trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;
 	{% endif %}
 	{% if user.locked %}
-		<a class="btn btn-danger" href="{{ path('cc_admin_user_unban', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.unban'|trans({}, 'CCDNUserAdminBundle') }}</a>
+		<a class="btn btn-danger" href="{{- path('cc_admin_user_unban', {'user_id': user.getId }) -}}">{{- 'sidebar.link.user.unban'|trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;
 	{% else %}
-		<a class="btn btn-danger" href="{{ path('cc_admin_user_ban', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.ban'|trans({}, 'CCDNUserAdminBundle') }}</a>
+		<a class="btn btn-danger" href="{{- path('cc_admin_user_ban', {'user_id': user.getId }) -}}">{{- 'sidebar.link.user.ban'|trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;
 	{% endif %}
-	{#	<a class="btn btn-danger" href="{{ path('cc_admin_user_set_roles', {'user_id': user.getId }) }}">{{ 'sidebar.link.user.set_roles'|trans({}, 'CCDNUserAdminBundle') }}</a>	#}
-		<a class="btn btn-danger" href="{{ path('cc_admin_user_account_edit', {'user_id': user.getId}) }}">{{ 'link.account.edit' |trans({}, 'CCDNUserAdminBundle') }}</a>
-		<a class="btn btn-danger" href="{{ path('cc_admin_user_profile_edit', {'user_id': user.getId}) }}">{{ 'link.profile.edit' |trans({}, 'CCDNUserAdminBundle') }}</a>
+	{#	<a class="btn btn-danger" href="{{- path('cc_admin_user_set_roles', {'user_id': user.getId }) -}}">{{- 'sidebar.link.user.set_roles'|trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;	#}
+		<a class="btn btn-danger" href="{{- path('cc_admin_user_account_edit', {'user_id': user.getId}) -}}">{{- 'link.account.edit' |trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;
+		<a class="btn btn-danger" href="{{- path('cc_admin_user_profile_edit', {'user_id': user.getId}) -}}">{{- 'link.profile.edit' |trans({}, 'CCDNUserAdminBundle') -}}</a>
 	</div>
 	
 	<table class="table table-striped table-bordered">
 		<tbody>
-			<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-				<td class="right" style="width: 30%;">{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</td>
-				<td class="left" style="width: 70%;">{{ user.username |capitalize }}</td>
+			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
+				<td class="right" style="width: 30%;">{{- 'profile.show.username'|trans({}, 'FOSUserBundle') -}}:</td>
+				<td class="left" style="width: 70%;">{{- user.username |capitalize -}}</td>
 			</tr>	
-			<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-				<td class="right">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</td>
-				<td class="left">{{ user.email }}</td>
+			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
+				<td class="right">{{- 'profile.show.email'|trans({}, 'FOSUserBundle') -}}:</td>
+				<td class="left">{{- user.email -}}</td>
 			</tr>
-			<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-				<td class="right">{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</td>
-				<td class="left">{{ user.registeredDate |date(param('ccdn_user_admin.account.show_user.member_since_datetime_format')) }}</td>
+			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
+				<td class="right">{{- 'profile.show.email'|trans({}, 'FOSUserBundle') -}}:</td>
+				<td class="left">{{- user.registeredDate |date(param('ccdn_user_admin.account.show_user.member_since_datetime_format')) -}}</td>
 			</tr>
-			<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-				<td class="right">{{ 'profile.show.banned'|trans({}, 'CCDNUserAdminBundle') }}</td>
-				<td class="left">{% if user.locked %}Banned{% else %}No Bans{% endif %}</td>		
+			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
+				<td class="right">{{- 'profile.show.banned'|trans({}, 'CCDNUserAdminBundle') -}}</td>
+				<td class="left">{%- if user.locked -%}Banned{%- else -%}No Bans{%- endif -%}</td>		
 			</tr>
-			<tr class="{{ cycler(['row_odd', 'row_even'], 'cycle') }}">
-				<td class="right">{{ 'profile.show.activated'|trans({}, 'CCDNUserAdminBundle') }}</td>
-				<td class="left">{% if user.enabled %}Activated{% else %}Not Activated{% endif %}</td>
+			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
+				<td class="right">{{- 'profile.show.activated'|trans({}, 'CCDNUserAdminBundle') -}}</td>
+				<td class="left">{%- if user.enabled -%}Activated{%- else -%}Not Activated{%- endif -%}</td>
 			</tr>
 		</tbody>
 	</table>
 
-	{% include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } %}
+	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
+	{%- endspaceless -%}
+	
 {% endblock body %}
