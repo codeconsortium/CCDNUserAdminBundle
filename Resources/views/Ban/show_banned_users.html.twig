@@ -2,8 +2,6 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link href="{{- asset('bundles/ccdncomponentcrumbtrail/css/crumbs.css') -}}" rel="stylesheet" type="text/css">
-	
 {% endblock %}
 
 {% block title %}{{- 'title.user.admin.banned_users' | trans({}, 'CCDNUserAdminBundle') -}}{% endblock %}

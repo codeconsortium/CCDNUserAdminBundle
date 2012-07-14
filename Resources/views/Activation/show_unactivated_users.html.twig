@@ -1,9 +1,7 @@
 {% extends param('ccdn_user_admin.activation.show_unactivated_users.layout_template') %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	<link href="{{- asset('bundles/ccdncomponentcrumbtrail/css/crumbs.css') -}}" rel="stylesheet" type="text/css">
-	
+	{{ parent() }}	
 {% endblock %}
 
 {% block title %}{{- 'title.user.admin.unactivated_users' | trans({}, 'CCDNUserAdminBundle') -}}{% endblock %}
