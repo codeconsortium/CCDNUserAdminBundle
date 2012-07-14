@@ -48,7 +48,7 @@
 		{%- else -%}
 			<tr>
 				<td class="center" colspan="4">
-					<div class="well">{{- 'users.newest.table.empty' | trans({}, 'CCDNUserAdminBundle') -}}</div>
+					{{- 'users.newest.table.empty' | trans({}, 'CCDNUserAdminBundle') -}}
 				</td>
 			</tr>
 		{%- endfor -%}
