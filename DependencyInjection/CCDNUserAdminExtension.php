@@ -34,6 +34,16 @@ class CCDNUserAdminExtension extends Extension
     /**
      * {@inheritDoc}
      */
+	public function getAlias()
+	{
+		return 'ccdn_user_admin';
+	}
+	
+	
+	
+    /**
+     * {@inheritDoc}
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
