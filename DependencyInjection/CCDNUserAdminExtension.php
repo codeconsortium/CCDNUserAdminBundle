@@ -45,11 +45,24 @@ class CCDNUserAdminExtension extends Extension
 		$container->setParameter('ccdn_user_admin.user.profile_route', $config['user']['profile_route']);
 		$container->setParameter('ccdn_user_admin.template.engine', $config['template']['engine']);
 		
+		$this->getSEOSection($container, $config);
 		$this->getActivationSection($container, $config);
 		$this->getBanSection($container, $config);
 		$this->getRoleSection($container, $config);
 		$this->getAccountSection($container, $config);
     }
+	
+	
+	
+	/**
+	 *
+	 * @access protected
+	 * @param $container, $config
+	 */
+	protected function getSEOSection($container, $config)
+	{
+	    $container->setParameter('ccdn_user_admin.seo.title_length', $config['seo']['title_length']);
+	}
 	
 	
 	
