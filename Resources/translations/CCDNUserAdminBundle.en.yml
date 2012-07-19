@@ -31,6 +31,7 @@ flash.user.set_roles.success: 'User: %username% roles changed.'
 
 link.account.edit: 'Edit Account'
 link.profile.edit: 'Edit Profile'
+link.profile.show: 'Show Profile'
 
 form.field.required: 'This field is required'
 form.label.user.roles: 'set roles: '
