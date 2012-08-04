@@ -3,8 +3,8 @@
 /*
  * This file is part of the CCDN UserAdminBundle
  *
- * (c) CCDN (c) CodeConsortium <http://www.codeconsortium.com/> 
- * 
+ * (c) CCDN (c) CodeConsortium <http://www.codeconsortium.com/>
+ *
  * Available on github <http://www.github.com/codeconsortium/>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -22,25 +22,21 @@ use Symfony\Component\DependencyInjection\Loader;
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
- * 
- * @author Reece Fowell <reece@codeconsortium.com> 
+ *
+ * @author Reece Fowell <reece@codeconsortium.com>
  * @version 1.0
  */
 class CCDNUserAdminExtension extends Extension
 {
-	
-	
-	
+
     /**
      * {@inheritDoc}
      */
-	public function getAlias()
-	{
-		return 'ccdn_user_admin';
-	}
-	
-	
-	
+    public function getAlias()
+    {
+        return 'ccdn_user_admin';
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -52,93 +48,83 @@ class CCDNUserAdminExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-		$container->setParameter('ccdn_user_admin.user.profile_route', $config['user']['profile_route']);
-		$container->setParameter('ccdn_user_admin.template.engine', $config['template']['engine']);
-		
-		$this->getSEOSection($container, $config);
-		$this->getActivationSection($container, $config);
-		$this->getBanSection($container, $config);
-		$this->getRoleSection($container, $config);
-		$this->getAccountSection($container, $config);
+        $container->setParameter('ccdn_user_admin.user.profile_route', $config['user']['profile_route']);
+        $container->setParameter('ccdn_user_admin.template.engine', $config['template']['engine']);
+
+        $this->getSEOSection($container, $config);
+        $this->getActivationSection($container, $config);
+        $this->getBanSection($container, $config);
+        $this->getRoleSection($container, $config);
+        $this->getAccountSection($container, $config);
     }
-	
-	
-	
-	/**
-	 *
-	 * @access protected
-	 * @param $container, $config
-	 */
-	protected function getSEOSection($container, $config)
-	{
-	    $container->setParameter('ccdn_user_admin.seo.title_length', $config['seo']['title_length']);
-	}
-	
-	
-	
-	/**
-	 *
-	 * @access private
-	 * @param $container, $config
-	 */
-	private function getActivationSection($container, $config)
-	{
-		$container->setParameter('ccdn_user_admin.activation.show_unactivated_users.layout_template', $config['activation']['show_unactivated_users']['layout_template']);
-		$container->setParameter('ccdn_user_admin.activation.show_unactivated_users.users_per_page', $config['activation']['show_unactivated_users']['users_per_page']);
-		$container->setParameter('ccdn_user_admin.activation.show_unactivated_users.member_since_datetime_format', $config['activation']['show_unactivated_users']['member_since_datetime_format']);
-		
-	}
-	
-	
-	
-	/**
-	 *
-	 * @access private
-	 * @param $container, $config
-	 */
-	private function getBanSection($container, $config)
-	{
-		$container->setParameter('ccdn_user_admin.ban.show_banned_users.layout_template', $config['ban']['show_banned_users']['layout_template']);
-		$container->setParameter('ccdn_user_admin.ban.show_banned_users.users_per_page', $config['ban']['show_banned_users']['users_per_page']);
-		$container->setParameter('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format', $config['ban']['show_banned_users']['member_since_datetime_format']);
-		
-	}
 
-	
-	
-	/**
-	 *
-	 * @access private
-	 * @param $container, $config
-	 */
-	private function getRoleSection($container, $config)
-	{
-		$container->setParameter('ccdn_user_admin.role.set_users_role.layout_template', $config['role']['set_users_role']['layout_template']);
-		$container->setParameter('ccdn_user_admin.role.set_users_role.form_theme', $config['role']['set_users_role']['form_theme']);
-	}
+    /**
+     *
+     * @access protected
+     * @param $container, $config
+     */
+    protected function getSEOSection($container, $config)
+    {
+        $container->setParameter('ccdn_user_admin.seo.title_length', $config['seo']['title_length']);
+    }
 
-		
-	
-	/**
-	 *
-	 * @access private
-	 * @param $container, $config
-	 */
-	private function getAccountSection($container, $config)
-	{
-		$container->setParameter('ccdn_user_admin.account.show_newest_users.layout_template', $config['account']['show_newest_users']['layout_template']);
-		$container->setParameter('ccdn_user_admin.account.show_newest_users.users_per_page', $config['account']['show_newest_users']['users_per_page']);
-		$container->setParameter('ccdn_user_admin.account.show_newest_users.member_since_datetime_format', $config['account']['show_newest_users']['member_since_datetime_format']);
-		
-		$container->setParameter('ccdn_user_admin.account.show_user.layout_template', $config['account']['show_user']['layout_template']);
-		$container->setParameter('ccdn_user_admin.account.show_user.member_since_datetime_format', $config['account']['show_user']['member_since_datetime_format']);	
+    /**
+     *
+     * @access private
+     * @param $container, $config
+     */
+    private function getActivationSection($container, $config)
+    {
+        $container->setParameter('ccdn_user_admin.activation.show_unactivated_users.layout_template', $config['activation']['show_unactivated_users']['layout_template']);
+        $container->setParameter('ccdn_user_admin.activation.show_unactivated_users.users_per_page', $config['activation']['show_unactivated_users']['users_per_page']);
+        $container->setParameter('ccdn_user_admin.activation.show_unactivated_users.member_since_datetime_format', $config['activation']['show_unactivated_users']['member_since_datetime_format']);
 
-		$container->setParameter('ccdn_user_admin.account.edit_user_account.layout_template', $config['account']['edit_user_account']['layout_template']);
-		$container->setParameter('ccdn_user_admin.account.edit_user_account.form_theme', $config['account']['edit_user_account']['form_theme']);		
+    }
 
-		$container->setParameter('ccdn_user_admin.account.edit_user_profile.layout_template', $config['account']['edit_user_profile']['layout_template']);
-		$container->setParameter('ccdn_user_admin.account.edit_user_profile.form_theme', $config['account']['edit_user_profile']['form_theme']);		
-		
-	}
-	
+    /**
+     *
+     * @access private
+     * @param $container, $config
+     */
+    private function getBanSection($container, $config)
+    {
+        $container->setParameter('ccdn_user_admin.ban.show_banned_users.layout_template', $config['ban']['show_banned_users']['layout_template']);
+        $container->setParameter('ccdn_user_admin.ban.show_banned_users.users_per_page', $config['ban']['show_banned_users']['users_per_page']);
+        $container->setParameter('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format', $config['ban']['show_banned_users']['member_since_datetime_format']);
+
+    }
+
+    /**
+     *
+     * @access private
+     * @param $container, $config
+     */
+    private function getRoleSection($container, $config)
+    {
+        $container->setParameter('ccdn_user_admin.role.set_users_role.layout_template', $config['role']['set_users_role']['layout_template']);
+        $container->setParameter('ccdn_user_admin.role.set_users_role.form_theme', $config['role']['set_users_role']['form_theme']);
+    }
+
+    /**
+     *
+     * @access private
+     * @param $container, $config
+     */
+    private function getAccountSection($container, $config)
+    {
+        $container->setParameter('ccdn_user_admin.account.show_newest_users.layout_template', $config['account']['show_newest_users']['layout_template']);
+        $container->setParameter('ccdn_user_admin.account.show_newest_users.users_per_page', $config['account']['show_newest_users']['users_per_page']);
+        $container->setParameter('ccdn_user_admin.account.show_newest_users.member_since_datetime_format', $config['account']['show_newest_users']['member_since_datetime_format']);
+
+        $container->setParameter('ccdn_user_admin.account.show_user.layout_template', $config['account']['show_user']['layout_template']);
+        $container->setParameter('ccdn_user_admin.account.show_user.member_since_datetime_format', $config['account']['show_user']['member_since_datetime_format']);
+
+        $container->setParameter('ccdn_user_admin.account.edit_user_account.layout_template', $config['account']['edit_user_account']['layout_template']);
+        $container->setParameter('ccdn_user_admin.account.edit_user_account.form_theme', $config['account']['edit_user_account']['form_theme']);
+
+        $container->setParameter('ccdn_user_admin.account.edit_user_profile.layout_template', $config['account']['edit_user_profile']['layout_template']);
+        $container->setParameter('ccdn_user_admin.account.edit_user_profile.form_theme', $config['account']['edit_user_profile']['form_theme']);
+
+    }
+
 }

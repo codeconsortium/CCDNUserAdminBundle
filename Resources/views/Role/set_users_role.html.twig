@@ -8,7 +8,7 @@
 
 {% block sidebar %}
 	{{ parent() }}
-	
+
 	{%- include 'CCDNUserAdminBundle:Sidebar:sidebar.html.twig' -%}
 
 {% endblock %}
@@ -22,14 +22,14 @@
 
 	<h2>{{- 'title.account.edit' |trans({}, 'CCDNUserUserBundle') -}}</h2>
 
-	{%- form_theme form param('ccdn_user_admin.role.set_users_role.form_theme') -%}	
+	{%- form_theme form param('ccdn_user_admin.role.set_users_role.form_theme') -%}
 	<form action="{{- path('cc_admin_user_set_roles', {'user_id': user.id }) -}}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
 		<fieldset>
-		
+
 			{{- form_errors(form) -}}
 
 			<div class="control-group"><div class="controls row-fluid">{{- form_row(form._token) -}}</div></div>
-	
+
 			<div class="control-group">
 				{{- form_label(form.role, null, { 'label': 'form.label.user.roles' |trans({}, 'CCDNUserAdminBundle')}) -}}</td>
 				<div class="controls row-fluid">
@@ -37,14 +37,14 @@
 					{{- form_widget(form.role) -}}
 				</div>
 			</div>
-		
+
 			<div class="form-actions">
 		        <input type="submit" class="btn btn-danger" value="{{- 'profile.edit.submit'|trans({}, 'FOSUserBundle') -}}">
 			</div>
-		
+
 		</fieldset>
 	</form>
-	
+
 	{%- endspaceless -%}
-	
+
 {% endblock body %}

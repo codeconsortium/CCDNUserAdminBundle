@@ -10,14 +10,14 @@
 	{{ parent() }}
 
 	{%- include 'CCDNUserAdminBundle:Sidebar:sidebar.html.twig' -%}
-	
+
 {% endblock %}
 
 
 {% block body %}
 
 	{%- spaceless -%}
-	
+
 	{%- include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' -%}
 
 	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
@@ -33,7 +33,7 @@
 			<tr>
 				<th class="left">{{- 'member.table.head.username' | trans({}, 'CCDNUserMemberBundle') -}}</th>
 				<th class="left">{{- 'user.table.head.email' | trans({}, 'CCDNUserAdminBundle') -}}</th>
-				<th class="center">{{- 'member.table.head.joined_date' | trans({}, 'CCDNUserMemberBundle') -}}</th>				
+				<th class="center">{{- 'member.table.head.joined_date' | trans({}, 'CCDNUserMemberBundle') -}}</th>
 				<th class="center">{{- 'user.table.head.status.activation' | trans({}, 'CCDNUserAdminBundle') -}}</th>
 			</tr>
 		</thead>
@@ -54,7 +54,7 @@
 		{%- endfor -%}
 		</tbody>
 	</table>
-	
+
 	{%- if pager.haveToPaginate -%}
 		{{- pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'cc_admin_user_show_banned_paginated' } ) -}}
 	{%- endif -%}
@@ -62,5 +62,5 @@
 	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
 	{%- endspaceless -%}
-	
+
 {% endblock %}

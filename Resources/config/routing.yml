@@ -1,14 +1,14 @@
 cc_admin_user_cp:
     pattern: /{_locale}/dashboard/admin
     defaults: { _controller: CCDNComponentDashboardBundle:Dashboard:show, _locale: en }
-    
+
 #
 # Show unactivated.
 #
 cc_admin_user_show_unactivated:
     pattern: /{_locale}/admin/user/show/unactivated
     defaults: { _controller: CCDNUserAdminBundle:Activation:showUnactivatedUsers, _locale: en, page: 1 }
-        
+
 cc_admin_user_show_unactivated_paginated:
     pattern: /{_locale}/admin/user/show/unactivated/page/{page}
     defaults: { _controller: CCDNUserAdminBundle:Activation:showUnactivatedUsers, _locale: en, page: 1 }
@@ -30,25 +30,25 @@ cc_admin_user_show_banned_paginated:
 cc_admin_user_show_newest:
     pattern: /{_locale}/admin/user/show/newest
     defaults: { _controller: CCDNUserAdminBundle:User:showNewestUsers, _locale: en, page: 1 }
-    
+
 cc_admin_user_show_newest_paginated:
     pattern: /{_locale}/admin/user/show/newest/page/{page}
     defaults: { _controller: CCDNUserAdminBundle:User:showNewestUsers, _locale: en, page: 1 }
- 
+
 #
 # User Management.
-#       
+#
 cc_admin_user_show:
     pattern: /{_locale}/admin/user/{user_id}/show
     defaults: { _controller: CCDNUserAdminBundle:User:show, _locale: en }
-        
+
 cc_admin_user_account_edit:
     pattern: /{_locale}/admin/user/{user_id}/account/edit
-    defaults: { _controller: CCDNUserAdminBundle:User:editAccount, _locale: en } 
+    defaults: { _controller: CCDNUserAdminBundle:User:editAccount, _locale: en }
 
 cc_admin_user_profile_edit:
     pattern: /{_locale}/admin/user/{user_id}/profile/edit
-    defaults: { _controller: CCDNUserAdminBundle:User:editProfile, _locale: en } 
+    defaults: { _controller: CCDNUserAdminBundle:User:editProfile, _locale: en }
 
 # ---- User Activation
 cc_admin_user_activate:

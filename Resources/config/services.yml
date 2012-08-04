@@ -1,5 +1,5 @@
 parameters:
-    
+
     ccdn_user_admin.role.form.change.type.class:             CCDNUser\AdminBundle\Form\Type\RoleType
     ccdn_user_admin.role.form.change.handler.class:          CCDNUser\AdminBundle\Form\Handler\RoleSetFormHandler
 
@@ -12,7 +12,7 @@ parameters:
     ccdn_user_admin.dashboard.integrator.class:              CCDNUser\AdminBundle\Component\Dashboard\DashboardIntegrator
 
 services:
-    
+
     #
     # Role Forms.
     #
@@ -22,7 +22,7 @@ services:
     ccdn_user_admin.role.form.change.handler:
         class:  %ccdn_user_admin.role.form.change.handler.class%
         arguments:  [@form.factory, @service_container, @ccdn_user_user.user.manager]
-    
+
     #
     # Account Forms.
     #

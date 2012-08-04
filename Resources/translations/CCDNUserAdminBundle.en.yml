@@ -46,4 +46,3 @@ users.newest.table.empty: 'No new users were found.'
 
 profile.show.banned: 'Ban Status: '
 profile.show.activated: 'Activation Status: '
-
