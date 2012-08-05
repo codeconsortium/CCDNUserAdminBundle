@@ -82,7 +82,7 @@ class ActivationController extends ContainerAware
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->container->get('ccdn_user_user.user.manager')->activate($user)->flushNow();
+        $this->container->get('ccdn_user_user.user.manager')->activate($user)->flush();
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.activate.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
@@ -112,7 +112,7 @@ class ActivationController extends ContainerAware
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->container->get('ccdn_user_user.user.manager')->forceReActivate($user)->flushNow();
+        $this->container->get('ccdn_user_user.user.manager')->forceReActivate($user)->flush();
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.force_reactivation.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 

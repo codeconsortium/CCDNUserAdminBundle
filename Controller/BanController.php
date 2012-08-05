@@ -82,7 +82,7 @@ class BanController extends ContainerAware
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->container->get('ccdn_user_user.user.manager')->ban($user)->flushNow();
+        $this->container->get('ccdn_user_user.user.manager')->ban($user)->flush();
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.ban.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
@@ -112,7 +112,7 @@ class BanController extends ContainerAware
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->container->get('ccdn_user_user.user.manager')->unban($user)->flushNow();
+        $this->container->get('ccdn_user_user.user.manager')->unban($user)->flush();
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.unban.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 

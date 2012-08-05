@@ -180,7 +180,7 @@ class UserController extends ContainerAware
         // if the profile has no id then it
         // does not exist, so create one.
         if ( ! $profile->getId()) {
-            $this->container->get('ccdn_user_profile.profile.manager')->insert($profile)->flushNow();
+            $this->container->get('ccdn_user_profile.profile.manager')->insert($profile)->flush();
         }
 
         $formHandler = $this->container->get('ccdn_user_admin.administrate.profile.form.handler')->setDefaults(array('profile' => $profile));
