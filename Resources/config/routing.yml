@@ -1,74 +1,80 @@
-cc_admin_user_cp:
+ccdn_user_admin_cpanel:
     pattern: /{_locale}/dashboard/admin
     defaults: { _controller: CCDNComponentDashboardBundle:Dashboard:show, _locale: en }
 
 #
 # Show unactivated.
 #
-cc_admin_user_show_unactivated:
+ccdn_user_admin_show_unactivated:
     pattern: /{_locale}/admin/user/show/unactivated
     defaults: { _controller: CCDNUserAdminBundle:Activation:showUnactivatedUsers, _locale: en, page: 1 }
 
-cc_admin_user_show_unactivated_paginated:
+ccdn_user_admin_show_unactivated_paginated:
     pattern: /{_locale}/admin/user/show/unactivated/page/{page}
     defaults: { _controller: CCDNUserAdminBundle:Activation:showUnactivatedUsers, _locale: en, page: 1 }
 
 #
 # Show banned.
 #
-cc_admin_user_show_banned:
+ccdn_user_admin_show_banned:
     pattern: /{_locale}/admin/user/show/banned
     defaults: { _controller: CCDNUserAdminBundle:Ban:showBannedUsers, _locale: en, page: 1 }
 
-cc_admin_user_show_banned_paginated:
+ccdn_user_admin_show_banned_paginated:
     pattern: /{_locale}/admin/user/show/banned/page/{page}
     defaults: { _controller: CCDNUserAdminBundle:Ban:showBannedUsers, _locale: en, page: 1 }
 
 #
 # Show newest.
 #
-cc_admin_user_show_newest:
+ccdn_user_admin_show_newest:
     pattern: /{_locale}/admin/user/show/newest
     defaults: { _controller: CCDNUserAdminBundle:User:showNewestUsers, _locale: en, page: 1 }
 
-cc_admin_user_show_newest_paginated:
+ccdn_user_admin_show_newest_paginated:
     pattern: /{_locale}/admin/user/show/newest/page/{page}
     defaults: { _controller: CCDNUserAdminBundle:User:showNewestUsers, _locale: en, page: 1 }
 
 #
 # User Management.
 #
-cc_admin_user_show:
+ccdn_user_admin_account_show:
     pattern: /{_locale}/admin/user/{user_id}/show
     defaults: { _controller: CCDNUserAdminBundle:User:show, _locale: en }
 
-cc_admin_user_account_edit:
+ccdn_user_admin_account_edit:
     pattern: /{_locale}/admin/user/{user_id}/account/edit
     defaults: { _controller: CCDNUserAdminBundle:User:editAccount, _locale: en }
 
-cc_admin_user_profile_edit:
+ccdn_user_admin_profile_edit:
     pattern: /{_locale}/admin/user/{user_id}/profile/edit
     defaults: { _controller: CCDNUserAdminBundle:User:editProfile, _locale: en }
 
-# ---- User Activation
-cc_admin_user_activate:
+#
+# User Activation.
+#
+ccdn_user_admin_activate:
     pattern: /{_locale}/admin/user/{user_id}/activate
     defaults: { _controller: CCDNUserAdminBundle:Activation:activate, _locale: en }
 
-cc_admin_user_force_reactivation:
+ccdn_user_admin_force_reactivation:
     pattern: /{_locale}/admin/user/{user_id}/force/reactivation
     defaults: { _controller: CCDNUserAdminBundle:Activation:forceReActivation, _locale: en }
 
-# ---- User Banning
-cc_admin_user_ban:
+#
+# User Banning.
+#
+ccdn_user_admin_ban:
     pattern: /{_locale}/admin/user/{user_id}/ban
     defaults: { _controller: CCDNUserAdminBundle:Ban:banUser, _locale: en }
 
-cc_admin_user_unban:
+ccdn_user_admin_unban:
     pattern: /{_locale}/admin/user/{user_id}/unban
     defaults: { _controller: CCDNUserAdminBundle:Ban:unbanUser, _locale: en }
 
-#---- User Roles
-cc_admin_user_set_roles:
+#
+# User Roles.
+#
+ccdn_user_admin_set_roles:
     pattern: /{_locale}/admin/user/{user_id}/set/roles
     defaults: { _controller: CCDNUserAdminBundle:Role:setUserRoles, _locale: en }

@@ -43,9 +43,9 @@ class DashboardIntegrator extends BaseIntegrator implements IntegratorInterface
         $resources = array(
             'admin' => array(
                 'User Administration' => array(
-                    'cc_admin_user_show_unactivated' => array('auth' => 'ROLE_ADMIN', 'name' => 'Show Unactivated', 'icon' => $this->basePath . '/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png'),
-                    'cc_admin_user_show_banned' => array('auth' => 'ROLE_ADMIN', 'name' => 'Show Banned', 'icon' => $this->basePath . '/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png'),
-                    'cc_admin_user_show_newest' => array('auth' => 'ROLE_ADMIN', 'name' => 'Show Newest Users', 'icon' => $this->basePath . '/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png'),
+                    'ccdn_user_admin_show_unactivated' => array('auth' => 'ROLE_ADMIN', 'name' => 'Show Unactivated', 'icon' => $this->basePath . '/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png'),
+                    'ccdn_user_admin_show_banned' => array('auth' => 'ROLE_ADMIN', 'name' => 'Show Banned', 'icon' => $this->basePath . '/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png'),
+                    'ccdn_user_admin_show_newest' => array('auth' => 'ROLE_ADMIN', 'name' => 'Show Newest Users', 'icon' => $this->basePath . '/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png'),
                 ),
             ),
 

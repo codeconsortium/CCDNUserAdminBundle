@@ -49,8 +49,8 @@ class BanController extends ContainerAware
         $users = $users_paginated->getCurrentPageResults();
 
         $crumb_trail = $this->container->get('ccdn_component_crumb.trail')
-            ->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
-            ->add($this->container->get('translator')->trans('crumbs.show_banned', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show_banned'), "users");
+            ->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
+            ->add($this->container->get('translator')->trans('crumbs.show_banned', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_show_banned'), "users");
 
         return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Ban:show_banned_users.html.' . $this->getEngine(), array(
             'crumbs' => $crumb_trail,
@@ -86,7 +86,7 @@ class BanController extends ContainerAware
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.ban.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
-        return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user_id)));
+        return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('user_id' => $user_id)));
 
     }
 
@@ -116,7 +116,7 @@ class BanController extends ContainerAware
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.unban.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
-        return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user_id)));
+        return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('user_id' => $user_id)));
 
     }
 

@@ -55,14 +55,14 @@ class RoleController extends ContainerAware
         if ($formHandler->process()) {
             $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.set_roles.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
-            return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array(
+            return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array(
                 'user_id' => $user->getId(),
             )));
         } else {
     /*		$crumb_trail = $this->container->get('ccdn_component_crumb.trail')
                 ->add($this->container->get('translator')->trans('crumbs.forum_index', array(), 'CCDNForumForumBundle'),
-                    $this->container->get('router')->generate('cc_forum_category_index'), "home")
-                ->add($category->getName(),	$this->container->get('router')->generate('cc_forum_category_show', array('category_id' => $category->getId())), "category");*/
+                    $this->container->get('router')->generate('ccdn_forum_forum_category_index'), "home")
+                ->add($category->getName(),	$this->container->get('router')->generate('ccdn_forum_forum_category_show', array('category_id' => $category->getId())), "category");*/
 
             return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Role:set_users_role.html.' . $this->getEngine(), array(
                 'user_profile_route' => $this->container->getParameter('ccdn_forum_admin.user.profile_route'),

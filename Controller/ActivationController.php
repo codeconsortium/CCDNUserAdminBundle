@@ -49,8 +49,8 @@ class ActivationController extends ContainerAware
         $users = $users_paginated->getCurrentPageResults();
 
         $crumb_trail = $this->container->get('ccdn_component_crumb.trail')
-            ->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_dashboard_show', array('category' => 'admin')), "sitemap")
-            ->add($this->container->get('translator')->trans('crumbs.show_unactivated', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('cc_admin_user_show_unactivated'), "users");
+            ->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
+            ->add($this->container->get('translator')->trans('crumbs.show_unactivated', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_show_unactivated'), "users");
 
         return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Activation:show_unactivated_users.html.' . $this->getEngine(), array(
             'crumbs' => $crumb_trail,
@@ -86,7 +86,7 @@ class ActivationController extends ContainerAware
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.activate.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
-        return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user_id)));
+        return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('user_id' => $user_id)));
 
     }
 
@@ -116,7 +116,7 @@ class ActivationController extends ContainerAware
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.force_reactivation.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
-        return new RedirectResponse($this->container->get('router')->generate('cc_admin_user_show', array('user_id' => $user_id)));
+        return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('user_id' => $user_id)));
 
     }
 

@@ -29,7 +29,7 @@
 		</div>
 		{%- if pager.haveToPaginate -%}
 			<div class="pull-right">
-		    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'cc_admin_user_show_banned_paginated' }) -}}
+		    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'ccdn_user_admin_show_banned_paginated' }) -}}
 			</div>
 		{%- endif -%}
 		<br><br>
@@ -47,7 +47,7 @@
 		<tbody>
 		{%- for row, user in users -%}
 			<tr class="{{- cycle(['row_odd', 'row_even'], row) }} marked_read">
-				<td class="left"><a href="{{- path('cc_admin_user_show', {'user_id': user.getId }) -}}">{{- user.username |capitalize -}}</a></td>
+				<td class="left"><a href="{{- path('ccdn_user_admin_account_show', {'user_id': user.getId }) -}}">{{- user.username |capitalize -}}</a></td>
 				<td class="left">{{- user.email -}}</td>
 				<td class="center">{{- user.registeredDate |date(param('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format')) -}}</td>
 				<td class="center">{%- if user.enabled -%}Activated{%- else -%}Pending Activation{%- endif -%}</td>
@@ -67,7 +67,7 @@
 		</div>
 		{%- if pager.haveToPaginate -%}
 			<div class="pull-right">
-		    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'cc_admin_user_show_banned_paginated' }) -}}
+		    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'ccdn_user_admin_show_banned_paginated' }) -}}
 			</div>
 		{%- endif -%}
 		<br><br>
