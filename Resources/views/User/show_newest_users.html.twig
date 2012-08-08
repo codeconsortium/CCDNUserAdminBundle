@@ -24,9 +24,16 @@
 
 	<h2>{{- 'title.user.admin.newest_users' | trans({}, 'CCDNUserAdminBundle') -}}</h2>
 
-	{%- if pager.haveToPaginate -%}
-		{{- pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'cc_admin_user_show_newest_paginated' }) -}}
-	{%- endif -%}
+	<div class="btn-toolbar" style="display:block !important;clear:both !important;">
+		<div class="pull-left">
+		</div>
+		{%- if pager.haveToPaginate -%}
+			<div class="pull-right">
+		    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'cc_admin_user_show_newest_paginated' }) -}}
+			</div>
+		{%- endif -%}
+		<br><br>
+	</div>
 
 	<table class="table">
 		<thead>
@@ -55,9 +62,16 @@
 		</tbody>
 	</table>
 
-	{%- if pager.haveToPaginate -%}
-		{{- pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'cc_admin_user_show_newest_paginated' } ) -}}
-	{%- endif -%}
+	<div class="btn-toolbar" style="display:block !important;clear:both !important;">
+		<div class="pull-left">
+		</div>
+		{%- if pager.haveToPaginate -%}
+			<div class="pull-right">
+		    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'cc_admin_user_show_newest_paginated' }) -}}
+			</div>
+		{%- endif -%}
+		<br><br>
+	</div>
 
 	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
