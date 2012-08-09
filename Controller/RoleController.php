@@ -31,16 +31,16 @@ class RoleController extends ContainerAware
     /**
      *
      * @access public
-     * @param  int                             $user_id
+     * @param  Int $userId
      * @return RedirectResponse|RenderResponse
      */
-    public function setUserRolesAction($user_id)
+    public function setUserRolesAction($userId)
     {
         if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException('You do not have permission to access this page!');
         }
 
-        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($user_id);
+        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($userId);
 
         if ( ! is_object($user) || ! $user instanceof UserInterface) {
             throw new NotFoundHttpException('the user does not exist.');
@@ -56,18 +56,13 @@ class RoleController extends ContainerAware
             $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.set_roles.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
             return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array(
-                'user_id' => $user->getId(),
+                'userId' => $user->getId(),
             )));
         } else {
-    /*		$crumb_trail = $this->container->get('ccdn_component_crumb.trail')
-                ->add($this->container->get('translator')->trans('crumbs.forum_index', array(), 'CCDNForumForumBundle'),
-                    $this->container->get('router')->generate('ccdn_forum_forum_category_index'), "home")
-                ->add($category->getName(),	$this->container->get('router')->generate('ccdn_forum_forum_category_show', array('category_id' => $category->getId())), "category");*/
 
             return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Role:set_users_role.html.' . $this->getEngine(), array(
                 'user_profile_route' => $this->container->getParameter('ccdn_forum_admin.user.profile_route'),
                 'user' => $user,
-            //	'crumbs' => $crumb_trail,
                 'form' => $formHandler->getForm()->createView(),
             ));
         }
@@ -77,7 +72,7 @@ class RoleController extends ContainerAware
     /**
      *
      * @access protected
-     * @return string
+     * @return String
      */
     protected function getEngine()
     {

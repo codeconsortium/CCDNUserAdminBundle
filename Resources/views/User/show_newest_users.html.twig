@@ -47,7 +47,7 @@
 		<tbody>
 		{%- for row, user in users -%}
 			<tr class="{{- cycle(['row_odd', 'row_even'], row) }} marked_read">
-				<td class="left"><a href="{{- path('ccdn_user_admin_account_show', {'user_id': user.getId }) -}}">{{- user.username |capitalize -}}</a></td>
+				<td class="left"><a href="{{- path('ccdn_user_admin_account_show', {'userId': user.getId }) -}}">{{- user.username |capitalize -}}</a></td>
 				<td class="left">{{- user.email -}}</td>
 				<td class="center">{{- user.registeredDate |date(param('ccdn_user_admin.account.show_newest_users.member_since_datetime_format')) -}}</td>
 				<td class="center">{%- if user.enabled -%}Activated{%- else -%}Pending Activation{%- endif -%}</td>

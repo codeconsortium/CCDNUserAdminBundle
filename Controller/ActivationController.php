@@ -31,7 +31,7 @@ class ActivationController extends ContainerAware
     /**
      *
      * @access public
-     * @param  int                             $page
+     * @param  Int $page
      * @return RedirectResponse|RenderResponse
      */
     public function showUnactivatedUsersAction($page)
@@ -40,22 +40,22 @@ class ActivationController extends ContainerAware
             throw new AccessDeniedException('You do not have access to this section.');
         }
 
-        $users_paginated = $this->container->get('ccdn_user_user.user.repository')->findAllUnactivatedPaginated();
+        $usersPager = $this->container->get('ccdn_user_user.user.repository')->findAllUnactivatedPaginated();
 
-        $users_per_page = $this->container->getParameter('ccdn_user_admin.activation.show_unactivated_users.users_per_page');
-        $users_paginated->setMaxPerPage($users_per_page);
-        $users_paginated->setCurrentPage($page, false, true);
+        $usersPerPage = $this->container->getParameter('ccdn_user_admin.activation.show_unactivated_users.users_per_page');
+        $usersPager->setMaxPerPage($usersPerPage);
+        $usersPager->setCurrentPage($page, false, true);
 
-        $users = $users_paginated->getCurrentPageResults();
+        $users = $usersPager->getCurrentPageResults();
 
-        $crumb_trail = $this->container->get('ccdn_component_crumb.trail')
+        $crumbs = $this->container->get('ccdn_component_crumb.trail')
             ->add($this->container->get('translator')->trans('crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
             ->add($this->container->get('translator')->trans('crumbs.show_unactivated', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_show_unactivated'), "users");
 
         return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Activation:show_unactivated_users.html.' . $this->getEngine(), array(
-            'crumbs' => $crumb_trail,
+            'crumbs' => $crumbs,
             'user_profile_route' => $this->container->getParameter('ccdn_user_admin.user.profile_route'),
-            'pager' => $users_paginated,
+            'pager' => $usersPager,
             'users' => $users,
         ));
     }
@@ -63,16 +63,16 @@ class ActivationController extends ContainerAware
     /**
      *
      * @access public
-     * @param  int                             $user_id
-     * @return RedirectResponse|RenderResponse
+     * @param  Int $userId
+     * @return RedirectResponse
      */
-    public function activateAction($user_id)
+    public function activateAction($userId)
     {
         if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException('You do not have permission to access this page!');
         }
 
-        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($user_id);
+        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($userId);
 
         if ( ! is_object($user) || ! $user instanceof UserInterface) {
             throw new NotFoundHttpException('the user does not exist.');
@@ -86,23 +86,23 @@ class ActivationController extends ContainerAware
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.activate.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
-        return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('user_id' => $user_id)));
+        return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $userId)));
 
     }
 
     /**
      *
      * @access public
-     * @param  int                             $user_id
-     * @return RedirectResponse|RenderResponse
+     * @param  Int $userId
+     * @return RedirectResponse
      */
-    public function forceReActivationAction($user_id)
+    public function forceReActivationAction($userId)
     {
         if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException('You do not have permission to access this page!');
         }
 
-        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($user_id);
+        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($userId);
 
         if ( ! is_object($user) || ! $user instanceof UserInterface) {
             throw new NotFoundHttpException('the user does not exist.');
@@ -116,14 +116,14 @@ class ActivationController extends ContainerAware
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.force_reactivation.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
-        return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('user_id' => $user_id)));
+        return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $userId)));
 
     }
 
     /**
      *
      * @access protected
-     * @return string
+     * @return String
      */
     protected function getEngine()
     {

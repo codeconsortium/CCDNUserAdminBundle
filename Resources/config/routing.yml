@@ -39,42 +39,42 @@ ccdn_user_admin_show_newest_paginated:
 # User Management.
 #
 ccdn_user_admin_account_show:
-    pattern: /{_locale}/admin/user/{user_id}/show
+    pattern: /{_locale}/admin/user/{userId}/show
     defaults: { _controller: CCDNUserAdminBundle:User:show, _locale: en }
 
 ccdn_user_admin_account_edit:
-    pattern: /{_locale}/admin/user/{user_id}/account/edit
+    pattern: /{_locale}/admin/user/{userId}/account/edit
     defaults: { _controller: CCDNUserAdminBundle:User:editAccount, _locale: en }
 
 ccdn_user_admin_profile_edit:
-    pattern: /{_locale}/admin/user/{user_id}/profile/edit
+    pattern: /{_locale}/admin/user/{userId}/profile/edit
     defaults: { _controller: CCDNUserAdminBundle:User:editProfile, _locale: en }
 
 #
 # User Activation.
 #
 ccdn_user_admin_activate:
-    pattern: /{_locale}/admin/user/{user_id}/activate
+    pattern: /{_locale}/admin/user/{userId}/activate
     defaults: { _controller: CCDNUserAdminBundle:Activation:activate, _locale: en }
 
 ccdn_user_admin_force_reactivation:
-    pattern: /{_locale}/admin/user/{user_id}/force/reactivation
+    pattern: /{_locale}/admin/user/{userId}/force/reactivation
     defaults: { _controller: CCDNUserAdminBundle:Activation:forceReActivation, _locale: en }
 
 #
 # User Banning.
 #
 ccdn_user_admin_ban:
-    pattern: /{_locale}/admin/user/{user_id}/ban
+    pattern: /{_locale}/admin/user/{userId}/ban
     defaults: { _controller: CCDNUserAdminBundle:Ban:banUser, _locale: en }
 
 ccdn_user_admin_unban:
-    pattern: /{_locale}/admin/user/{user_id}/unban
+    pattern: /{_locale}/admin/user/{userId}/unban
     defaults: { _controller: CCDNUserAdminBundle:Ban:unbanUser, _locale: en }
 
 #
 # User Roles.
 #
 ccdn_user_admin_set_roles:
-    pattern: /{_locale}/admin/user/{user_id}/set/roles
+    pattern: /{_locale}/admin/user/{userId}/set/roles
     defaults: { _controller: CCDNUserAdminBundle:Role:setUserRoles, _locale: en }
