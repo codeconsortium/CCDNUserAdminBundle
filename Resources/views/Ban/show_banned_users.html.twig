@@ -4,7 +4,7 @@
 	{{ parent() }}
 {% endblock %}
 
-{% block title %}{{- truncDot('title.user.admin.banned_users' | trans({}, 'CCDNUserAdminBundle'), param('ccdn_user_admin.seo.title_length')) -}}{% endblock %}
+{% block title %}{{- truncDot('ccdn_user_admin.title.users.banned' | trans({}, 'CCDNUserAdminBundle'), param('ccdn_user_admin.seo.title_length')) -}}{% endblock %}
 
 {% block sidebar %}
 	{{ parent() }}
@@ -22,7 +22,7 @@
 
 	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
-	<h2>{{- 'title.user.admin.banned_users' | trans({}, 'CCDNUserAdminBundle') -}}</h2>
+	<h2>{{- 'ccdn_user_admin.title.users.banned' | trans({}, 'CCDNUserAdminBundle') -}}</h2>
 
 	<div class="btn-toolbar" style="display:block !important;clear:both !important;">
 		<div class="pull-left">
@@ -38,10 +38,10 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th class="left">{{- 'member.table.head.username' | trans({}, 'CCDNUserMemberBundle') -}}</th>
-				<th class="left">{{- 'user.table.head.email' | trans({}, 'CCDNUserAdminBundle') -}}</th>
-				<th class="center">{{- 'member.table.head.joined_date' | trans({}, 'CCDNUserMemberBundle') -}}</th>
-				<th class="center">{{- 'user.table.head.status.activation' | trans({}, 'CCDNUserAdminBundle') -}}</th>
+				<th class="left">{{- 'ccdn_user_admin.users.table.head.username' | trans({}, 'CCDNUserAdminBundle') -}}</th>
+				<th class="left">{{- 'ccdn_user_admin.users.table.head.email' | trans({}, 'CCDNUserAdminBundle') -}}</th>
+				<th class="center">{{- 'ccdn_user_admin.users.table.head.joined_date' | trans({}, 'CCDNUserAdminBundle') -}}</th>
+				<th class="center">{{- 'ccdn_user_admin.users.table.head.activation_status' | trans({}, 'CCDNUserAdminBundle') -}}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -55,7 +55,7 @@
 		{%- else -%}
 			<tr>
 				<td class="center" colspan="4">
-					{{- 'users.banned.table.empty' | trans({}, 'CCDNUserAdminBundle') -}}
+					{{- 'ccdn_user_admin.users.banned.table.empty' | trans({}, 'CCDNUserAdminBundle') -}}
 				</td>
 			</tr>
 		{%- endfor -%}

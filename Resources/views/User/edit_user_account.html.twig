@@ -49,7 +49,7 @@
 			</div>
 
 			<div class="control-group{{- (form.locked.vars.errors|length > 0) ? ' error': '' -}}">
-				{{- form_label(form.locked, null, { 'label': 'form.label.account.locked' |trans({}, 'CCDNUserAdminBundle')}) -}}
+				{{- form_label(form.locked, null, { 'label': 'ccdn_user_admin.form.label.account.locked' |trans({}, 'CCDNUserAdminBundle')}) -}}
 				<div class="controls row-fluid">
 					{{- form_errors(form.locked) -}}
 					{{- form_widget(form.locked) -}}
@@ -57,7 +57,7 @@
 			</div>
 
 			<div class="control-group{{- (form.enabled.vars.errors|length > 0) ? ' error': '' -}}">
-				{{- form_label(form.enabled, null, { 'label': 'form.label.account.enabled' |trans({}, 'CCDNUserAdminBundle')}) -}}
+				{{- form_label(form.enabled, null, { 'label': 'ccdn_user_admin.form.label.account.enabled' |trans({}, 'CCDNUserAdminBundle')}) -}}
 				<div class="controls row-fluid">
 					{{- form_errors(form.enabled) -}}
 					{{- form_widget(form.enabled) -}}

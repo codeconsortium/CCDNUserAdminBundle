@@ -53,7 +53,7 @@ class RoleController extends ContainerAware
         $formHandler = $this->container->get('ccdn_user_user_admin.role.form.change.handler')->setOptions(array('user' => $user));
 
         if ($formHandler->process()) {
-            $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('flash.user.set_roles.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
+            $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.set_roles.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
             return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array(
                 'userId' => $user->getId(),

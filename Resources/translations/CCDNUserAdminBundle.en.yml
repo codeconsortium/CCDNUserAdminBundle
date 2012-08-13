@@ -1,48 +1,72 @@
-title.user.admin.newest_users: 'New Users.'
-title.user.admin.unactivated_users: 'Unactivated Users.'
-title.user.admin.banned_users: 'Banned Users.'
+#
+# Page Titles.
+#
+ccdn_user_admin.title.users.newest: 'New Users.'
+ccdn_user_admin.title.users.unactivated: 'Unactivated Users.'
+ccdn_user_admin.title.users.banned: 'Banned Users.'
 
-sidebar.header.admin.user: User Management
-sidebar.link.user.show_new: New Users
-sidebar.link.user.show_unactivated: Unactivated Users
-sidebar.link.user.show_banned: Banned Users
+#
+# Crumbs.
+#
+ccdn_user_admin.crumbs.dashboard: 'Dashboard'
+ccdn_user_admin.crumbs.dashboard.admin: 'Admin Panel'
+ccdn_user_admin.crumbs.show_newest: 'Show Newest Users'
+ccdn_user_admin.crumbs.show_unactivated: 'Show Unactivated Users'
+ccdn_user_admin.crumbs.show_banned: 'Show Banned Users'
+ccdn_user_admin.crumbs.account.show: 'Administrate %user_name% Account'
+ccdn_user_admin.crumbs.account.edit: 'Edit Account'
+ccdn_user_admin.crumbs.profile.edit: 'Edit Profile'
 
-sidebar.link.user.activate: Activate
-sidebar.link.user.force_reactivation: Force Reactivation
-sidebar.link.user.ban: Ban User
-sidebar.link.user.unban: Unban User
-sidebar.link.user.set_roles: Set Roles
+#
+# Flash Messages.
+#
+ccdn_user_admin.flash.user.activate.success: 'User: %username% activated.'
+ccdn_user_admin.flash.user.force_reactivation.success: 'User: %username% pending re-activation.'
+ccdn_user_admin.flash.user.ban.success: 'User: %username% banned.'
+ccdn_user_admin.flash.user.unban.success: 'User: %username% unbanned.'
+ccdn_user_admin.flash.user.set_roles.success: 'User: %username% roles changed.'
 
-crumbs.dashboard: 'Dashboard'
-crumbs.dashboard.admin: 'Admin Panel'
-crumbs.show_newest: 'Show Newest Users'
-crumbs.show_unactivated: 'Show Unactivated Users'
-crumbs.show_banned: 'Show Banned Users'
-crumbs.account: 'Administrate %user_name% Account'
-crumbs.account.edit: 'Edit Account'
-crumbs.profile.edit: 'Edit Profile'
+#
+# Sidebar.
+#
+ccdn_user_admin.sidebar.header.user_admin: 'User Management'
+ccdn_user_admin.ccdn_user_admin.sidebar.link.user.show_new: 'New Users'
+ccdn_user_admin.ccdn_user_admin.sidebar.link.user.show_unactivated: 'Unactivated Users'
+ccdn_user_admin.ccdn_user_admin.sidebar.link.user.show_banned: 'Banned Users'
+ccdn_user_admin.sidebar.link.user.activate: 'Activate'
+ccdn_user_admin.sidebar.link.user.force_reactivation: 'Force Reactivation'
+ccdn_user_admin.sidebar.link.user.ban: 'Ban User'
+ccdn_user_admin.sidebar.link.user.unban: 'Unban User'
+ccdn_user_admin.sidebar.link.user.set_roles: 'Set Roles'
 
+#
+# Link Labels.
+#
+ccdn_user_admin.link.account.edit: 'Edit Account'
+ccdn_user_admin.link.profile.edit: 'Edit Profile'
+ccdn_user_admin.link.profile.show: 'Show Profile'
 
-flash.user.activate.success: 'User: %username% activated.'
-flash.user.force_reactivation.success: 'User: %username% pending re-activation.'
-flash.user.ban.success: 'User: %username% banned.'
-flash.user.unban.success: 'User: %username% unbanned.'
-flash.user.set_roles.success: 'User: %username% roles changed.'
+#
+# Forms.
+#
+ccdn_user_admin.form.field.required: 'This field is required'
+ccdn_user_admin.form.label.user.roles: 'set roles: '
+ccdn_user_admin.form.label.account.locked: 'Account is Banned: '
+ccdn_user_admin.form.label.account.enabled: 'Account is Activated: '
 
-link.account.edit: 'Edit Account'
-link.profile.edit: 'Edit Profile'
-link.profile.show: 'Show Profile'
+#
+# Table Labels.
+#
+ccdn_user_admin.users.table.head.username: 'Username'
+ccdn_user_admin.users.table.head.email: 'Email Address'
+ccdn_user_admin.users.table.head.joined_date: 'Member Since'
+ccdn_user_admin.users.table.head.activation_status: 'Activation Status'
+ccdn_user_admin.users.unactivated.table.empty: 'No users were found.'
+ccdn_user_admin.users.banned.table.empty: 'No banned users were found.'
+ccdn_user_admin.users.newest.table.empty: 'No new users were found.'
 
-form.field.required: 'This field is required'
-form.label.user.roles: 'set roles: '
-form.label.account.locked: 'Account is Banned: '
-form.label.account.enabled: 'Account is Activated: '
-
-user.table.head.status.activation: Activation Status
-user.table.head.email: Email Address
-users.unactivated.table.empty: 'No users were found.'
-users.banned.table.empty: 'No banned users were found.'
-users.newest.table.empty: 'No new users were found.'
-
-profile.show.banned: 'Ban Status: '
-profile.show.activated: 'Activation Status: '
+#
+# Generic.
+#
+ccdn_user_admin.profile.show.banned: 'Ban Status: '
+ccdn_user_admin.profile.show.activated: 'Activation Status: '
