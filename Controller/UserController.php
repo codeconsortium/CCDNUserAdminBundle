@@ -52,7 +52,7 @@ class UserController extends ContainerAware
             ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
             ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.show_newest', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_show_newest'), "users");
 
-        return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:show_newest_users.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Newest:show_newest_users.html.' . $this->getEngine(), array(
             'crumbs' => $crumbs,
             'user_profile_route' => $this->container->getParameter('ccdn_user_admin.user.profile_route'),
             'pager' => $usersPager,
