@@ -20,6 +20,8 @@
 
 	{%- include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' -%}
 
+	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
+
 	<h2>{{- 'ccdn_user_admin.title.account.set_roles' |trans({'%username%':user.username}, 'CCDNUserAdminBundle') -}}</h2>
 
 	{%- form_theme form param('ccdn_user_admin.role.set_users_role.form_theme') -%}
@@ -45,6 +47,8 @@
 
 		</fieldset>
 	</form>
+
+	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
 	{%- endspaceless -%}
 
