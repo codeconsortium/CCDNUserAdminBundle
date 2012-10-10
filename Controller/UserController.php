@@ -134,6 +134,7 @@ class UserController extends ContainerAware
 
         $crumbs = $this->container->get('ccdn_component_crumb.trail')
             ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
+            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.profile.show', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_profile_show', array('userId' => $user->getId())), "user")
             ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $user->getId())), "user")
             ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.edit', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_account_edit', array('userId' => $user->getId())), "edit");
 
@@ -190,7 +191,7 @@ class UserController extends ContainerAware
 
         $crumbs = $this->container->get('ccdn_component_crumb.trail')
             ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $user->getId())), "user")
+            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.profile.show', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_profile_show', array('userId' => $user->getId())), "user")
             ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.profile.edit', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_profile_edit', array('userId' => $user->getId())), "edit");
 
         return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:edit_user_profile.html.' . $this->getEngine(),
