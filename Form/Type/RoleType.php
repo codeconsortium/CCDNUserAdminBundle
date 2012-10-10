@@ -16,8 +16,6 @@ namespace CCDNUser\AdminBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-use CCDNUser\AdminBundle\Component\Helper\RoleHelper;
-
 /**
  *
  * @author Reece Fowell <reece@codeconsortium.com>
@@ -43,7 +41,7 @@ class RoleType extends AbstractType
      * @access public
      * @param RoleHelper $roleHelper
      */
-    public function __construct(RoleHelper $roleHelper)
+    public function __construct($roleHelper)
     {
         $this->options = array();
 		$this->roleHelper = $roleHelper;

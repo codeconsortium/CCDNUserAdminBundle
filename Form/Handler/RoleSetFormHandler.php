@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use CCDNUser\UserBundle\Manager\ManagerInterface;
-use CCDNUser\AdminBundle\Component\Helper\RoleHelper;
 
 /**
  *
@@ -74,9 +73,9 @@ class RoleSetFormHandler
     /**
      *
      * @access public
-     * @param FormFactory $factory, ContainerInterface $container, ManagerInterface $manager
+     * @param FormFactory $factory, ContainerInterface $container, ManagerInterface $manager, RoleHelper $roleHelper
      */
-    public function __construct(FormFactory $factory, ContainerInterface $container, ManagerInterface $manager, RoleHelper $roleHelper)
+    public function __construct(FormFactory $factory, ContainerInterface $container, ManagerInterface $manager, $roleHelper)
     {
         $this->options = array();
         $this->factory = $factory;
