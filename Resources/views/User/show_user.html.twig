@@ -44,15 +44,15 @@
 	<table class="table table-striped table-bordered">
 		<tbody>
 			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
-				<td class="right" style="width: 30%;">{{- 'profile.show.username'|trans({}, 'FOSUserBundle') -}}:</td>
+				<td class="right" style="width: 30%;">{{- 'ccdn_user_admin.account.show.username' |trans({}, 'CCDNUserAdminBundle') -}}</td>
 				<td class="left" style="width: 70%;">{{- user.username |capitalize -}}</td>
 			</tr>
 			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
-				<td class="right">{{- 'profile.show.email'|trans({}, 'FOSUserBundle') -}}:</td>
+				<td class="right">{{- 'ccdn_user_admin.account.show.email'|trans({}, 'CCDNUserAdminBundle') -}}</td>
 				<td class="left">{{- user.email -}}</td>
 			</tr>
 			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
-				<td class="right">{{- 'profile.show.email'|trans({}, 'FOSUserBundle') -}}:</td>
+				<td class="right">{{- 'ccdn_user_admin.account.show.registered_date'|trans({}, 'CCDNUserAdminBundle') -}}</td>
 				<td class="left">{{- user.registeredDate |date(param('ccdn_user_admin.account.show_user.member_since_datetime_format')) -}}</td>
 			</tr>
 			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">

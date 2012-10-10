@@ -76,3 +76,7 @@ ccdn_user_admin.users.newest.table.empty: 'No new users were found.'
 #
 ccdn_user_admin.profile.show.banned: 'Ban Status: '
 ccdn_user_admin.profile.show.activated: 'Activation Status: '
+ccdn_user_admin.account.show.username: 'Username: '
+ccdn_user_admin.account.show.email: 'Email: '
+ccdn_user_admin.account.show.registered_date: 'Registered: '
+
