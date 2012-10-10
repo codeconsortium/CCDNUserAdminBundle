@@ -16,6 +16,8 @@ namespace CCDNUser\AdminBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
+use CCDNUser\AdminBundle\Component\Helper\RoleHelper;
+
 /**
  *
  * @author Reece Fowell <reece@codeconsortium.com>
@@ -29,6 +31,23 @@ class RoleType extends AbstractType
      * @access protected
      */
     protected $options;
+
+	/**
+	 *
+	 * @access protected
+	 */
+	protected $roleHelper;
+	
+	/**
+     *
+     * @access public
+     * @param RoleHelper $roleHelper
+     */
+    public function __construct(RoleHelper $roleHelper)
+    {
+        $this->options = array();
+		$this->roleHelper = $roleHelper;
+    }
 
     /**
      *
@@ -47,16 +66,13 @@ class RoleType extends AbstractType
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-
         $user = $this->options['user'];
 
-        $roles = array('ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN');
-
-        //echo '<pre>' . print_r($user->getRoles(), true) . '</pre>'; die();
-        $role = $user->getRoles();
-
-        $builder->add('role', 'choice',
-            array('choices' => $roles, 'preferred_choices' => array($role[0]) )
+		$availableRoles = $this->roleHelper->getAvailableRoles();
+		$currentRole = $this->roleHelper->getUsersHighestRole($user->getRoles());
+				
+        $builder->add('new_role', 'choice',
+            array('choices' => $availableRoles, 'multiple' => false, 'expanded' => false, 'preferred_choices' => array($currentRole), 'property_path' => false)
         );
     }
 

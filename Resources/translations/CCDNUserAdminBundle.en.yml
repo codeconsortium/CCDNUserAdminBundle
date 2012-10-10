@@ -4,6 +4,7 @@
 ccdn_user_admin.title.users.newest: 'New Users.'
 ccdn_user_admin.title.users.unactivated: 'Unactivated Users.'
 ccdn_user_admin.title.users.banned: 'Banned Users.'
+ccdn_user_admin.title.account.set_roles: "Set %username%'s Account Role."
 
 #
 # Crumbs.
@@ -51,6 +52,8 @@ ccdn_user_admin.link.profile.show: 'Show Profile'
 #
 ccdn_user_admin.form.field.required: 'This field is required'
 ccdn_user_admin.form.label.user.roles: 'set roles: '
+ccdn_user_admin.form.button.user.roles.update: 'Update Roles'
+ccdn_user_admin.form.button.user.roles.cancel: 'Cancel'
 ccdn_user_admin.form.label.account.locked: 'Account is Banned: '
 ccdn_user_admin.form.label.account.enabled: 'Account is Activated: '
 

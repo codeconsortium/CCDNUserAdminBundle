@@ -35,7 +35,7 @@
 	{% else %}
 		<a class="btn btn-danger" href="{{- path('ccdn_user_admin_ban', {'userId': user.getId }) -}}">{{- 'ccdn_user_admin.sidebar.link.user.ban'|trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;
 	{% endif %}
-	{#	<a class="btn btn-danger" href="{{- path('ccdn_user_admin_set_roles', {'userId': user.getId }) -}}">{{- 'ccdn_user_admin.sidebar.link.user.set_roles'|trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;	#}
+		<a class="btn btn-danger" href="{{- path('ccdn_user_admin_set_roles', {'userId': user.getId }) -}}">{{- 'ccdn_user_admin.sidebar.link.user.set_roles'|trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;
 		<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_edit', {'userId': user.getId}) -}}">{{- 'ccdn_user_admin.link.account.edit' |trans({}, 'CCDNUserAdminBundle') -}}</a>&nbsp;
 	{#	<a class="btn btn-danger" href="{{- path('ccdn_user_admin_profile_edit', {'userId': user.getId}) -}}">{{- 'ccdn_user_admin.link.profile.edit' |trans({}, 'CCDNUserAdminBundle') -}}</a>#}
 		<a class="btn" href="{{- path('ccdn_user_profile_show_by_id', {'userId': user.getId}) -}}">{{- 'ccdn_user_admin.link.profile.show' |trans({}, 'CCDNUserAdminBundle') -}}</a>

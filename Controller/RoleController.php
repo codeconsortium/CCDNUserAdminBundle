@@ -36,7 +36,7 @@ class RoleController extends ContainerAware
      */
     public function setUserRolesAction($userId)
     {
-        if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
+        if ( ! $this->container->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
             throw new AccessDeniedException('You do not have permission to access this page!');
         }
 
@@ -50,7 +50,7 @@ class RoleController extends ContainerAware
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $formHandler = $this->container->get('ccdn_user_user_admin.role.form.change.handler')->setOptions(array('user' => $user));
+        $formHandler = $this->container->get('ccdn_user_admin.role.form.change.handler')->setOptions(array('user' => $user));
 
         if ($formHandler->process()) {
             $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.set_roles.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));

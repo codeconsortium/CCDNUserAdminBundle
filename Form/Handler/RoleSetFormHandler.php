@@ -18,7 +18,8 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-use CCDNUser\AdminBundle\Manager\ManagerInterface;
+use CCDNUser\UserBundle\Manager\ManagerInterface;
+use CCDNUser\AdminBundle\Component\Helper\RoleHelper;
 
 /**
  *
@@ -64,17 +65,24 @@ class RoleSetFormHandler
      */
     protected $form;
 
+	/**
+	 *
+	 * @access protected
+	 */
+	protected $roleHelper;
+	
     /**
      *
      * @access public
      * @param FormFactory $factory, ContainerInterface $container, ManagerInterface $manager
      */
-    public function __construct(FormFactory $factory, ContainerInterface $container, ManagerInterface $manager)
+    public function __construct(FormFactory $factory, ContainerInterface $container, ManagerInterface $manager, RoleHelper $roleHelper)
     {
         $this->options = array();
         $this->factory = $factory;
         $this->container = $container;
         $this->manager = $manager;
+		$this->roleHelper = $roleHelper;
 
         $this->request = $container->get('request');
     }
@@ -126,6 +134,7 @@ class RoleSetFormHandler
         if (!$this->form) {
             $roleType = $this->container->get('ccdn_user_admin.role.form.change.type');
             $roleType->setOptions(array('user' => $this->options['user']));
+
             $this->form = $this->factory->create($roleType);
         }
 
@@ -137,10 +146,13 @@ class RoleSetFormHandler
      * @access protected
      * @param $entity
      */
-    protected function onSuccess($entity)
+    protected function onSuccess($form)
     {
         $user = $this->options['user'];
-        $user->setRoles($entity->getRoles());
+
+		$availableRoles = $this->roleHelper->getAvailableRoles();
+
+        $user->setRoles(array($availableRoles[$this->form['new_role']->getData()]));
 
         $this->manager->update($user);
     }

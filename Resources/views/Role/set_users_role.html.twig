@@ -4,7 +4,7 @@
 	{{ parent() }}
 {% endblock %}
 
-{% block title %}{{- truncDot('title.account.edit' |trans({}, 'CCDNUserUserBundle'), param('ccdn_user_admin.seo.title_length')) -}}{% endblock %}
+{% block title %}{{- truncDot('ccdn_user_admin.title.account.set_roles' |trans({'%username%':user.username}, 'CCDNUserAdminBundle'), param('ccdn_user_admin.seo.title_length')) -}}{% endblock %}
 
 {% block sidebar %}
 	{{ parent() }}
@@ -20,7 +20,7 @@
 
 	{%- include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' -%}
 
-	<h2>{{- 'title.account.edit' |trans({}, 'CCDNUserUserBundle') -}}</h2>
+	<h2>{{- 'ccdn_user_admin.title.account.set_roles' |trans({'%username%':user.username}, 'CCDNUserAdminBundle') -}}</h2>
 
 	{%- form_theme form param('ccdn_user_admin.role.set_users_role.form_theme') -%}
 	<form action="{{- path('ccdn_user_admin_set_roles', {'userId': user.id }) -}}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
@@ -31,15 +31,16 @@
 			<div class="control-group"><div class="controls row-fluid">{{- form_row(form._token) -}}</div></div>
 
 			<div class="control-group">
-				{{- form_label(form.role, null, { 'label': 'ccdn_user_admin.form.label.user.roles' |trans({}, 'CCDNUserAdminBundle')}) -}}</td>
+				{{- form_label(form.new_role, null, { 'label': 'ccdn_user_admin.form.label.user.roles' |trans({}, 'CCDNUserAdminBundle')}) -}}</td>
 				<div class="controls row-fluid">
-					{{- form_errors(form.role) -}}
-					{{- form_widget(form.role) -}}
+					{{- form_errors(form.new_role) -}}
+					{{- form_widget(form.new_role) -}}
 				</div>
 			</div>
 
 			<div class="form-actions">
-		        <input type="submit" class="btn btn-danger" value="{{- 'profile.edit.submit'|trans({}, 'FOSUserBundle') -}}">
+		        <input type="submit" class="btn btn-danger" value="{{- 'ccdn_user_admin.form.button.user.roles.update'|trans({}, 'CCDNUserAdminBundle') -}}">&nbsp;
+				<a class="btn" href="{{- path('ccdn_user_admin_account_show', {'userId':user.id}) -}}">{{- 'ccdn_user_admin.form.button.user.roles.cancel' |trans({}, 'CCDNUserAdminBundle') -}}</a>
 			</div>
 
 		</fieldset>

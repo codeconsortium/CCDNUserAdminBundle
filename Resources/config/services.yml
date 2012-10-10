@@ -1,5 +1,7 @@
 parameters:
 
+    ccdn_user_admin.role_helper.class:                       CCDNUser\AdminBundle\Component\Helper\RoleHelper
+    
     ccdn_user_admin.role.form.change.type.class:             CCDNUser\AdminBundle\Form\Type\RoleType
     ccdn_user_admin.role.form.change.handler.class:          CCDNUser\AdminBundle\Form\Handler\RoleSetFormHandler
 
@@ -14,14 +16,21 @@ parameters:
 services:
 
     #
+    # Helpers
+    #
+    ccdn_user_admin.role_helper:
+        class: %ccdn_user_admin.role_helper.class%
+        arguments: [@service_container]
+
+    #
     # Role Forms.
     #
     ccdn_user_admin.role.form.change.type:
         class:  %ccdn_user_admin.role.form.change.type.class%
-        arguments:  [@doctrine]
+        arguments:  [@ccdn_user_admin.role_helper]
     ccdn_user_admin.role.form.change.handler:
         class:  %ccdn_user_admin.role.form.change.handler.class%
-        arguments:  [@form.factory, @service_container, @ccdn_user_user.user.manager]
+        arguments:  [@form.factory, @service_container, @ccdn_user_user.user.manager, @ccdn_user_admin.role_helper]
 
     #
     # Account Forms.
@@ -51,3 +60,4 @@ services:
         arguments: [@service_container]
         tags:
             - { name: ccdn_component_dashboard.integrator }
+
