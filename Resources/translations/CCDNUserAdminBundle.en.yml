@@ -4,6 +4,7 @@
 ccdn_user_admin.title.users.newest: 'New Users.'
 ccdn_user_admin.title.users.unactivated: 'Unactivated Users.'
 ccdn_user_admin.title.users.banned: 'Banned Users.'
+ccdn_user_admin.title.account.show: "Administrate %username%'s Account."
 ccdn_user_admin.title.account.set_roles: "Set %username%'s Account Role."
 
 #
@@ -16,6 +17,7 @@ ccdn_user_admin.crumbs.show_unactivated: 'Show Unactivated Users'
 ccdn_user_admin.crumbs.show_banned: 'Show Banned Users'
 ccdn_user_admin.crumbs.account.show: 'Administrate %user_name% Account'
 ccdn_user_admin.crumbs.account.edit: 'Edit Account'
+ccdn_user_admin.crumbs.profile.show: "%username%'s Profile"
 ccdn_user_admin.crumbs.profile.edit: 'Edit Profile'
 
 #
