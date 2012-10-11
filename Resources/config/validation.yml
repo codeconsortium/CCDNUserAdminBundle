@@ -1,0 +1,11 @@
+namespaces:
+    CCDNUserAdminBundle: CCDNUser\AdminBundle\Form\Validator\Constraints\
+
+#CCDNMessage\MessageBundle\Entity\Message:
+Role:
+    properties:
+        new_role:
+            - Type: string
+            - MinLength: { limit: 255 }
+            - NotNull: ~
+#            - "CCDNUserAdminBundle:Role": ~

@@ -55,11 +55,11 @@
 				<td class="right">{{- 'ccdn_user_admin.account.show.registered_date'|trans({}, 'CCDNUserAdminBundle') -}}</td>
 				<td class="left">{{- user.registeredDate |date(param('ccdn_user_admin.account.show_user.member_since_datetime_format')) -}}</td>
 			</tr>
-		{#	<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
+			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
 				<td class="right">{{- 'ccdn_user_admin.account.show.role'|trans({}, 'CCDNUserAdminBundle') -}}</td>
-				<td class="left">{{- user.getRoles -}}</td>
+				<td class="left">{{- userRole(user) -}}</td>
 			</tr>			
-		#}	<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
+			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
 				<td class="right">{{- 'ccdn_user_admin.profile.show.banned'|trans({}, 'CCDNUserAdminBundle') -}}</td>
 				<td class="left">{%- if user.locked -%}Banned{%- else -%}No Bans{%- endif -%}</td>
 			</tr>

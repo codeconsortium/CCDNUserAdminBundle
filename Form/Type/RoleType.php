@@ -16,6 +16,10 @@ namespace CCDNUser\AdminBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
+use Symfony\Component\Validator\Constraints\CallbackValidator;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Collection;
+
 /**
  *
  * @author Reece Fowell <reece@codeconsortium.com>
@@ -68,10 +72,21 @@ class RoleType extends AbstractType
 
 		$availableRoles = $this->roleHelper->getAvailableRoles();
 		$currentRole = $this->roleHelper->getUsersHighestRole($user->getRoles());
-				
-        $builder->add('new_role', 'choice',
-            array('choices' => $availableRoles, 'multiple' => false, 'expanded' => false, 'preferred_choices' => array($currentRole), 'property_path' => false)
-        );
+		
+		$form = $builder->getForm();
+		
+        $builder
+			->add('new_role', 'choice',
+            	array(
+					'choices' => $availableRoles,
+					'preferred_choices' => array($currentRole), 
+					'multiple' => false, 
+					'expanded' => false, 
+					'property_path' => false,
+					'required' => true,
+					'empty_value' => false,
+				)
+        	);
     }
 
     /**
@@ -83,6 +98,10 @@ class RoleType extends AbstractType
      */
     public function getDefaultOptions(array $options)
     {
+		$collectionConstraint = new Collection(array(
+			'new_role' => new NotNull(array('message' => 'oops')), 
+		));
+		
         return array(
             'data_class' => 'CCDNUser\UserBundle\Entity\User',
             'csrf_protection' => true,
