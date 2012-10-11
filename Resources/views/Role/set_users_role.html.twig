@@ -4,7 +4,7 @@
 	{{ parent() }}
 {% endblock %}
 
-{% block title %}{{- truncDot('ccdn_user_admin.title.account.set_roles' |trans({'%username%':user.username}, 'CCDNUserAdminBundle'), param('ccdn_user_admin.seo.title_length')) -}}{% endblock %}
+{% block title %}{{- truncDot('ccdn_user_admin.title.account.set_roles' |trans({'%user_name%':user.username}, 'CCDNUserAdminBundle'), param('ccdn_user_admin.seo.title_length')) -}}{% endblock %}
 
 {% block sidebar %}
 	{{ parent() }}
@@ -22,7 +22,7 @@
 
 	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
-	<h2>{{- 'ccdn_user_admin.title.account.set_roles' |trans({'%username%':user.username}, 'CCDNUserAdminBundle') -}}</h2>
+	<h2>{{- 'ccdn_user_admin.title.account.set_roles' |trans({'%user_name%':user.username}, 'CCDNUserAdminBundle') -}}</h2>
 
 	{%- form_theme form param('ccdn_user_admin.role.set_users_role.form_theme') -%}
 	<form action="{{- path('ccdn_user_admin_set_roles', {'userId': user.id }) -}}" {{ form_enctype(form) }} method="POST" class="form-horizontal">

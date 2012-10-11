@@ -53,7 +53,7 @@ class RoleController extends ContainerAware
         $formHandler = $this->container->get('ccdn_user_admin.role.form.change.handler')->setOptions(array('user' => $user));
 
         if ($formHandler->process()) {
-            $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.set_roles.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
+            $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.set_roles.success', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
             return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array(
                 'userId' => $user->getId(),
@@ -62,9 +62,9 @@ class RoleController extends ContainerAware
 	
 	        $crumbs = $this->container->get('ccdn_component_crumb.trail')
 	            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
-	            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.profile.show', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_profile_show', array('userId' => $user->getId())), "user")
+	            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.profile.show', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_profile_show', array('userId' => $user->getId())), "user")
 	            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $user->getId())), "user")
-            	->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.set_roles', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_set_roles', array('userId' => $user->getId())), "user");
+            	->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.set_roles', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_set_roles', array('userId' => $user->getId())), "user");
 
             return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Role:set_users_role.html.' . $this->getEngine(), array(
                 'user_profile_route' => $this->container->getParameter('ccdn_forum_admin.user.profile_route'),

@@ -4,8 +4,8 @@
 ccdn_user_admin.title.users.newest: 'New Users.'
 ccdn_user_admin.title.users.unactivated: 'Unactivated Users.'
 ccdn_user_admin.title.users.banned: 'Banned Users.'
-ccdn_user_admin.title.account.show: "Administrate %username%'s Account."
-ccdn_user_admin.title.account.set_roles: "Set %username%'s Account Role."
+ccdn_user_admin.title.account.show: "Administrate %user_name%'s Account."
+ccdn_user_admin.title.account.set_roles: "Set %user_name%'s Account Role."
 
 #
 # Crumbs.
@@ -17,18 +17,18 @@ ccdn_user_admin.crumbs.show_unactivated: 'Show Unactivated Users'
 ccdn_user_admin.crumbs.show_banned: 'Show Banned Users'
 ccdn_user_admin.crumbs.account.show: 'Administrate %user_name% Account'
 ccdn_user_admin.crumbs.account.edit: 'Edit Account'
-ccdn_user_admin.crumbs.account.set_roles: "Set %username%'s Account Role."
-ccdn_user_admin.crumbs.profile.show: "%username%'s Profile"
+ccdn_user_admin.crumbs.account.set_roles: "Set %user_name%'s Account Role."
+ccdn_user_admin.crumbs.profile.show: "%user_name%'s Profile"
 ccdn_user_admin.crumbs.profile.edit: 'Edit Profile'
 
 #
 # Flash Messages.
 #
-ccdn_user_admin.flash.user.activate.success: 'User: %username% activated.'
-ccdn_user_admin.flash.user.force_reactivation.success: 'User: %username% pending re-activation.'
-ccdn_user_admin.flash.user.ban.success: 'User: %username% banned.'
-ccdn_user_admin.flash.user.unban.success: 'User: %username% unbanned.'
-ccdn_user_admin.flash.user.set_roles.success: 'User: %username% roles changed.'
+ccdn_user_admin.flash.user.activate.success: 'User: %user_name% activated.'
+ccdn_user_admin.flash.user.force_reactivation.success: 'User: %user_name% pending re-activation.'
+ccdn_user_admin.flash.user.ban.success: 'User: %user_name% banned.'
+ccdn_user_admin.flash.user.unban.success: 'User: %user_name% unbanned.'
+ccdn_user_admin.flash.user.set_roles.success: 'User: %user_name% roles changed.'
 
 #
 # Sidebar.

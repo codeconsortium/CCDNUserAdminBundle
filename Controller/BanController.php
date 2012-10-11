@@ -84,7 +84,7 @@ class BanController extends ContainerAware
 
         $this->container->get('ccdn_user_user.user.manager')->ban($user)->flush();
 
-        $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.ban.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
+        $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.ban.success', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
         return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $userId)));
 
@@ -114,7 +114,7 @@ class BanController extends ContainerAware
 
         $this->container->get('ccdn_user_user.user.manager')->unban($user)->flush();
 
-        $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.unban.success', array('%username%' => $user->getUsername()), 'CCDNUserAdminBundle'));
+        $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.unban.success', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
         return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $userId)));
 
