@@ -70,7 +70,7 @@ class RoleType extends AbstractType
     {
         $user = $this->options['user'];
 
-		$availableRoles = $this->roleHelper->getAvailableRoles();
+		$availableRoles = $this->roleHelper->getAvailableRoleKeys();
 		$currentRole = $this->roleHelper->getUsersHighestRole($user->getRoles());
 		
 		$form = $builder->getForm();

@@ -149,7 +149,7 @@ class RoleSetFormHandler
     {
         $user = $this->options['user'];
 
-		$availableRoles = $this->roleHelper->getAvailableRoles();
+		$availableRoles = $this->roleHelper->getAvailableRoleKeys();
 
 		if (array_key_exists($this->form['new_role']->getData(), $availableRoles)) {
         	$user->setRoles(array($availableRoles[$this->form['new_role']->getData()]));		
