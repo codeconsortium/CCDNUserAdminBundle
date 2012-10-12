@@ -40,7 +40,7 @@ class RoleController extends ContainerAware
             throw new AccessDeniedException('You do not have permission to access this page!');
         }
 
-        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($userId);
+        $user = $this->container->get('ccdn_user_user.repository.user')->findOneById($userId);
 
         if ( ! is_object($user) || ! $user instanceof UserInterface) {
             throw new NotFoundHttpException('the user does not exist.');
@@ -50,7 +50,7 @@ class RoleController extends ContainerAware
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $formHandler = $this->container->get('ccdn_user_admin.role.form.change.handler')->setOptions(array('user' => $user));
+        $formHandler = $this->container->get('ccdn_user_admin.form.handler.role_change')->setOptions(array('user' => $user));
 
         if ($formHandler->process()) {
             $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.set_roles.success', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'));

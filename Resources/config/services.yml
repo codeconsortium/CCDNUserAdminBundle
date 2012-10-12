@@ -1,53 +1,53 @@
 parameters:
     
-    ccdn_user_admin.role.form.change.type.class:             CCDNUser\AdminBundle\Form\Type\RoleType
-    ccdn_user_admin.role.form.change.handler.class:          CCDNUser\AdminBundle\Form\Handler\RoleSetFormHandler
+    ccdn_user_admin.form.type.role_change.class:             CCDNUser\AdminBundle\Form\Type\RoleType
+    ccdn_user_admin.form.handler.role_change.class:          CCDNUser\AdminBundle\Form\Handler\RoleSetFormHandler
 
-    ccdn_user_admin.administrate.account.form.type.class:    CCDNUser\AdminBundle\Form\Type\AdministrateAccountType
-    ccdn_user_admin.administrate.account.form.handler.class: CCDNUser\AdminBundle\Form\Handler\AdministrateAccountFormHandler
+    ccdn_user_admin.form.type.administrate_account.class:    CCDNUser\AdminBundle\Form\Type\AdministrateAccountType
+    ccdn_user_admin.form.handler.administrate_account.class: CCDNUser\AdminBundle\Form\Handler\AdministrateAccountFormHandler
 
-    ccdn_user_admin.administrate.profile.form.type.class:    CCDNUser\AdminBundle\Form\Type\AdministrateProfileType
-    ccdn_user_admin.administrate.profile.form.handler.class: CCDNUser\AdminBundle\Form\Handler\AdministrateProfileFormHandler
+    ccdn_user_admin.form.type.administrate_profile.class:    CCDNUser\AdminBundle\Form\Type\AdministrateProfileType
+    ccdn_user_admin.form.handler.administrate_profile.class: CCDNUser\AdminBundle\Form\Handler\AdministrateProfileFormHandler
 
-    ccdn_user_admin.dashboard.integrator.class:              CCDNUser\AdminBundle\Component\Dashboard\DashboardIntegrator
+    ccdn_user_admin.component.dashboard.integrator.class:    CCDNUser\AdminBundle\Component\Dashboard\DashboardIntegrator
 
 services:
 
     #
     # Role Forms.
     #
-    ccdn_user_admin.role.form.change.type:
-        class:  %ccdn_user_admin.role.form.change.type.class%
-        arguments:  [@ccdn_component_common.role_helper]
-    ccdn_user_admin.role.form.change.handler:
-        class:  %ccdn_user_admin.role.form.change.handler.class%
-        arguments:  [@form.factory, @service_container, @ccdn_user_user.user.manager, @ccdn_component_common.role_helper]
+    ccdn_user_admin.form.type.role_change:
+        class:  %ccdn_user_admin.form.type.role_change.class%
+        arguments:  [@ccdn_component_common.component.helper.role]
+    ccdn_user_admin.form.handler.role_change:
+        class:  %ccdn_user_admin.form.handler.role_change.class%
+        arguments:  [@form.factory, @service_container, @ccdn_user_user.manager.user, @ccdn_component_common.component.helper.role]
 
     #
     # Account Forms.
     #
-    ccdn_user_admin.administrate.account.form.type:
-        class:  %ccdn_user_admin.administrate.account.form.type.class%
+    ccdn_user_admin.form.type.administrate_account:
+        class:  %ccdn_user_admin.form.type.administrate_account.class%
         arguments:  [@doctrine]
-    ccdn_user_admin.administrate.account.form.handler:
-        class:  %ccdn_user_admin.administrate.account.form.handler.class%
-        arguments:  [@form.factory, @service_container, @ccdn_user_user.user.manager]
+    ccdn_user_admin.form.handler.administrate_account:
+        class:  %ccdn_user_admin.form.handler.administrate_account.class%
+        arguments:  [@form.factory, @service_container, @ccdn_user_user.manager.user]
 
     #
     # Profile Forms.
     #
-    ccdn_user_admin.administrate.profile.form.type:
-        class:  %ccdn_user_admin.administrate.profile.form.type.class%
+    ccdn_user_admin.form.type.administrate_profile:
+        class:  %ccdn_user_admin.form.type.administrate_profile.class%
         arguments:  [@doctrine]
-    ccdn_user_admin.administrate.profile.form.handler:
-        class:  %ccdn_user_admin.administrate.profile.form.handler.class%
-        arguments:  [@form.factory, @service_container, @ccdn_user_user.user.manager]
+    ccdn_user_admin.form.handler.administrate_profile:
+        class:  %ccdn_user_admin.form.handler.administrate_profile.class%
+        arguments:  [@form.factory, @service_container, @ccdn_user_user.manager.user]
 
     #
     # Dashboard Integrator.
     #
-    ccdn_user_admin.dashboard.integrator:
-        class: %ccdn_user_admin.dashboard.integrator.class%
+    ccdn_user_admin.component.dashboard.integrator:
+        class: %ccdn_user_admin.component.dashboard.integrator.class%
         arguments: [@service_container]
         tags:
             - { name: ccdn_component_dashboard.integrator }

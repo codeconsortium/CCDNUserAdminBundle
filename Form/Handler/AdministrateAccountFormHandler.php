@@ -143,7 +143,7 @@ class AdministrateAccountFormHandler
     public function getForm()
     {
         if (! $this->form) {
-            $userAdministrateType = $this->container->get('ccdn_user_admin.administrate.account.form.type');
+            $userAdministrateType = $this->container->get('ccdn_user_admin.form.type.administrate_account');
             $userAdministrateType->setOptions($this->options);
             $this->form = $this->factory->create($userAdministrateType, $this->defaults['user']);
         }

@@ -40,7 +40,7 @@ class ActivationController extends ContainerAware
             throw new AccessDeniedException('You do not have access to this section.');
         }
 
-        $usersPager = $this->container->get('ccdn_user_user.user.repository')->findAllUnactivatedPaginated();
+        $usersPager = $this->container->get('ccdn_user_user.repository.user')->findAllUnactivatedPaginated();
 
         $usersPerPage = $this->container->getParameter('ccdn_user_admin.activation.show_unactivated_users.users_per_page');
         $usersPager->setMaxPerPage($usersPerPage);
@@ -72,7 +72,7 @@ class ActivationController extends ContainerAware
             throw new AccessDeniedException('You do not have permission to access this page!');
         }
 
-        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($userId);
+        $user = $this->container->get('ccdn_user_user.repository.user')->findOneById($userId);
 
         if ( ! is_object($user) || ! $user instanceof UserInterface) {
             throw new NotFoundHttpException('the user does not exist.');
@@ -82,7 +82,7 @@ class ActivationController extends ContainerAware
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->container->get('ccdn_user_user.user.manager')->activate($user)->flush();
+        $this->container->get('ccdn_user_user.manager.user')->activate($user)->flush();
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.activate.success', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 
@@ -102,7 +102,7 @@ class ActivationController extends ContainerAware
             throw new AccessDeniedException('You do not have permission to access this page!');
         }
 
-        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($userId);
+        $user = $this->container->get('ccdn_user_user.repository.user')->findOneById($userId);
 
         if ( ! is_object($user) || ! $user instanceof UserInterface) {
             throw new NotFoundHttpException('the user does not exist.');
@@ -112,7 +112,7 @@ class ActivationController extends ContainerAware
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->container->get('ccdn_user_user.user.manager')->forceReActivate($user)->flush();
+        $this->container->get('ccdn_user_user.manager.user')->forceReActivate($user)->flush();
 
         $this->container->get('session')->setFlash('notice', $this->container->get('translator')->trans('ccdn_user_admin.flash.user.force_reactivation.success', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'));
 

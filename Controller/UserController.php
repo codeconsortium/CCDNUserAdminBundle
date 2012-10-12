@@ -40,7 +40,7 @@ class UserController extends ContainerAware
             throw new AccessDeniedException('You do not have access to this section.');
         }
 
-        $usersPager = $this->container->get('ccdn_user_user.user.repository')->findAllNewPaginated();
+        $usersPager = $this->container->get('ccdn_user_user.repository.user')->findAllNewPaginated();
 
         $usersPerPage = $this->container->getParameter('ccdn_user_admin.account.show_newest_users.users_per_page');
         $usersPager->setMaxPerPage($usersPerPage);
@@ -72,7 +72,7 @@ class UserController extends ContainerAware
             throw new AccessDeniedException('You do not have access to this section.');
         }
 
-        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($userId);
+        $user = $this->container->get('ccdn_user_user.repository.user')->findOneById($userId);
 
         if ( ! is_object($user) || ! $user instanceof UserInterface) {
             throw new NotFoundHttpException('the user does not exist.');
@@ -116,7 +116,7 @@ class UserController extends ContainerAware
             throw new NotFoundHTTPException('The user does not exist.');
         }
 
-        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($userId);
+        $user = $this->container->get('ccdn_user_user.repository.user')->findOneById($userId);
 
         if ( ! is_object($user) || ! $user instanceof UserInterface) {
             throw new NotFoundHTTPException('The user does not exist.');
@@ -126,7 +126,7 @@ class UserController extends ContainerAware
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $formHandler = $this->container->get('ccdn_user_admin.administrate.account.form.handler')->setDefaults(array('user' => $user));
+        $formHandler = $this->container->get('ccdn_user_admin.form.handler.administrate_account')->setDefaults(array('user' => $user));
 
         if ($formHandler->process()) {
             return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $userId)));
@@ -164,7 +164,7 @@ class UserController extends ContainerAware
             throw new NotFoundHTTPException('The user does not exist.');
         }
 
-        $user = $this->container->get('ccdn_user_user.user.repository')->findOneById($userId);
+        $user = $this->container->get('ccdn_user_user.repository.user')->findOneById($userId);
 
         if ( ! is_object($user) || ! $user instanceof UserInterface) {
             throw new NotFoundHTTPException('The user does not exist.');
@@ -180,10 +180,10 @@ class UserController extends ContainerAware
         // if the profile has no id then it
         // does not exist, so create one.
         if ( ! $profile->getId()) {
-            $this->container->get('ccdn_user_profile.profile.manager')->insert($profile)->flush();
+            $this->container->get('ccdn_user_profile.manager.profile')->insert($profile)->flush();
         }
 
-        $formHandler = $this->container->get('ccdn_user_admin.administrate.profile.form.handler')->setDefaults(array('profile' => $profile));
+        $formHandler = $this->container->get('ccdn_user_admin.form.handler.administrate_profile')->setDefaults(array('profile' => $profile));
 
         if ($formHandler->process()) {
             return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $userId)));

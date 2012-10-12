@@ -131,7 +131,7 @@ class RoleSetFormHandler
     public function getForm()
     {
         if (!$this->form) {
-            $roleType = $this->container->get('ccdn_user_admin.role.form.change.type');
+            $roleType = $this->container->get('ccdn_user_admin.form.type.role_change');
             $roleType->setOptions(array('user' => $this->options['user']));
 
             $this->form = $this->factory->create($roleType);
