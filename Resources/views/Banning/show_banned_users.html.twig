@@ -1,10 +1,10 @@
-{% extends param('ccdn_user_admin.ban.show_banned_users.layout_template') %}
+{% extends ccdn_user_admin.ban.show_banned_users.layout_template %}
 
 {% block stylesheets %}
 	{{ parent() }}
 {% endblock %}
 
-{% block title %}{{- truncDot('ccdn_user_admin.title.users.banned' | trans({}, 'CCDNUserAdminBundle'), param('ccdn_user_admin.seo.title_length')) -}}{% endblock %}
+{% block title %}{{- truncDot('ccdn_user_admin.title.users.banned' | trans({}, 'CCDNUserAdminBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
 
 {% block sidebar %}
 	{{ parent() }}
@@ -49,7 +49,7 @@
 			<tr class="{{- cycle(['row_odd', 'row_even'], row) }} marked_read">
 				<td class="left"><a href="{{- path('ccdn_user_admin_account_show', {'userId': user.getId }) -}}">{{- user.username |capitalize -}}</a></td>
 				<td class="left">{{- user.email -}}</td>
-				<td class="center">{{- user.registeredDate |date(param('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format')) -}}</td>
+				<td class="center">{{- user.registeredDate |date(ccdn_user_admin.ban.show_banned_users.member_since_datetime_format) -}}</td>
 				<td class="center">{%- if user.enabled -%}Activated{%- else -%}Pending Activation{%- endif -%}</td>
 			</tr>
 		{%- else -%}

@@ -1,10 +1,10 @@
-{% extends param('ccdn_user_admin.account.edit_user_account.layout_template') %}
+{% extends ccdn_user_admin.account.edit_user_account.layout_template %}
 
 {% block stylesheets %}
 	{{ parent() }}
 {% endblock %}
 
-{% block title %}{{- truncDot('title.account.edit' |trans({}, 'CCDNUserUserBundle'), param('ccdn_user_admin.seo.title_length')) -}}{% endblock %}
+{% block title %}{{- truncDot('title.account.edit' |trans({}, 'CCDNUserUserBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
 
 {% block sidebar %}
 	{{ parent() }}
@@ -24,7 +24,7 @@
 
 	<h2>{{- 'title.account.edit' |trans({}, 'CCDNUserUserBundle') -}}</h2>
 
-	{%- form_theme form param('ccdn_user_admin.account.edit_user_account.form_theme') -%}
+	{%- form_theme form ccdn_user_admin.account.edit_user_account.form_theme -%}
 	<form action="{{- path('ccdn_user_admin_account_edit', {'userId': user.id}) -}}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
 		<fieldset>
 

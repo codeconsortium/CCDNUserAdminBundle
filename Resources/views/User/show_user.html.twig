@@ -1,10 +1,10 @@
-{% extends param('ccdn_user_admin.account.show_user.layout_template') %}
+{% extends ccdn_user_admin.account.show_user.layout_template %}
 
 {% block stylesheets %}
 	{{ parent() }}
 {% endblock %}
 
-{% block title %}{{- truncDot('ccdn_user_admin.title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserAdminBundle'), param('ccdn_user_admin.seo.title_length')) -}}{% endblock %}
+{% block title %}{{- truncDot('ccdn_user_admin.title.account.show' |trans({'%user_name%': user.getUsername }, 'CCDNUserAdminBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
 
 {% block sidebar %}
 	{{ parent() }}
@@ -53,7 +53,7 @@
 			</tr>
 			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
 				<td class="right">{{- 'ccdn_user_admin.account.show.registered_date'|trans({}, 'CCDNUserAdminBundle') -}}</td>
-				<td class="left">{{- user.registeredDate |date(param('ccdn_user_admin.account.show_user.member_since_datetime_format')) -}}</td>
+				<td class="left">{{- user.registeredDate |date(ccdn_user_admin.account.show_user.member_since_datetime_format) -}}</td>
 			</tr>
 			<tr class="{{- cycler(['row_odd', 'row_even'], 'cycle') -}}">
 				<td class="right">{{- 'ccdn_user_admin.account.show.role'|trans({}, 'CCDNUserAdminBundle') -}}</td>
