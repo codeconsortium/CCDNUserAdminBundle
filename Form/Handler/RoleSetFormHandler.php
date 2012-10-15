@@ -89,8 +89,8 @@ class RoleSetFormHandler
     /**
      *
      * @access public
-     * @param Array() $options
-     * @return $this
+     * @param array $options
+     * @return self
      */
     public function setOptions(array $options = null )
     {
@@ -126,7 +126,7 @@ class RoleSetFormHandler
     /**
      *
      * @access public
-     * @return Form
+     * @return Form $form
      */
     public function getForm()
     {
@@ -143,7 +143,7 @@ class RoleSetFormHandler
     /**
      *
      * @access protected
-     * @param $entity
+     * @param $form
      */
     protected function onSuccess($form)
     {

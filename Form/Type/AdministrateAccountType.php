@@ -40,8 +40,8 @@ class AdministrateAccountType extends AbstractType
      * Use this to set default entity values.
      *
      * @access public
-     * @param Array() $options
-     * @return $this
+     * @param array $defaults
+     * @return self
      */
     public function setDefaults($defaults = array())
     {
@@ -53,8 +53,8 @@ class AdministrateAccountType extends AbstractType
     /**
      *
      * @access public
-     * @param Array() $options
-     * @return $this
+     * @param array $options
+     * @return self
      */
     public function setOptions($options)
     {
@@ -66,7 +66,7 @@ class AdministrateAccountType extends AbstractType
     /**
      *
      * @access public
-     * @param FormBuilder $builder, Array() $options
+     * @param FormBuilder $builder, array $options
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
@@ -78,10 +78,8 @@ class AdministrateAccountType extends AbstractType
 
     /**
      *
-     * for creating and replying to topics
-     *
      * @access public
-     * @param Array() $options
+     * @param array $options
      */
     public function getDefaultOptions(array $options)
     {

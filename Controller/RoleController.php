@@ -31,7 +31,7 @@ class RoleController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $userId
+     * @param  int $userId
      * @return RedirectResponse|RenderResponse
      */
     public function setUserRolesAction($userId)
@@ -79,7 +79,7 @@ class RoleController extends ContainerAware
     /**
      *
      * @access protected
-     * @return String
+     * @return string
      */
     protected function getEngine()
     {

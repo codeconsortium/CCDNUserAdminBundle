@@ -31,7 +31,7 @@ class ActivationController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $page
+     * @param  int $page
      * @return RedirectResponse|RenderResponse
      */
     public function showUnactivatedUsersAction($page)
@@ -63,7 +63,7 @@ class ActivationController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $userId
+     * @param  int $userId
      * @return RedirectResponse
      */
     public function activateAction($userId)
@@ -93,7 +93,7 @@ class ActivationController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $userId
+     * @param  int $userId
      * @return RedirectResponse
      */
     public function forceReActivationAction($userId)
@@ -123,7 +123,7 @@ class ActivationController extends ContainerAware
     /**
      *
      * @access protected
-     * @return String
+     * @return string
      */
     protected function getEngine()
     {

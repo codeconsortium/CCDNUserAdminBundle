@@ -31,7 +31,7 @@ class UserController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $page
+     * @param  int $page
      * @return RedirectResponse|RenderResponse
      */
     public function showNewestUsersAction($page)
@@ -63,7 +63,7 @@ class UserController extends ContainerAware
      /**
      *
      * @access public
-     * @param  Int $userId
+     * @param  int $userId
      * @return RedirectResponse|RenderResponse
      */
     public function showAction($userId)
@@ -103,7 +103,7 @@ class UserController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $userId
+     * @param  int $userId
      * @return RedirectResponse|RenderResponse
      */
     public function editAccountAction($userId)
@@ -151,7 +151,7 @@ class UserController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $userId
+     * @param  int $userId
      * @return RedirectResponse|RenderResponse
      */
     public function editProfileAction($userId)
@@ -207,7 +207,7 @@ class UserController extends ContainerAware
     /**
      *
      * @access protected
-     * @return String
+     * @return string
      */
     protected function getEngine()
     {

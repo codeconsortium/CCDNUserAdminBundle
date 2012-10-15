@@ -88,8 +88,8 @@ class AdministrateAccountFormHandler
     /**
      *
      * @access public
-     * @param Array() $defaults
-     * @return $this
+     * @param array $defaults
+     * @return self
      */
     public function setDefaults($defaults = array())
     {
@@ -101,8 +101,8 @@ class AdministrateAccountFormHandler
     /**
      *
      * @access public
-     * @param Array() $options
-     * @return $this
+     * @param array $options
+     * @return self
      */
     public function setOptions(array $options = null )
     {

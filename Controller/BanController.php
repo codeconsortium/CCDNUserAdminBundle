@@ -31,7 +31,7 @@ class BanController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $page
+     * @param  int $page
      * @return RenderResponse
      */
     public function showBannedUsersAction($page)
@@ -63,7 +63,7 @@ class BanController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $userId
+     * @param  int $userId
      * @return RedirectResponse
      */
     public function banUserAction($userId)
@@ -93,7 +93,7 @@ class BanController extends ContainerAware
     /**
      *
      * @access public
-     * @param  Int $userId
+     * @param  int $userId
      * @return RedirectResponse
      */
     public function unbanUserAction($userId)
@@ -147,7 +147,7 @@ class BanController extends ContainerAware
     /**
      *
      * @access protected
-     * @return String
+     * @return string
      */
     protected function getEngine()
     {
