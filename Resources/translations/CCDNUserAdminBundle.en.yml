@@ -5,6 +5,7 @@ ccdn_user_admin.title.users.newest: 'New Users.'
 ccdn_user_admin.title.users.unactivated: 'Unactivated Users.'
 ccdn_user_admin.title.users.banned: 'Banned Users.'
 ccdn_user_admin.title.account.show: "Administrate %user_name%'s Account."
+ccdn_user_admin.title.account.edit: "Edit %user_name%'s Account."
 ccdn_user_admin.title.account.set_roles: "Set %user_name%'s Account Role."
 
 #

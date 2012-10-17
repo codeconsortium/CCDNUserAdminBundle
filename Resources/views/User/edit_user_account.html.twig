@@ -4,7 +4,7 @@
 	{{ parent() }}
 {% endblock %}
 
-{% block title %}{{- truncDot('title.account.edit' |trans({}, 'CCDNUserUserBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
+{% block title %}{{- truncDot('ccdn_user_admin.title.account.edit' |trans({'%user_name%': user.getUsername}, 'CCDNUserAdminBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
 
 {% block sidebar %}
 	{{ parent() }}
@@ -22,7 +22,7 @@
 
 	{%- include 'CCDNComponentCrumbTrailBundle:Trail:trail.html.twig' with {'crumbs': crumbs } -%}
 
-	<h2>{{- 'title.account.edit' |trans({}, 'CCDNUserUserBundle') -}}</h2>
+	<h2>{{- 'ccdn_user_admin.title.account.edit' |trans({'%user_name%': user.getUsername}, 'CCDNUserAdminBundle') -}}</h2>
 
 	{%- form_theme form ccdn_user_admin.account.edit_user_account.form_theme -%}
 	<form action="{{- path('ccdn_user_admin_account_edit', {'userId': user.id}) -}}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
