@@ -13,6 +13,8 @@
 
 namespace CCDNUser\AdminBundle\Form\Type;
 
+use Symfony\Component\Form\FormBuilderInterface;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
@@ -66,7 +68,7 @@ class RoleType extends AbstractType
      * @access public
      * @param FormBuilder $builder, array $options
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $user = $this->options['user'];
 
