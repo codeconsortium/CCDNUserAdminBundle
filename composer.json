@@ -2,7 +2,7 @@
     "name": "codeconsortium/ccdn-user-admin-bundle",
     "type": "symfony-bundle",
     "description": "CCDN User Admin Bundle",
-    "keywords": ["ccdn", "user", "User Administration", "admin"],
+    "keywords": ["ccdn", "codeconsortium", "user", "User Administration", "admin"],
     "homepage": "http://github.com/codeconsortium/CCDNUserAdminBundle",
     "license": "MIT",
     "authors": [
