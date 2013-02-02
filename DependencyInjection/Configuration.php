@@ -40,13 +40,19 @@ class Configuration implements ConfigurationInterface
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
         $rootNode
+            ->addDefaultsIfNotSet()
+            ->canBeUnset()
             ->children()
                 ->arrayNode('user')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
                     ->children()
                         ->scalarNode('profile_route')->defaultValue('ccdn_user_profile_show_by_id')->end()
                     ->end()
                 ->end()
                 ->arrayNode('template')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
                     ->children()
                         ->scalarNode('engine')->defaultValue('twig')->end()
                     ->end()
@@ -70,6 +76,8 @@ class Configuration implements ConfigurationInterface
     protected function addSEOSection(ArrayNodeDefinition $node)
     {
         $node
+            ->addDefaultsIfNotSet()
+            ->canBeUnset()
             ->children()
                 ->arrayNode('seo')
                     ->addDefaultsIfNotSet()
@@ -89,6 +97,8 @@ class Configuration implements ConfigurationInterface
     private function addActivationSection(ArrayNodeDefinition $node)
     {
         $node
+            ->addDefaultsIfNotSet()
+            ->canBeUnset()
             ->children()
                 ->arrayNode('activation')
                     ->addDefaultsIfNotSet()
@@ -96,6 +106,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('show_unactivated_users')
                             ->addDefaultsIfNotSet()
+                            ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
                                 ->scalarNode('users_per_page')->defaultValue('30')->end()
@@ -115,6 +126,8 @@ class Configuration implements ConfigurationInterface
     private function addBanSection(ArrayNodeDefinition $node)
     {
         $node
+            ->addDefaultsIfNotSet()
+            ->canBeUnset()
             ->children()
                 ->arrayNode('ban')
                     ->addDefaultsIfNotSet()
@@ -122,6 +135,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('show_banned_users')
                             ->addDefaultsIfNotSet()
+                            ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
                                 ->scalarNode('users_per_page')->defaultValue('30')->end()
@@ -141,6 +155,8 @@ class Configuration implements ConfigurationInterface
     private function addRoleSection(ArrayNodeDefinition $node)
     {
         $node
+            ->addDefaultsIfNotSet()
+            ->canBeUnset()
             ->children()
                 ->arrayNode('role')
                     ->addDefaultsIfNotSet()
@@ -148,6 +164,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('set_users_role')
                             ->addDefaultsIfNotSet()
+                            ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
                                 ->scalarNode('form_theme')->defaultValue('CCDNUserAdminBundle:Form:fields.html.twig')->end()
@@ -166,6 +183,8 @@ class Configuration implements ConfigurationInterface
     private function addAccountSection(ArrayNodeDefinition $node)
     {
         $node
+            ->addDefaultsIfNotSet()
+            ->canBeUnset()
             ->children()
                 ->arrayNode('account')
                     ->addDefaultsIfNotSet()
@@ -173,6 +192,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('show_newest_users')
                             ->addDefaultsIfNotSet()
+                            ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
                                 ->scalarNode('users_per_page')->defaultValue('30')->end()
@@ -181,6 +201,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->arrayNode('show_user')
                             ->addDefaultsIfNotSet()
+                            ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
                                 ->scalarNode('member_since_datetime_format')->defaultValue('d-m-Y - H:i')->end()
@@ -188,6 +209,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->arrayNode('edit_user_account')
                             ->addDefaultsIfNotSet()
+                            ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
                                 ->scalarNode('form_theme')->defaultValue('CCDNUserAdminBundle:Form:fields.html.twig')->end()
@@ -195,6 +217,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->arrayNode('edit_user_profile')
                             ->addDefaultsIfNotSet()
+                            ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
                                 ->scalarNode('form_theme')->defaultValue('CCDNUserAdminBundle:Form:fields.html.twig')->end()
