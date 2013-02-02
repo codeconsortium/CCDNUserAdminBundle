@@ -1,0 +1,24 @@
+{
+    "name": "codeconsortium/ccdn-user-admin-bundle",
+    "type": "symfony-bundle",
+    "description": "CCDN User Admin Bundle",
+    "keywords": ["ccdn", "user", "User Administration", "admin"],
+    "homepage": "http://github.com/codeconsortium/CCDNUserAdminBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "reecefowell",
+            "email": "reece@codeconsortium.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": "2.1.*",
+        "doctrine/doctrine-bundle": "*",
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": { "CCDNUser\\AdminBundle": "" }
+    },
+    "target-dir": "CCDNUser/AdminBundle"
+}
