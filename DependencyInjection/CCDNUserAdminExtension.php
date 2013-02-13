@@ -56,6 +56,7 @@ class CCDNUserAdminExtension extends Extension
         $this->getBanSection($container, $config);
         $this->getRoleSection($container, $config);
         $this->getAccountSection($container, $config);
+        $this->getSidebarSection($container, $config);
     }
 
     /**
@@ -127,4 +128,13 @@ class CCDNUserAdminExtension extends Extension
 
     }
 
+    /**
+     *
+     * @access private
+     * @param $container, $config
+     */
+    private function getSidebarSection($container, $config)
+    {
+        $container->setParameter('ccdn_user_admin.sidebar.links', $config['sidebar']['links']);
+    }
 }

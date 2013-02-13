@@ -70,6 +70,9 @@ class CCDNUserAdminBundle extends Bundle
 					'form_theme' => $this->container->getParameter('ccdn_user_admin.role.set_users_role.form_theme'),
 				),
 			),
+            'sidebar' => array(
+                'links' => $this->container->getParameter('ccdn_user_admin.sidebar.links'),
+            ),
 		));
 	}
 	

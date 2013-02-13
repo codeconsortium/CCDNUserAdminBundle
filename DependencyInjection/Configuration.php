@@ -64,6 +64,7 @@ class Configuration implements ConfigurationInterface
         $this->addBanSection($rootNode);
         $this->addRoleSection($rootNode);
         $this->addAccountSection($rootNode);
+        $this->addSidebarSection($rootNode);
 
         return $treeBuilder;
     }
@@ -228,4 +229,33 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
+    /**
+     *
+     * @access private
+     * @param ArrayNodeDefinition $node
+     */
+    private function addSidebarSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->addDefaultsIfNotSet()
+            ->canBeUnset()
+            ->children()
+                ->arrayNode('sidebar')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('links')
+                            ->prototype('array')
+                                ->children()
+                                    ->scalarNode('bundle')->end()
+                                    ->scalarNode('label')->end()
+                                    ->scalarNode('route')->defaultNull()->end()
+                                    ->scalarNode('path')->defaultNull()->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
 }
