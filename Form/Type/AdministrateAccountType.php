@@ -72,10 +72,24 @@ class AdministrateAccountType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username', 'text');
-        $builder->add('email', 'text');
-        $builder->add('locked'); // banning
-        $builder->add('enabled'); // activation
+        $builder->add('username', 'text', array(
+        	'label' => 'ccdn_user_admin.form.label.account.username',
+			'translation_domain' => 'CCDNUserAdminBundle'
+        ));
+        $builder->add('email', 'text', array(
+        	'label' => 'ccdn_user_admin.form.label.account.email',
+			'translation_domain' => 'CCDNUserAdminBundle'
+        ));
+        $builder->add('locked', null, array(
+			'required' => false,
+        	'label' => 'ccdn_user_admin.form.label.account.locked',
+			'translation_domain' => 'CCDNUserAdminBundle'
+        )); // banning
+        $builder->add('enabled', null, array(
+			'required' => false,
+        	'label' => 'ccdn_user_admin.form.label.account.enabled',
+			'translation_domain' => 'CCDNUserAdminBundle'
+        )); // activation
     }
 
     /**

@@ -68,6 +68,17 @@ CCDNUserAdminBundle:
     prefix: /
 ```
 
+### Translations
+
+If you wish to use default texts provided in this bundle, you have to make sure you have translator enabled in your config.
+
+``` yaml
+# app/config/config.yml
+
+framework:
+    translator: ~
+```
+
 ## Next Steps.
 
 Installation should now be complete!

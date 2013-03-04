@@ -87,6 +87,8 @@ class RoleType extends AbstractType
 					'property_path' => false,
 					'required' => true,
 					'empty_value' => false,
+					'label' => 'ccdn_user_admin.form.label.user.roles',
+					'translation_domain' => 'CCDNUserAdminBundle',
 				)
         	);
     }
