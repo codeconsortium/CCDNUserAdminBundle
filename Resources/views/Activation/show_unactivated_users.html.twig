@@ -9,63 +9,65 @@
 
 	{%- spaceless -%}
 
-	{%- include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' -%}
+	<header>
+		<h3>{{- 'ccdn_user_admin.title.users.unactivated' | trans({}, 'CCDNUserAdminBundle') -}}</h3>
+	</header>
 
-	<h3>{{- 'ccdn_user_admin.title.users.unactivated' | trans({}, 'CCDNUserAdminBundle') -}}</h3>
+	<section>
+		{%- if pager.haveToPaginate -%}
+			<div class="btn-toolbar">
+				<nav class="span12 btn-right paginate">
+			    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'ccdn_user_admin_show_unactivated_paginated' }) -}}
+				</nav>
+			</div>
+		{%- endif -%}
 
-	{%- if pager.haveToPaginate -%}
-		<div class="btn-toolbar">
-			<nav class="span12 btn-right paginate">
-		    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'ccdn_user_admin_show_unactivated_paginated' }) -}}
-			</nav>
-		</div>
-	{%- endif -%}
-
-	<table class="table table-striped table-bordered table-condensed table-hover">
-		<thead>
-			<tr>
-				<th class="left">{{- 'ccdn_user_admin.users.table.head.username' | trans({}, 'CCDNUserAdminBundle') -}}</th>
-				<th class="left">{{- 'ccdn_user_admin.users.table.head.email' | trans({}, 'CCDNUserAdminBundle') -}}</th>
-				<th class="center">{{- 'ccdn_user_admin.users.table.head.joined_date' | trans({}, 'CCDNUserAdminBundle') -}}</th>
-				<th class="center">{{- 'ccdn_user_admin.users.table.head.activation_status' | trans({}, 'CCDNUserAdminBundle') -}}</th>
-			</tr>
-		</thead>
-		<tbody>
-			{%- for row, user in users -%}
+		<table class="table table-striped table-bordered table-condensed table-hover table-no-vertical-borders">
+			<thead>
 				<tr>
-					<td class="left">
-						<a href="{{- path('ccdn_user_admin_account_show', {'userId': user.getId }) -}}">
-							<bdi>{{- user.username |capitalize -}}</bdi>
-						</a>
-					</td>
-					<td class="left">{{- user.email -}}</td>
-					<td class="center">{{- user.registeredDate |date(ccdn_user_admin.activation.show_unactivated_users.member_since_datetime_format) -}}</td>
-					<td class="center">
-						{%- if user.enabled -%}
-							Activated
-						{%- else -%}
-							Pending Activation
-						{%- endif -%}
-					</td>
+					<th class="left">{{- 'ccdn_user_admin.users.table.head.username' | trans({}, 'CCDNUserAdminBundle') -}}</th>
+					<th class="left">{{- 'ccdn_user_admin.users.table.head.email' | trans({}, 'CCDNUserAdminBundle') -}}</th>
+					<th class="center">{{- 'ccdn_user_admin.users.table.head.joined_date' | trans({}, 'CCDNUserAdminBundle') -}}</th>
+					<th class="center">{{- 'ccdn_user_admin.users.table.head.activation_status' | trans({}, 'CCDNUserAdminBundle') -}}</th>
 				</tr>
-			{%- else -%}
-				<tr>
-					<td class="center" colspan="4">
-						{{- 'ccdn_user_admin.users.unactivated.table.empty' | trans({}, 'CCDNUserAdminBundle') -}}
-					</td>
-				</tr>
-			{%- endfor -%}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{%- for row, user in users -%}
+					<tr>
+						<td class="left">
+							<a href="{{- path('ccdn_user_admin_account_show', {'userId': user.getId }) -}}">
+								<bdi>{{- user.username |capitalize -}}</bdi>
+							</a>
+						</td>
+						<td class="left">{{- user.email -}}</td>
+						<td class="center">{{- user.registeredDate |date(ccdn_user_admin.activation.show_unactivated_users.member_since_datetime_format) -}}</td>
+						<td class="center">
+							{%- if user.enabled -%}
+								Activated
+							{%- else -%}
+								Pending Activation
+							{%- endif -%}
+						</td>
+					</tr>
+				{%- else -%}
+					<tr>
+						<td class="center" colspan="4">
+							{{- 'ccdn_user_admin.users.unactivated.table.empty' | trans({}, 'CCDNUserAdminBundle') -}}
+						</td>
+					</tr>
+				{%- endfor -%}
+			</tbody>
+		</table>
 
-	{%- if pager.haveToPaginate -%}
-		<div class="btn-toolbar">
-			<nav class="span12 btn-right paginate">
-		    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'ccdn_user_admin_show_unactivated_paginated' }) -}}
-			</nav>
-		</div>
-	{%- endif -%}
-
+		{%- if pager.haveToPaginate -%}
+			<div class="btn-toolbar">
+				<nav class="span12 btn-right paginate">
+			    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'ccdn_user_admin_show_unactivated_paginated' }) -}}
+				</nav>
+			</div>
+		{%- endif -%}
+	</section>
+	
 	{%- endspaceless -%}
 
 {% endblock body_content %}

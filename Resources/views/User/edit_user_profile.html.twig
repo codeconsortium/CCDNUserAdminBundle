@@ -13,29 +13,29 @@
 
 	{%- spaceless -%}
 
-	{%- include 'CCDNComponentCommonBundle:Flashes:flashes.html.twig' -%}
+	<section>
+		{%- form_theme form ccdn_user_admin.account.edit_user_profile.form_theme -%}
+		<form action="{{- path('ccdn_user_admin_profile_edit', {'userId': user.getId}) -}}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+			<fieldset>
 
-	{%- form_theme form ccdn_user_admin.account.edit_user_profile.form_theme -%}
-	<form action="{{- path('ccdn_user_admin_profile_edit', {'userId': user.getId}) -}}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
-		<fieldset>
-
-			<div class="control-group form-title">
-				<div class="controls">
-					<h3>{{- 'title.profile.edit' | trans({ '%user_name%': '<bdi>' ~ user.getUsername ~ '</bdi>' }, 'CCDNUserProfileBundle') |raw -}}</h3>
+				<div class="control-group form-title">
+					<div class="controls">
+						<h3>{{- 'title.profile.edit' | trans({ '%user_name%': '<bdi>' ~ user.getUsername ~ '</bdi>' }, 'CCDNUserProfileBundle') |raw -}}</h3>
+					</div>
 				</div>
-			</div>
 			
-			{{- form_errors(form) -}}
+				{{- form_errors(form) -}}
 
-			{{- form_widget(form) -}}
+				{{- form_widget(form) -}}
 					
-			<div class="form-actions">
-				<input type="submit" class="btn btn-danger" value="{{- 'form.button.profile.edit.update' |trans({}, 'CCDNUserProfileBundle') -}}">
-			</div>
+				<div class="form-actions">
+					<input type="submit" class="btn btn-danger" value="{{- 'form.button.profile.edit.update' |trans({}, 'CCDNUserProfileBundle') -}}">
+				</div>
 
-		</fieldset>
-	</form>
-
+			</fieldset>
+		</form>
+	</section>
+	
 	{%- endspaceless -%}
 
 {% endblock body_content %}
