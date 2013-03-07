@@ -8,8 +8,6 @@ All available configuration options are listed below with their default values.
 # for CCDNUser AdminBundle   
 #
 ccdn_user_admin:
-    user:
-        profile_route:        ccdn_user_profile_show_by_id
     template:
         engine:               twig
     seo:

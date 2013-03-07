@@ -67,7 +67,6 @@ class RoleController extends ContainerAware
             	->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.set_roles', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_set_roles', array('userId' => $user->getId())), "user");
 
             return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Role:set_users_role.html.' . $this->getEngine(), array(
-                'user_profile_route' => $this->container->getParameter('ccdn_forum_admin.user.profile_route'),
 				'crumbs' => $crumbs,
                 'user' => $user,
                 'form' => $formHandler->getForm()->createView(),

@@ -48,7 +48,6 @@ class CCDNUserAdminExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('ccdn_user_admin.user.profile_route', $config['user']['profile_route']);
         $container->setParameter('ccdn_user_admin.template.engine', $config['template']['engine']);
 
         $this->getSEOSection($container, $config);

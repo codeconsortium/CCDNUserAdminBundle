@@ -54,7 +54,6 @@ class ActivationController extends ContainerAware
 
         return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Activation:show_unactivated_users.html.' . $this->getEngine(), array(
             'crumbs' => $crumbs,
-            'user_profile_route' => $this->container->getParameter('ccdn_user_admin.user.profile_route'),
             'pager' => $usersPager,
             'users' => $users,
         ));
