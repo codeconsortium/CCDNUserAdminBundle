@@ -9,8 +9,10 @@
 
 	{%- spaceless -%}
 
+	{%- set profile = create_profile(user) -%}
+
 	<header>
-		<h3>{{- 'ccdn_user_admin.title.account.show' |trans({'%user_name%': '<bdi>' ~ user.getUsername ~ '</bdi>' }, 'CCDNUserAdminBundle') |raw -}}</h3>
+		<h3>{{- 'ccdn_user_admin.title.account.show' |trans({'%user_name%': profile.getUsernameBDI}, 'CCDNUserAdminBundle') |raw -}}</h3>
 	</header>
 
 	<section>
@@ -41,19 +43,16 @@
 			<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_edit', {'userId': user.getId}) -}}">
 				{{- 'ccdn_user_admin.link.account.edit' |trans({}, 'CCDNUserAdminBundle') -}}
 			</a>
-		{#	<a class="btn btn-danger" href="{{- path('ccdn_user_admin_profile_edit', {'userId': user.getId}) -}}">{{- 'ccdn_user_admin.link.profile.edit' |trans({}, 'CCDNUserAdminBundle') -}}</a>#}
-		{#
-			<a class="btn" href="{{- path('ccdn_user_profile_show_by_id', {'profileId': user.getId}) -}}">
+					<a class="btn" href="{{- path('ccdn_user_profile_show_by_id', {'profileId': profile.getId}) -}}">
 				{{- 'ccdn_user_admin.link.profile.show' |trans({}, 'CCDNUserAdminBundle') -}}
-			</a>
-			#}
+			</a>			
 		</div>
 
 		<table class="table table-striped table-bordered table-hover table-vertical-labels">
 			<tbody>
 				<tr>
 					<td class="right" style="width: 30%;">{{- 'ccdn_user_admin.account.show.username' |trans({}, 'CCDNUserAdminBundle') -}}</td>
-					<td class="left" style="width: 70%;"><bdi>{{- user.username |capitalize -}}</bdi></td>
+					<td class="left" style="width: 70%;">{{- profile.getUsernameBDI |raw -}}</td>
 				</tr>
 				<tr>
 					<td class="right">{{- 'ccdn_user_admin.account.show.email'|trans({}, 'CCDNUserAdminBundle') -}}</td>
