@@ -160,5 +160,4 @@ class AdministrateAccountFormHandler
     {
         $this->manager->update($entity);
     }
-
 }

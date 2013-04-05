@@ -28,7 +28,6 @@ use Symfony\Component\Config\FileLocator;
  */
 class CCDNUserAdminExtension extends Extension
 {
-
     /**
      * {@inheritDoc}
      */
@@ -50,11 +49,13 @@ class CCDNUserAdminExtension extends Extension
 
         $container->setParameter('ccdn_user_admin.template.engine', $config['template']['engine']);
 
+    	$container->setParameter('ccdn_user_admin.users_per_page', $config['users_per_page']);
+	
         $this->getSEOSection($container, $config);
-        $this->getActivationSection($container, $config);
+        $this->getUserSection($container, $config);
         $this->getBanSection($container, $config);
+        $this->getActivationSection($container, $config);
         $this->getRoleSection($container, $config);
-        $this->getAccountSection($container, $config);
         $this->getSidebarSection($container, $config);
     }
 
@@ -76,9 +77,7 @@ class CCDNUserAdminExtension extends Extension
     private function getActivationSection($container, $config)
     {
         $container->setParameter('ccdn_user_admin.activation.show_unactivated_users.layout_template', $config['activation']['show_unactivated_users']['layout_template']);
-        $container->setParameter('ccdn_user_admin.activation.show_unactivated_users.users_per_page', $config['activation']['show_unactivated_users']['users_per_page']);
         $container->setParameter('ccdn_user_admin.activation.show_unactivated_users.member_since_datetime_format', $config['activation']['show_unactivated_users']['member_since_datetime_format']);
-
     }
 
     /**
@@ -89,9 +88,7 @@ class CCDNUserAdminExtension extends Extension
     private function getBanSection($container, $config)
     {
         $container->setParameter('ccdn_user_admin.ban.show_banned_users.layout_template', $config['ban']['show_banned_users']['layout_template']);
-        $container->setParameter('ccdn_user_admin.ban.show_banned_users.users_per_page', $config['ban']['show_banned_users']['users_per_page']);
         $container->setParameter('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format', $config['ban']['show_banned_users']['member_since_datetime_format']);
-
     }
 
     /**
@@ -110,10 +107,9 @@ class CCDNUserAdminExtension extends Extension
      * @access private
      * @param $container, $config
      */
-    private function getAccountSection($container, $config)
+    private function getUserSection($container, $config)
     {
         $container->setParameter('ccdn_user_admin.account.show_newest_users.layout_template', $config['account']['show_newest_users']['layout_template']);
-        $container->setParameter('ccdn_user_admin.account.show_newest_users.users_per_page', $config['account']['show_newest_users']['users_per_page']);
         $container->setParameter('ccdn_user_admin.account.show_newest_users.member_since_datetime_format', $config['account']['show_newest_users']['member_since_datetime_format']);
 
         $container->setParameter('ccdn_user_admin.account.show_user.layout_template', $config['account']['show_user']['layout_template']);
@@ -124,7 +120,6 @@ class CCDNUserAdminExtension extends Extension
 
         $container->setParameter('ccdn_user_admin.account.edit_user_profile.layout_template', $config['account']['edit_user_profile']['layout_template']);
         $container->setParameter('ccdn_user_admin.account.edit_user_profile.form_theme', $config['account']['edit_user_profile']['form_theme']);
-
     }
 
     /**

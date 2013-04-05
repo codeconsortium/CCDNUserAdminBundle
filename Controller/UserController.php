@@ -13,21 +13,16 @@
 
 namespace CCDNUser\AdminBundle\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
-use FOS\UserBundle\Model\UserInterface;
+use CCDNUser\AdminBundle\Controller\UserBaseController;
 
 /**
  *
  * @author Reece Fowell <reece@codeconsortium.com>
  * @version 1.0
  */
-class UserController extends ContainerAware
+class UserController extends UserBaseController
 {
-
     /**
      *
      * @access public
@@ -36,26 +31,17 @@ class UserController extends ContainerAware
      */
     public function showNewestUsersAction($page)
     {
-        if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException('You do not have access to this section.');
-        }
+        $this->isAuthorised('ROLE_ADMIN');
 
-        $usersPager = $this->container->get('ccdn_user_user.repository.user')->findAllNewPaginated();
+        $usersPager = $this->getUserManager()->getNewestUsersPaginated($page, new \DateTime('-7 days'));
 
-        $usersPerPage = $this->container->getParameter('ccdn_user_admin.account.show_newest_users.users_per_page');
-        $usersPager->setMaxPerPage($usersPerPage);
-        $usersPager->setCurrentPage($page, false, true);
+        $crumbs = $this->getCrumbs()
+            ->add($this->trans('ccdn_user_admin.crumbs.show_newest'), $this->path('ccdn_user_admin_show_newest'));
 
-        $users = $usersPager->getCurrentPageResults();
-
-        $crumbs = $this->container->get('ccdn_component_crumb.trail')
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.show_newest', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_show_newest'), "users");
-
-        return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:Newest:show_newest_users.html.' . $this->getEngine(), array(
+        return $this->renderResponse('CCDNUserAdminBundle:Newest:show_newest_users.html.', array(
             'crumbs' => $crumbs,
             'pager' => $usersPager,
-            'users' => $users,
+            'users' => $usersPager->getCurrentPageResults(),
         ));
     }
 
@@ -67,23 +53,15 @@ class UserController extends ContainerAware
      */
     public function showAction($userId)
     {
-        if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException('You do not have access to this section.');
-        }
+        $this->isAuthorised('ROLE_ADMIN');
+		
+        $user = $this->getUserManager()->findOneById($userId);
+		$this->isFound($user);
+		
+        $crumbs = $this->getCrumbs()
+            ->add($this->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())));
 
-        $user = $this->container->get('ccdn_user_user.repository.user')->findOneById($userId);
-
-        if ( ! is_object($user) || ! $user instanceof UserInterface) {
-            throw new NotFoundHttpException('the user does not exist.');
-        }
-
-        $crumbs = $this->container->get('ccdn_component_crumb.trail')
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'),
-				$this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'),
-				$this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $user->getId())), "user");
-
-        return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:show_user.html.' . $this->getEngine(), array(
+        return $this->renderResponse('CCDNUserAdminBundle:User:show_user.html.', array(
             'crumbs' => $crumbs,
             'user' => $user,
         ));
@@ -95,9 +73,7 @@ class UserController extends ContainerAware
      */
     public function findUserAction()
     {
-        if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException('You do not have permission to access this page!');
-        }
+        $this->isAuthorised('ROLE_ADMIN');
     }
 
     /**
@@ -108,39 +84,26 @@ class UserController extends ContainerAware
      */
     public function editAccountAction($userId)
     {
-        if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException('You do not have access to this section.');
-        }
+        $this->isAuthorised('ROLE_ADMIN');
 
-        if (! $userId || $userId == 0) {
-            throw new NotFoundHTTPException('The user does not exist.');
-        }
-
-        $user = $this->container->get('ccdn_user_user.repository.user')->findOneById($userId);
-
-        if ( ! is_object($user) || ! $user instanceof UserInterface) {
-            throw new NotFoundHTTPException('The user does not exist.');
-        }
-
-        if ($user->getId() == $this->container->get('security.context')->getToken()->getUser()->getId()) {
+        $user = $this->getUserManager()->findOneById($userId);
+		$this->isFound($user);
+		
+        if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
         $formHandler = $this->container->get('ccdn_user_admin.form.handler.administrate_account')->setDefaults(array('user' => $user));
 
         if ($formHandler->process()) {
-            return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $userId)));
+            return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
         }
 
-        $crumbs = $this->container->get('ccdn_component_crumb.trail')
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'),
-				$this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername()), 'CCDNUserAdminBundle'),
-				$this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $user->getId())), "user")
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.account.edit', array(), 'CCDNUserAdminBundle'),
-				$this->container->get('router')->generate('ccdn_user_admin_account_edit', array('userId' => $user->getId())), "edit");
+        $crumbs = $this->getCrumbs()
+            ->add($this->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
+			->add($this->trans('ccdn_user_admin.crumbs.account.edit'), $this->path('ccdn_user_admin_account_edit', array('userId' => $user->getId())));
 
-        return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:edit_user_account.html.' . $this->getEngine(),
+        return $this->renderResponse('CCDNUserAdminBundle:User:edit_user_account.html.',
             array(
                 'crumbs' => $crumbs,
                 'form' => $formHandler->getForm()->createView(),
@@ -149,70 +112,45 @@ class UserController extends ContainerAware
             )
         );
     }
-
+	
     /**
      *
      * @access public
      * @param  int $userId
      * @return RedirectResponse|RenderResponse
      */
-    public function editProfileAction($userId)
+    public function changeUserRolesAction($userId)
     {
-        if ( ! $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException('You do not have access to this section.');
-        }
+        $this->isAuthorised('ROLE_SUPER_ADMIN');
 
-        if (! $userId || $userId == 0) {
-            throw new NotFoundHTTPException('The user does not exist.');
-        }
+        $user = $this->getUserManager()->findOneById($userId);
+		$this->isFound($user);
 
-        $user = $this->container->get('ccdn_user_user.repository.user')->findOneById($userId);
-
-        if ( ! is_object($user) || ! $user instanceof UserInterface) {
-            throw new NotFoundHTTPException('The user does not exist.');
-        }
-
-        if ($user->getId() == $this->container->get('security.context')->getToken()->getUser()->getId()) {
+        if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        // get the user associated profile
-        $profile = $user->getProfile();
-
-        // if the profile has no id then it
-        // does not exist, so create one.
-        if ( ! $profile->getId()) {
-            $this->container->get('ccdn_user_profile.manager.profile')->insert($profile)->flush();
-        }
-
-        $formHandler = $this->container->get('ccdn_user_admin.form.handler.administrate_profile')->setDefaults(array('profile' => $profile));
+        $formHandler = $this->container->get('ccdn_user_admin.form.handler.role_change')->setOptions(array('user' => $user));
 
         if ($formHandler->process()) {
-            return new RedirectResponse($this->container->get('router')->generate('ccdn_user_admin_account_show', array('userId' => $userId)));
+            $this->setFlash('notice', $this->trans('ccdn_user_admin.flash.user.set_roles.success', array('%user_name%' => $user->getUsername())));
+
+            return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array(
+                'userId' => $user->getId(),
+            )));
+        } else {
+	
+	        $crumbs = $this->getCrumbs()
+	            ->add($this->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
+            	->add($this->trans('ccdn_user_admin.crumbs.account.set_roles', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_set_roles', array('userId' => $user->getId())));
+
+            return $this->renderResponse('CCDNUserAdminBundle:Role:set_users_role.html.',
+				array(
+					'crumbs' => $crumbs,
+	                'user' => $user,
+	                'form' => $formHandler->getForm()->createView(),
+	            )
+			);
         }
-
-        $crumbs = $this->container->get('ccdn_component_crumb.trail')
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.dashboard.admin', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_component_dashboard_show', array('category' => 'admin')), "sitemap")
-            ->add($this->container->get('translator')->trans('ccdn_user_admin.crumbs.profile.edit', array(), 'CCDNUserAdminBundle'), $this->container->get('router')->generate('ccdn_user_admin_profile_edit', array('userId' => $user->getId())), "edit");
-
-        return $this->container->get('templating')->renderResponse('CCDNUserAdminBundle:User:edit_user_profile.html.' . $this->getEngine(),
-            array(
-                'crumbs' => $crumbs,
-                'form' => $formHandler->getForm()->createView(),
-                'theme' => $this->container->getParameter('ccdn_user_admin.account.edit_user_profile.form_theme'),
-                'user' => $user,
-            )
-        );
     }
-
-    /**
-     *
-     * @access protected
-     * @return string
-     */
-    protected function getEngine()
-    {
-        return $this->container->getParameter('ccdn_user_admin.template.engine');
-    }
-
 }

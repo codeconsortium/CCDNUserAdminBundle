@@ -77,4 +77,4 @@ ccdn_user_admin_unban:
 #
 ccdn_user_admin_set_roles:
     pattern: /{_locale}/admin/user/{userId}/set/roles
-    defaults: { _controller: CCDNUserAdminBundle:Role:setUserRoles, _locale: en }
+    defaults: { _controller: CCDNUserAdminBundle:User:changeUserRoles, _locale: en }

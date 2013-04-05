@@ -50,13 +50,14 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('engine')->defaultValue('twig')->end()
                     ->end()
                 ->end()
+                ->scalarNode('users_per_page')->defaultValue('30')->end()
             ->end();
 
         $this->addSEOSection($rootNode);
-        $this->addActivationSection($rootNode);
+        $this->addUserSection($rootNode);
         $this->addBanSection($rootNode);
+        $this->addActivationSection($rootNode);
         $this->addRoleSection($rootNode);
-        $this->addAccountSection($rootNode);
         $this->addSidebarSection($rootNode);
 
         return $treeBuilder;
@@ -103,7 +104,6 @@ class Configuration implements ConfigurationInterface
                             ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
-                                ->scalarNode('users_per_page')->defaultValue('30')->end()
                                 ->scalarNode('member_since_datetime_format')->defaultValue('d-m-Y - H:i')->end()
                             ->end()
                         ->end()
@@ -132,7 +132,6 @@ class Configuration implements ConfigurationInterface
                             ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
-                                ->scalarNode('users_per_page')->defaultValue('30')->end()
                                 ->scalarNode('member_since_datetime_format')->defaultValue('d-m-Y - H:i')->end()
                             ->end()
                         ->end()
@@ -174,7 +173,7 @@ class Configuration implements ConfigurationInterface
      * @access private
      * @param ArrayNodeDefinition $node
      */
-    private function addAccountSection(ArrayNodeDefinition $node)
+    private function addUserSection(ArrayNodeDefinition $node)
     {
         $node
             ->addDefaultsIfNotSet()
@@ -189,7 +188,6 @@ class Configuration implements ConfigurationInterface
                             ->canBeUnset()
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
-                                ->scalarNode('users_per_page')->defaultValue('30')->end()
                                 ->scalarNode('member_since_datetime_format')->defaultValue('d-m-Y - H:i')->end()
                             ->end()
                         ->end()
