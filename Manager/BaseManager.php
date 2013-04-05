@@ -110,7 +110,7 @@ abstract class BaseManager implements BaseManagerInterface
 	/**
 	 *
 	 * @access public
-	 * @return \CCDNMessage\MessageBundle\Gateway\BaseGatewayInterface
+	 * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
 	 */
 	public function getGateway()
 	{
