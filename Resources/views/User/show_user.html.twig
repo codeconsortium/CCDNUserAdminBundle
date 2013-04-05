@@ -42,9 +42,6 @@
 			</a>
 			<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_edit', {'userId': user.getId}) -}}">
 				{{- 'ccdn_user_admin.link.account.edit' |trans({}, 'CCDNUserAdminBundle') -}}
-			</a>
-					<a class="btn" href="{{- path('ccdn_user_profile_show_by_id', {'profileId': profile.getId}) -}}">
-				{{- 'ccdn_user_admin.link.profile.show' |trans({}, 'CCDNUserAdminBundle') -}}
 			</a>			
 		</div>
 
@@ -62,10 +59,6 @@
 					<td class="right">{{- 'ccdn_user_admin.account.show.registered_date'|trans({}, 'CCDNUserAdminBundle') -}}</td>
 					<td class="left">{{- user.registeredDate |date(ccdn_user_admin.account.show_user.member_since_datetime_format) -}}</td>
 				</tr>
-				<tr>
-					<td class="right">{{- 'ccdn_user_admin.account.show.role'|trans({}, 'CCDNUserAdminBundle') -}}</td>
-					<td class="left">{{- userRole(user) -}}</td>
-				</tr>			
 				<tr>
 					<td class="right">{{- 'ccdn_user_admin.profile.show.banned'|trans({}, 'CCDNUserAdminBundle') -}}</td>
 					<td class="left">
@@ -86,6 +79,16 @@
 						{%- endif -%}
 					</td>
 				</tr>
+				<tr>
+					<td class="right">{{- 'ccdn_user_admin.account.show.role'|trans({}, 'CCDNUserAdminBundle') -}}</td>
+					<td class="left">
+						<ul>
+						{%- for role in user.getRoles -%}
+							<li>{{- role -}}</li>
+						{%- endfor -%}
+						</ul>
+					</td>
+				</tr>			
 			</tbody>
 		</table>
 	</section>

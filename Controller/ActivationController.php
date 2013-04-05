@@ -54,7 +54,7 @@ class ActivationController extends BaseController
      */
     public function activateAction($userId)
     {
-        $this->isAthorised('ROLE_ADMIN');
+        $this->isAuthorised('ROLE_ADMIN');
 
         $user = $this->getUserManager()->findOneById($userId);
 		$this->isFound($user);

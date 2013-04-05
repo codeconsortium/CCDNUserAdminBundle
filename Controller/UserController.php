@@ -93,9 +93,9 @@ class UserController extends UserBaseController
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $formHandler = $this->container->get('ccdn_user_admin.form.handler.administrate_account')->setDefaults(array('user' => $user));
+        $formHandler = $this->getFormHandlerToUpdateAccount($user);
 
-        if ($formHandler->process()) {
+        if ($formHandler->process($this->getRequest())) {
             return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
         }
 
@@ -103,7 +103,7 @@ class UserController extends UserBaseController
             ->add($this->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
 			->add($this->trans('ccdn_user_admin.crumbs.account.edit'), $this->path('ccdn_user_admin_account_edit', array('userId' => $user->getId())));
 
-        return $this->renderResponse('CCDNUserAdminBundle:User:edit_user_account.html.',
+        return $this->renderResponse('CCDNUserAdminBundle:User:update_account.html.',
             array(
                 'crumbs' => $crumbs,
                 'form' => $formHandler->getForm()->createView(),
@@ -130,25 +130,24 @@ class UserController extends UserBaseController
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $formHandler = $this->container->get('ccdn_user_admin.form.handler.role_change')->setOptions(array('user' => $user));
+        $formHandler = $this->getFormHandlerToUpdateRolesForUser($user);
 
-        if ($formHandler->process()) {
+        if ($formHandler->process($this->getRequest())) {
             $this->setFlash('notice', $this->trans('ccdn_user_admin.flash.user.set_roles.success', array('%user_name%' => $user->getUsername())));
 
-            return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array(
-                'userId' => $user->getId(),
-            )));
+            return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())));
         } else {
 	
 	        $crumbs = $this->getCrumbs()
 	            ->add($this->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
             	->add($this->trans('ccdn_user_admin.crumbs.account.set_roles', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_set_roles', array('userId' => $user->getId())));
 
-            return $this->renderResponse('CCDNUserAdminBundle:Role:set_users_role.html.',
+            return $this->renderResponse('CCDNUserAdminBundle:User:update_roles.html.',
 				array(
 					'crumbs' => $crumbs,
-	                'user' => $user,
 	                'form' => $formHandler->getForm()->createView(),
+	                'theme' => $this->container->getParameter('ccdn_user_admin.account.edit_user_account.form_theme'),
+	                'user' => $user,					
 	            )
 			);
         }

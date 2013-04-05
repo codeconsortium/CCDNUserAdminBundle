@@ -3,13 +3,13 @@ parameters:
     ccdn_user_admin.gateway.user.class:                      CCDNUser\AdminBundle\Gateway\UserGateway
     ccdn_user_admin.manager.user.class:                      CCDNUser\AdminBundle\Manager\UserManager
 
-    ccdn_user_admin.form.type.role_change.class:             CCDNUser\AdminBundle\Form\Type\RoleType
-    ccdn_user_admin.form.handler.role_change.class:          CCDNUser\AdminBundle\Form\Handler\RoleSetFormHandler
+    ccdn_user_admin.form.type.update_roles.class:             CCDNUser\AdminBundle\Form\Type\UpdateRolesFormType
+    ccdn_user_admin.form.handler.update_roles.class:          CCDNUser\AdminBundle\Form\Handler\UpdateRolesFormHandler
 
-    ccdn_user_admin.form.type.administrate_account.class:    CCDNUser\AdminBundle\Form\Type\AdministrateAccountType
-    ccdn_user_admin.form.handler.administrate_account.class: CCDNUser\AdminBundle\Form\Handler\AdministrateAccountFormHandler
+    ccdn_user_admin.form.type.update_account.class:          CCDNUser\AdminBundle\Form\Type\UpdateAccountFormType
+    ccdn_user_admin.form.handler.update_account.class:       CCDNUser\AdminBundle\Form\Handler\UpdateAccountFormHandler
 
-    ccdn_user_admin.form.type.administrate_profile.class:    CCDNUser\AdminBundle\Form\Type\AdministrateProfileType
+    ccdn_user_admin.form.type.administrate_profile.class:    CCDNUser\AdminBundle\Form\Type\AdministrateProfileFormType
     ccdn_user_admin.form.handler.administrate_profile.class: CCDNUser\AdminBundle\Form\Handler\AdministrateProfileFormHandler
 
     ccdn_user_admin.component.dashboard.integrator.class:    CCDNUser\AdminBundle\Component\Dashboard\DashboardIntegrator
@@ -38,30 +38,31 @@ services:
     #
     # Role Forms.
     #
-    ccdn_user_admin.form.type.role_change:
-        class:  %ccdn_user_admin.form.type.role_change.class%
+    ccdn_user_admin.form.type.update_roles:
+        class:  %ccdn_user_admin.form.type.update_roles.class%
         arguments:
             - @ccdn_component_common.component.helper.role
-    ccdn_user_admin.form.handler.role_change:
-        class:  %ccdn_user_admin.form.handler.role_change.class%
+    ccdn_user_admin.form.handler.update_roles:
+        class:  %ccdn_user_admin.form.handler.update_roles.class%
         arguments:
             - @form.factory
+            - @ccdn_user_admin.form.type.update_roles
             - @ccdn_user_admin.manager.user
             - @ccdn_component_common.component.helper.role
 
     #
     # Account Forms.
     #
-    ccdn_user_admin.form.type.administrate_account:
-        class:  %ccdn_user_admin.form.type.administrate_account.class%
+    ccdn_user_admin.form.type.update_account:
+        class:  %ccdn_user_admin.form.type.update_account.class%
         arguments:
             - @doctrine
-    ccdn_user_admin.form.handler.administrate_account:
-        class:  %ccdn_user_admin.form.handler.administrate_account.class%
+    ccdn_user_admin.form.handler.update_account:
+        class:  %ccdn_user_admin.form.handler.update_account.class%
         arguments:
             - @form.factory
-            - @service_container
-            - @ccdn_user_user.manager.user
+            - @ccdn_user_admin.form.type.update_account
+            - @ccdn_user_admin.manager.user
 
     #
     # Profile Forms.

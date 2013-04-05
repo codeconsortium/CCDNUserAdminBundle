@@ -27,42 +27,8 @@ use Symfony\Component\Validator\Constraints\Collection;
  * @author Reece Fowell <reece@codeconsortium.com>
  * @version 1.0
  */
-class RoleType extends AbstractType
+class UpdateRolesFormType extends AbstractType
 {
-
-    /**
-     *
-     * @access protected
-     */
-    protected $options;
-
-	/**
-	 *
-	 * @access protected
-	 */
-	protected $roleHelper;
-	
-	/**
-     *
-     * @access public
-     * @param RoleHelper $roleHelper
-     */
-    public function __construct($roleHelper)
-    {
-        $this->options = array();
-		$this->roleHelper = $roleHelper;
-    }
-
-    /**
-     *
-     * @access public
-     * @param array $options
-     */
-    public function setOptions($options)
-    {
-        $this->options = $options;
-    }
-
     /**
      *
      * @access public
@@ -70,27 +36,18 @@ class RoleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user = $this->options['user'];
-
-		$availableRoles = $this->roleHelper->getAvailableRoleKeys();
-		$currentRole = $this->roleHelper->getUsersHighestRole($user->getRoles());
-		
-		$form = $builder->getForm();
-		
         $builder
-			->add('new_role', 'choice',
+			->add('roles', 'choice',
             	array(
-					'choices' => $availableRoles,
-					'preferred_choices' => array($currentRole), 
-					'multiple' => false, 
-					'expanded' => false, 
-					'property_path' => false,
-					'required' => true,
-					'empty_value' => false,
+					'choices' => $options['available_roles'],
+		            'required' => false,
+		            'expanded' => true,
+		            'multiple' => true,
 					'label' => 'ccdn_user_admin.form.label.user.roles',
 					'translation_domain' => 'CCDNUserAdminBundle',
 				)
-        	);
+        	)
+		;
     }
 
     /**
@@ -105,11 +62,12 @@ class RoleType extends AbstractType
 		));
 		
         return array(
-            'data_class' => 'CCDNUser\UserBundle\Entity\User',
+            'data_class'      => 'CCDNUser\UserBundle\Entity\User',
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             // a unique key to help generate the secret token
-            'intention'       => 'user_role_item',
+            'intention'       => 'user_role_item',			
+			'available_roles' => array(),
         );
     }
 
@@ -120,7 +78,6 @@ class RoleType extends AbstractType
      */
     public function getName()
     {
-        return 'Role';
+        return 'UpdateRoles';
     }
-
 }

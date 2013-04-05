@@ -25,8 +25,11 @@
 				{{- form_widget(form) -}}
 			
 				<div class="form-actions">
-			        <input type="submit" class="btn btn-danger" value="{{- 'ccdn_user_admin.form.button.user.roles.update'|trans({}, 'CCDNUserAdminBundle') -}}">
-					<a class="btn" href="{{- path('ccdn_user_admin_account_show', {'userId':user.id}) -}}">{{- 'ccdn_user_admin.form.button.user.roles.cancel' |trans({}, 'CCDNUserAdminBundle') -}}</a>
+			        <input type="submit" name="submit[save]" class="btn btn-danger" value="{{- 'ccdn_user_admin.form.button.user.roles.update'|trans({}, 'CCDNUserAdminBundle') -}}">
+					
+					<a class="btn" href="{{- path('ccdn_user_admin_account_show', {'userId':user.id}) -}}">
+						{{- 'ccdn_user_admin.form.button.user.roles.cancel' |trans({}, 'CCDNUserAdminBundle') -}}
+					</a>
 				</div>
 
 			</fieldset>
