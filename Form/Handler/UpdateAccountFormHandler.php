@@ -40,13 +40,6 @@ class UpdateAccountFormHandler
 	 * @var \CCDNUser\AdminBundle\Form\Type\UpdateAccountFormType $updateAccountFormType
 	 */
 	protected $updateAccountFormType;
-	
-    /**
-	 *
-	 * @access protected
-	 * @var \CCDNUser\AdminBundle\Manager\UserManagerInterface $manager
-	 */
-    protected $manager;
 
     /**
 	 * 
@@ -54,6 +47,13 @@ class UpdateAccountFormHandler
 	 * @var \CCDNUser\AdminBundle\Form\Type\UpdateAccountFornType $form 
 	 */
     protected $form;
+	
+    /**
+	 *
+	 * @access protected
+	 * @var \CCDNUser\AdminBundle\Manager\UserManagerInterface $manager
+	 */
+    protected $manager;
 
     /**
 	 * 

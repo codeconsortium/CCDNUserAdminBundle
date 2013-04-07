@@ -40,13 +40,6 @@ class UpdateRolesFormHandler
 	 * @var \CCDNUser\AdminBundle\Form\Type\UpdateRolesFormType $updateRolesFormType
 	 */
 	protected $updateRolesFormType;
-	
-    /**
-	 *
-	 * @access protected
-	 * @var \CCDNUser\AdminBundle\Manager\UserManagerInterface $manager
-	 */
-    protected $manager;
 
     /**
 	 * 
@@ -54,6 +47,13 @@ class UpdateRolesFormHandler
 	 * @var \CCDNUser\AdminBundle\Form\Type\UpdateAccountFornType $form 
 	 */
     protected $form;
+	
+    /**
+	 *
+	 * @access protected
+	 * @var \CCDNUser\AdminBundle\Manager\UserManagerInterface $manager
+	 */
+    protected $manager;
 
     /**
 	 * 
