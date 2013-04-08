@@ -1,15 +1,6 @@
 parameters:
 
-#    ccdn_user_admin.gateway.user.class:                      CCDNUser\AdminBundle\Gateway\UserGateway
-#    ccdn_user_admin.manager.user.class:                      CCDNUser\AdminBundle\Manager\UserManager
-
-    ccdn_user_admin.form.type.update_roles.class:            CCDNUser\AdminBundle\Form\Type\UpdateRolesFormType
-    ccdn_user_admin.form.handler.update_roles.class:         CCDNUser\AdminBundle\Form\Handler\UpdateRolesFormHandler
-
-    ccdn_user_admin.form.type.update_account.class:          CCDNUser\AdminBundle\Form\Type\UpdateAccountFormType
-    ccdn_user_admin.form.handler.update_account.class:       CCDNUser\AdminBundle\Form\Handler\UpdateAccountFormHandler
-
-    ccdn_user_admin.component.dashboard.integrator.class:    CCDNUser\AdminBundle\Component\Dashboard\DashboardIntegrator
+    # Service Parameters defined in app/config
 
 services:
 
@@ -40,6 +31,7 @@ services:
         class: %ccdn_user_admin.form.type.update_roles.class%
         arguments:
             - @ccdn_component_common.component.helper.role
+
     ccdn_user_admin.form.handler.update_roles:
         class: %ccdn_user_admin.form.handler.update_roles.class%
         arguments:
@@ -55,6 +47,7 @@ services:
         class: %ccdn_user_admin.form.type.update_account.class%
         arguments:
             - @doctrine
+
     ccdn_user_admin.form.handler.update_account:
         class: %ccdn_user_admin.form.handler.update_account.class%
         arguments:
