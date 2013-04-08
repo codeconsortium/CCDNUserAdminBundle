@@ -27,7 +27,6 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
  */
 class Configuration implements ConfigurationInterface
 {
-
     /**
      * {@inheritDoc}
      */
@@ -36,9 +35,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('ccdn_user_admin');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
         $rootNode
             ->addDefaultsIfNotSet()
             ->canBeUnset()
@@ -53,6 +49,12 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('users_per_page')->defaultValue('30')->end()
             ->end();
 
+		// Class file namespaces.
+		$this->addEntitySection($rootNode);
+		$this->addGatewaySection($rootNode);
+		$this->addManagerSection($rootNode);
+		
+		// Configuration stuff.
         $this->addSEOSection($rootNode);
         $this->addUserSection($rootNode);
         $this->addBanSection($rootNode);
@@ -63,6 +65,82 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
+    /**
+     *
+     * @access private
+     * @param ArrayNodeDefinition $node
+     */
+    private function addEntitySection(ArrayNodeDefinition $node)
+	{
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('entity')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+				        ->arrayNode('user')
+				            ->children()
+								->scalarNode('class')->end()
+							->end()
+						->end()
+					->end()
+				->end()
+			->end();
+	}
+	
+    /**
+     *
+     * @access private
+     * @param ArrayNodeDefinition $node
+     */
+    private function addGatewaySection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('gateway')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('user')
+		                    ->addDefaultsIfNotSet()
+		                    ->canBeUnset()
+                            ->children()
+								->scalarNode('class')->defaultValue('CCDNUser\AdminBundle\Gateway\UserGateway')->end()							
+							->end()
+						->end()
+					->end()
+				->end()
+			->end();
+	}
+	
+    /**
+     *
+     * @access private
+     * @param ArrayNodeDefinition $node
+     */
+    private function addManagerSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('manager')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('user')
+		                    ->addDefaultsIfNotSet()
+		                    ->canBeUnset()
+                            ->children()
+								->scalarNode('class')->defaultValue('CCDNUser\AdminBundle\Manager\UserManager')->end()							
+							->end()
+						->end()
+					->end()
+				->end()
+			->end();
+	}
+	
     /**
      *
      * @access protected
@@ -219,7 +297,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-
+	
     /**
      *
      * @access private

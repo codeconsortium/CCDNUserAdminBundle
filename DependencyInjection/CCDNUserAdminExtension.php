@@ -44,21 +44,60 @@ class CCDNUserAdminExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+		// Class file namespaces.
+        $this->getEntitySection($container, $config);
+        $this->getGatewaySection($container, $config);
+        $this->getManagerSection($container, $config);
 
+		// Configuration stuff.
         $container->setParameter('ccdn_user_admin.template.engine', $config['template']['engine']);
-
     	$container->setParameter('ccdn_user_admin.users_per_page', $config['users_per_page']);
-	
         $this->getSEOSection($container, $config);
         $this->getUserSection($container, $config);
         $this->getBanSection($container, $config);
         $this->getActivationSection($container, $config);
         $this->getRoleSection($container, $config);
         $this->getSidebarSection($container, $config);
+		
+		// Load Service definitions.
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
     }
 
+    /**
+     *
+     * @access private
+     * @param $container, $config
+     */
+    private function getEntitySection($container, $config)
+    {
+		if (! array_key_exists('class', $config['entity']['user'])) {
+			throw new \Exception('You must set the class of the User entity in "app/config/config.yml" or some imported configuration file.');
+		}
+
+        $container->setParameter('ccdn_user_admin.entity.user.class', $config['entity']['user']['class']);				
+	}
+	
+    /**
+     *
+     * @access private
+     * @param $container, $config
+     */
+    private function getGatewaySection($container, $config)
+    {
+        $container->setParameter('ccdn_user_admin.gateway.user.class', $config['gateway']['user']['class']);
+	}
+	
+    /**
+     *
+     * @access private
+     * @param $container, $config
+     */
+    private function getManagerSection($container, $config)
+    {
+        $container->setParameter('ccdn_user_admin.manager.user.class', $config['manager']['user']['class']);		
+	}
+	
     /**
      *
      * @access protected
@@ -121,7 +160,7 @@ class CCDNUserAdminExtension extends Extension
         $container->setParameter('ccdn_user_admin.account.edit_user_profile.layout_template', $config['account']['edit_user_profile']['layout_template']);
         $container->setParameter('ccdn_user_admin.account.edit_user_profile.form_theme', $config['account']['edit_user_profile']['form_theme']);
     }
-
+	
     /**
      *
      * @access private
