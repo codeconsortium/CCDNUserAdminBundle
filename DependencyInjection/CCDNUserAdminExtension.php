@@ -29,7 +29,9 @@ use Symfony\Component\Config\FileLocator;
 class CCDNUserAdminExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+	 *
+     * @access public
+	 * @return string
      */
     public function getAlias()
     {
@@ -38,7 +40,7 @@ class CCDNUserAdminExtension extends Extension
 
     /**
      *
-     * @access private
+     * @access public
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
@@ -48,21 +50,26 @@ class CCDNUserAdminExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
 		// Class file namespaces.
-        $this->getEntitySection($config, $container);
-        $this->getGatewaySection($config, $container);
-        $this->getManagerSection($config, $container);
-		$this->getFormSection($config, $container);
-		$this->getComponentSection($config, $container);
+        $this
+			->getEntitySection($config, $container)
+	        ->getGatewaySection($config, $container)
+	        ->getManagerSection($config, $container)
+			->getFormSection($config, $container)
+			->getComponentSection($config, $container)
+		;
 		
 		// Configuration stuff.
         $container->setParameter('ccdn_user_admin.template.engine', $config['template']['engine']);
     	$container->setParameter('ccdn_user_admin.users_per_page', $config['users_per_page']);
-        $this->getSEOSection($config, $container);
-        $this->getUserSection($config, $container);
-        $this->getBanSection($config, $container);
-        $this->getActivationSection($config, $container);
-        $this->getRoleSection($config, $container);
-        $this->getSidebarSection($config, $container);
+        
+		$this
+			->getSEOSection($config, $container)
+	        ->getUserSection($config, $container)
+	        ->getBanSection($config, $container)
+	        ->getActivationSection($config, $container)
+	        ->getRoleSection($config, $container)
+	        ->getSidebarSection($config, $container)
+		;
 		
 		// Load Service definitions.
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -74,6 +81,7 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
     private function getEntitySection(array $config, ContainerBuilder $container)
     {
@@ -82,6 +90,8 @@ class CCDNUserAdminExtension extends Extension
 		}
 
         $container->setParameter('ccdn_user_admin.entity.user.class', $config['entity']['user']['class']);				
+		
+		return $this;
 	}
 	
     /**
@@ -89,10 +99,13 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
     private function getGatewaySection(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ccdn_user_admin.gateway.user.class', $config['gateway']['user']['class']);
+		
+		return $this;
 	}
 	
     /**
@@ -100,10 +113,13 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
     private function getManagerSection(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ccdn_user_admin.manager.user.class', $config['manager']['user']['class']);		
+		
+		return $this;
 	}
 	
     /**
@@ -111,6 +127,7 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
     private function getFormSection(array $config, ContainerBuilder $container)
     {
@@ -118,17 +135,8 @@ class CCDNUserAdminExtension extends Extension
         $container->setParameter('ccdn_user_admin.form.type.update_roles.class', $config['form']['type']['update_roles']['class']);
         $container->setParameter('ccdn_user_admin.form.handler.update_account.class', $config['form']['handler']['update_account']['class']);
         $container->setParameter('ccdn_user_admin.form.handler.update_roles.class', $config['form']['handler']['update_roles']['class']);
-	}
-	
-    /**
-     *
-     * @access private
-     * @param array $config
-	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    private function getComponentSection(array $config, ContainerBuilder $container)
-    {
-        $container->setParameter('ccdn_user_admin.component.dashboard.integrator.class', $config['component']['dashboard']['integrator']['class']);		
+		
+		return $this;
 	}
 	
     /**
@@ -136,10 +144,27 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
-    protected function getSEOSection(array $config, ContainerBuilder $container)
+    private function getComponentSection(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ccdn_user_admin.component.dashboard.integrator.class', $config['component']['dashboard']['integrator']['class']);		
+		
+		return $this;
+	}
+	
+    /**
+     *
+     * @access private
+	 * @param array $config
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
+     */
+    private function getSEOSection(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ccdn_user_admin.seo.title_length', $config['seo']['title_length']);
+		
+		return $this;
     }
 
     /**
@@ -147,11 +172,14 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
     private function getActivationSection(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ccdn_user_admin.activation.show_unactivated_users.layout_template', $config['activation']['show_unactivated_users']['layout_template']);
         $container->setParameter('ccdn_user_admin.activation.show_unactivated_users.member_since_datetime_format', $config['activation']['show_unactivated_users']['member_since_datetime_format']);
+		
+		return $this;
     }
 
     /**
@@ -159,11 +187,14 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
     private function getBanSection(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ccdn_user_admin.ban.show_banned_users.layout_template', $config['ban']['show_banned_users']['layout_template']);
         $container->setParameter('ccdn_user_admin.ban.show_banned_users.member_since_datetime_format', $config['ban']['show_banned_users']['member_since_datetime_format']);
+		
+		return $this;
     }
 
     /**
@@ -171,11 +202,14 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
     private function getRoleSection(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ccdn_user_admin.role.set_users_role.layout_template', $config['role']['set_users_role']['layout_template']);
         $container->setParameter('ccdn_user_admin.role.set_users_role.form_theme', $config['role']['set_users_role']['form_theme']);
+		
+		return $this;
     }
 
     /**
@@ -183,6 +217,7 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
     private function getUserSection(array $config, ContainerBuilder $container)
     {
@@ -197,6 +232,8 @@ class CCDNUserAdminExtension extends Extension
 
         $container->setParameter('ccdn_user_admin.account.edit_user_profile.layout_template', $config['account']['edit_user_profile']['layout_template']);
         $container->setParameter('ccdn_user_admin.account.edit_user_profile.form_theme', $config['account']['edit_user_profile']['form_theme']);
+		
+		return $this;
     }
 	
     /**
@@ -204,9 +241,12 @@ class CCDNUserAdminExtension extends Extension
      * @access private
 	 * @param array $config
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+	 * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
     private function getSidebarSection(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ccdn_user_admin.sidebar.links', $config['sidebar']['links']);
+		
+		return $this;
     }
 }
