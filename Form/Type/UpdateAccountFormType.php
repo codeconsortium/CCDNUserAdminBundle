@@ -25,6 +25,23 @@ use Symfony\Component\Form\FormBuilder;
  */
 class UpdateAccountFormType extends AbstractType
 {
+	/**
+	 *
+	 * @access protected
+	 * @var string $userClass
+	 */
+	protected $userClass;
+	
+	/**
+	 *
+	 * @access public
+	 * @var string $userClass
+	 */
+	public function __construct($userClass)
+	{
+		$this->userClass = $userClass;
+	}
+	
     /**
      *
      * @access public
@@ -35,29 +52,29 @@ class UpdateAccountFormType extends AbstractType
         $builder
 			->add('username', 'text',
 				array(
-					'required' => true,
-		        	'label' => 'ccdn_user_admin.form.label.account.username',
+					'required'           => true,
+		        	'label'              => 'ccdn_user_admin.form.label.account.username',
 					'translation_domain' => 'CCDNUserAdminBundle'
 		        )
 			)
 			->add('email', 'text',
 				array(
-					'required' => true,
-		        	'label' => 'ccdn_user_admin.form.label.account.email',
+					'required'           => true,
+		        	'label'              => 'ccdn_user_admin.form.label.account.email',
 					'translation_domain' => 'CCDNUserAdminBundle'
 		        )
 			)
 	        ->add('locked', null,
 				array(
-					'required' => false,
-		        	'label' => 'ccdn_user_admin.form.label.account.locked',
+					'required'           => false,
+		        	'label'              => 'ccdn_user_admin.form.label.account.locked',
 					'translation_domain' => 'CCDNUserAdminBundle'
 		        )
 			)
 	        ->add('enabled', null,
 				array(
-					'required' => false,
-		        	'label' => 'ccdn_user_admin.form.label.account.enabled',
+					'required'           => false,
+		        	'label'              => 'ccdn_user_admin.form.label.account.enabled',
 					'translation_domain' => 'CCDNUserAdminBundle'
 		        )
 			)
@@ -72,11 +89,12 @@ class UpdateAccountFormType extends AbstractType
     public function getDefaultOptions(array $options)
     {
         return array(
-            'data_class' => 'CCDNUser\UserBundle\Entity\User',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
+            'data_class'         => $this->userClass,
+            'csrf_protection'    => true,
+            'csrf_field_name'    => '_token',
             // a unique key to help generate the secret token
-            'intention'       => 'update_account',
+            'intention'          => 'update_account',
+			'validation_groups'  => array('update_account'),
         );
     }
 

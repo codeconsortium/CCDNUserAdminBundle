@@ -29,6 +29,23 @@ use Symfony\Component\Validator\Constraints\Collection;
  */
 class UpdateRolesFormType extends AbstractType
 {
+	/**
+	 *
+	 * @access protected
+	 * @var string $userClass
+	 */
+	protected $userClass;
+	
+	/**
+	 *
+	 * @access public
+	 * @var string $userClass
+	 */
+	public function __construct($userClass)
+	{
+		$this->userClass = $userClass;
+	}
+	
     /**
      *
      * @access public
@@ -39,11 +56,11 @@ class UpdateRolesFormType extends AbstractType
         $builder
 			->add('roles', 'choice',
             	array(
-					'choices' => $options['available_roles'],
-		            'required' => false,
-		            'expanded' => true,
-		            'multiple' => true,
-					'label' => 'ccdn_user_admin.form.label.user.roles',
+					'choices'            => $options['available_roles'],
+		            'required'           => false,
+		            'expanded'           => true,
+		            'multiple'           => true,
+					'label'              => 'ccdn_user_admin.form.label.user.roles',
 					'translation_domain' => 'CCDNUserAdminBundle',
 				)
         	)
@@ -56,18 +73,15 @@ class UpdateRolesFormType extends AbstractType
      * @param array $options
      */
     public function getDefaultOptions(array $options)
-    {
-		$collectionConstraint = new Collection(array(
-			'new_role' => new NotNull(array('message' => 'oops')), 
-		));
-		
+    {		
         return array(
-            'data_class'      => 'CCDNUser\UserBundle\Entity\User',
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
+            'data_class'         => $this->userClass,
+            'csrf_protection'    => true,
+            'csrf_field_name'    => '_token',
             // a unique key to help generate the secret token
-            'intention'       => 'user_role_item',			
-			'available_roles' => array(),
+            'intention'          => 'user_role_item',			
+			'validation_groups'  => array('update_account_roles'),
+			'available_roles'    => array(),
         );
     }
 
