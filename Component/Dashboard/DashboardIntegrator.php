@@ -13,44 +13,51 @@
 
 namespace CCDNUser\AdminBundle\Component\Dashboard;
 
-use CCDNComponent\DashboardBundle\Component\Integrator\BaseIntegrator;
-use CCDNComponent\DashboardBundle\Component\Integrator\IntegratorInterface;
+use CCDNComponent\DashboardBundle\Component\Integrator\Model\BuilderInterface;
 
 /**
  *
  * @author Reece Fowell <reece@codeconsortium.com>
- * @version 1.0
+ * @version 2.0
  */
-class DashboardIntegrator extends BaseIntegrator implements IntegratorInterface
+class DashboardIntegrator
 {
-
     /**
-     *
-     * Structure of $resources
-     * 	[DASHBOARD_PAGE <string>]
-     * 		[CATEGORY_NAME <string>]
-     *			[ROUTE_FOR_LINK <string>]
-     *				[AUTH <string>] (optional)
-     *				[URL_LINK <string>]
-     *				[URL_NAME <string>]
 	 * 
 	 * @access public
-	 * @return array $resources
+     * @param CCDNComponent\DashboardBundle\Component\Integrator\Model\BuilderInterface $builder
      */
-    public function getResources()
+    public function build(BuilderInterface $builder)
     {
-        $resources = array(
-            'admin' => array(
-                'User Administration' => array(
-                    'ccdn_user_admin_show_unactivated' => array('auth' => 'ROLE_ADMIN', 'name' => 'Show Unactivated', 'icon' => $this->basePath . '/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png'),
-                    'ccdn_user_admin_show_banned' => array('auth' => 'ROLE_ADMIN', 'name' => 'Show Banned', 'icon' => $this->basePath . '/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png'),
-                    'ccdn_user_admin_show_newest' => array('auth' => 'ROLE_ADMIN', 'name' => 'Show Newest Users', 'icon' => $this->basePath . '/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png'),
-                ),
-            ),
-
-        );
-
-        return $resources;
+		$builder
+			->addCategory('user_administration')
+				->setLabel('ccdn_user_admin.dashboard.categories.user_admin', array(), 'CCDNUserAdminBundle')
+				->addPages()
+					->addPage('admin')
+						->setLabel('ccdn_user_admin.dashboard.pages.admin', array(), 'CCDNUserAdminBundle')
+					->end()
+				->end()
+				->addLinks()
+					->addLink('show_unactivated')
+						->setAuthRole('ROLE_ADMIN')
+						->setRoute('ccdn_user_admin_show_unactivated')
+						->setIcon('/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png')
+						->setLabel('ccdn_user_admin.title.users.unactivated', array(), 'CCDNUserAdminBundle')
+					->end()
+					->addLink('show_banned')
+						->setAuthRole('ROLE_ADMIN')
+						->setRoute('ccdn_user_admin_show_banned')
+						->setIcon('/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png')
+						->setLabel('ccdn_user_admin.title.users.banned', array(), 'CCDNUserAdminBundle')
+					->end()
+					->addLink('show_newest')
+						->setAuthRole('ROLE_ADMIN')
+						->setRoute('ccdn_user_admin_show_newest')
+						->setIcon('/bundles/ccdncomponentcommon/images/icons/Black/32x32/32x32_users.png')
+						->setLabel('ccdn_user_admin.title.users.newest', array(), 'CCDNUserAdminBundle')
+					->end()
+				->end()
+			->end()
+		;
     }
-
 }

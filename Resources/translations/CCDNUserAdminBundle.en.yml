@@ -1,3 +1,10 @@
+ccdn_user_admin:
+    dashboard:
+        pages:
+            admin: Admin
+        categories:
+            user_admin: User Administration
+
 #
 # Page Titles.
 #
