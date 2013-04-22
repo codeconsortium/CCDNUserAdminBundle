@@ -19,14 +19,14 @@
 						<h3>{{- 'ccdn_user_admin.title.account.set_roles' |trans({'%user_name%': '<bdi>' ~ user.getUsername ~ '</bdi>'}, 'CCDNUserAdminBundle') |raw -}}</h3>
 					</div>
 				</div>
-						
+
 				{{- form_errors(form) -}}
-			
+
 				{{- form_widget(form) -}}
-			
+
 				<div class="form-actions">
 			        <input type="submit" name="submit[save]" class="btn btn-danger" value="{{- 'ccdn_user_admin.form.button.user.roles.update'|trans({}, 'CCDNUserAdminBundle') -}}">
-					
+
 					<a class="btn" href="{{- path('ccdn_user_admin_account_show', {'userId':user.id}) -}}">
 						{{- 'ccdn_user_admin.form.button.user.roles.cancel' |trans({}, 'CCDNUserAdminBundle') -}}
 					</a>
@@ -35,7 +35,7 @@
 			</fieldset>
 		</form>
 	</section>
-	
+
 	{%- endspaceless -%}
 
 {% endblock body_content %}

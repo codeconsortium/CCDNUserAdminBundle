@@ -17,39 +17,45 @@ use CCDNUser\AdminBundle\Controller\BaseController;
 
 /**
  *
- * @author Reece Fowell <reece@codeconsortium.com>
- * @version 1.0
+ * @category CCDNUser
+ * @package  AdminBundle
+ *
+ * @author   Reece Fowell <reece@codeconsortium.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @version  Release: 2.0
+ * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
+ *
  */
 class ActivationController extends BaseController
 {
     /**
      *
      * @access public
-     * @param  int $page
+     * @param  int                             $page
      * @return RedirectResponse|RenderResponse
      */
     public function showUnactivatedUsersAction($page)
     {
         $this->isAuthorised('ROLE_ADMIN');
 
-		$usersPager = $this->getUserManager()->getUnactivatedUsersPaginated($page);
+        $usersPager = $this->getUserManager()->getUnactivatedUsersPaginated($page);
 
         $crumbs = $this->getCrumbs()
             ->add($this->trans('ccdn_user_admin.crumbs.show_unactivated'), $this->path('ccdn_user_admin_show_unactivated'));
 
         return $this->renderResponse('CCDNUserAdminBundle:Activation:show_unactivated_users.html.',
-			array(
-	            'crumbs' => $crumbs,
-	            'pager' => $usersPager,
-	            'users' => $usersPager->getCurrentPageResults(),
-	        )
-		);
+            array(
+                'crumbs' => $crumbs,
+                'pager' => $usersPager,
+                'users' => $usersPager->getCurrentPageResults(),
+            )
+        );
     }
 
     /**
      *
      * @access public
-     * @param  int $userId
+     * @param  int              $userId
      * @return RedirectResponse
      */
     public function activateAction($userId)
@@ -57,7 +63,7 @@ class ActivationController extends BaseController
         $this->isAuthorised('ROLE_ADMIN');
 
         $user = $this->getUserManager()->findOneById($userId);
-		$this->isFound($user);
+        $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');
@@ -73,7 +79,7 @@ class ActivationController extends BaseController
     /**
      *
      * @access public
-     * @param  int $userId
+     * @param  int              $userId
      * @return RedirectResponse
      */
     public function forceReActivationAction($userId)
@@ -81,7 +87,7 @@ class ActivationController extends BaseController
         $this->isAuthorised('ROLE_ADMIN');
 
         $user = $this->getUserManager()->findOneById($userId);
-		$this->isFound($user);
+        $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');

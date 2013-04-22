@@ -17,39 +17,45 @@ use CCDNUser\AdminBundle\Controller\BaseController;
 
 /**
  *
- * @author Reece Fowell <reece@codeconsortium.com>
- * @version 1.0
+ * @category CCDNUser
+ * @package  AdminBundle
+ *
+ * @author   Reece Fowell <reece@codeconsortium.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @version  Release: 2.0
+ * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
+ *
  */
 class BanController extends BaseController
 {
     /**
      *
      * @access public
-     * @param  int $page
+     * @param  int            $page
      * @return RenderResponse
      */
     public function showBannedUsersAction($page)
     {
         $this->isAuthorised('ROLE_ADMIN');
 
-		$usersPager = $this->getUserManager()->getBannedUsersPaginated($page);
+        $usersPager = $this->getUserManager()->getBannedUsersPaginated($page);
 
         $crumbs = $this->getCrumbs()
             ->add($this->trans('ccdn_user_admin.crumbs.show_banned'), $this->path('ccdn_user_admin_show_banned'));
 
         return $this->renderResponse('CCDNUserAdminBundle:Banning:show_banned_users.html.',
-			array(
-	            'crumbs' => $crumbs,
-	            'pager' => $usersPager,
-	            'users' => $usersPager->getCurrentPageResults(),
-	        )
-		);
+            array(
+                'crumbs' => $crumbs,
+                'pager' => $usersPager,
+                'users' => $usersPager->getCurrentPageResults(),
+            )
+        );
     }
 
     /**
      *
      * @access public
-     * @param  int $userId
+     * @param  int              $userId
      * @return RedirectResponse
      */
     public function banUserAction($userId)
@@ -57,7 +63,7 @@ class BanController extends BaseController
         $this->isAuthorised('ROLE_ADMIN');
 
         $user = $this->getUserManager()->findOneById($userId);
-		$this->isFound($user);
+        $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');
@@ -73,7 +79,7 @@ class BanController extends BaseController
     /**
      *
      * @access public
-     * @param  int $userId
+     * @param  int              $userId
      * @return RedirectResponse
      */
     public function unbanUserAction($userId)
@@ -81,7 +87,7 @@ class BanController extends BaseController
         $this->isAuthorised('ROLE_ADMIN');
 
         $user = $this->getUserManager()->findOneById($userId);
-		$this->isFound($user);
+        $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');

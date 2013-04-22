@@ -17,16 +17,16 @@
 				<div class="control-group form-title">
 					<div class="controls">
 						<h3>{{- 'ccdn_user_admin.title.account.edit' |trans({'%user_name%': '<bdi>' ~ user.getUsername ~ '</bdi>'}, 'CCDNUserAdminBundle') |raw -}}</h3>
-					</div>					
+					</div>
 				</div>
-			
+
 				{{- form_errors(form) -}}
 
 				{{- form_widget(form) -}}
-			
+
 				<div class="form-actions">
 					<input type="submit" name="submit[save]" class="btn btn-primary" value="{{- 'profile.edit.submit'|trans({}, 'FOSUserBundle') -}}">
-				
+
 					<a class="btn" href="{{- path('ccdn_user_admin_account_show', {'userId':user.id}) -}}">
 						{{- 'ccdn_user_admin.form.button.cancel' |trans({}, 'CCDNUserAdminBundle') -}}
 					</a>
@@ -35,7 +35,7 @@
 			</fieldset>
 		</form>
 	</section>
-	
+
 	{%- endspaceless -%}
 
 {% endblock body_content %}

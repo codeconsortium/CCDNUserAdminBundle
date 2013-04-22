@@ -18,34 +18,36 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-use Symfony\Component\Validator\Constraints\CallbackValidator;
-use Symfony\Component\Validator\Constraints\NotNull;
-use Symfony\Component\Validator\Constraints\Collection;
-
 /**
  *
- * @author Reece Fowell <reece@codeconsortium.com>
- * @version 1.0
+ * @category CCDNUser
+ * @package  AdminBundle
+ *
+ * @author   Reece Fowell <reece@codeconsortium.com>
+ * @license  http://opensource.org/licenses/MIT MIT
+ * @version  Release: 2.0
+ * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
+ *
  */
 class UpdateRolesFormType extends AbstractType
 {
-	/**
-	 *
-	 * @access protected
-	 * @var string $userClass
-	 */
-	protected $userClass;
-	
-	/**
-	 *
-	 * @access public
-	 * @var string $userClass
-	 */
-	public function __construct($userClass)
-	{
-		$this->userClass = $userClass;
-	}
-	
+    /**
+     *
+     * @access protected
+     * @var string $userClass
+     */
+    protected $userClass;
+
+    /**
+     *
+     * @access public
+     * @var string $userClass
+     */
+    public function __construct($userClass)
+    {
+        $this->userClass = $userClass;
+    }
+
     /**
      *
      * @access public
@@ -54,34 +56,34 @@ class UpdateRolesFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-			->add('roles', 'choice',
-            	array(
-					'choices'            => $options['available_roles'],
-		            'required'           => false,
-		            'expanded'           => true,
-		            'multiple'           => true,
-					'label'              => 'ccdn_user_admin.form.label.user.roles',
-					'translation_domain' => 'CCDNUserAdminBundle',
-				)
-        	)
-		;
+            ->add('roles', 'choice',
+                array(
+                    'choices'            => $options['available_roles'],
+                    'required'           => false,
+                    'expanded'           => true,
+                    'multiple'           => true,
+                    'label'              => 'ccdn_user_admin.form.label.user.roles',
+                    'translation_domain' => 'CCDNUserAdminBundle',
+                )
+            )
+        ;
     }
 
     /**
-	 *
+     *
      * @access public
      * @param array $options
      */
     public function getDefaultOptions(array $options)
-    {		
+    {
         return array(
             'data_class'         => $this->userClass,
             'csrf_protection'    => true,
             'csrf_field_name'    => '_token',
             // a unique key to help generate the secret token
-            'intention'          => 'user_role_item',			
-			'validation_groups'  => array('update_account_roles'),
-			'available_roles'    => array(),
+            'intention'          => 'user_role_item',
+            'validation_groups'  => array('update_account_roles'),
+            'available_roles'    => array(),
         );
     }
 
