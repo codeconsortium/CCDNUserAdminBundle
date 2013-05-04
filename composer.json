@@ -1,14 +1,15 @@
 {
     "name": "codeconsortium/ccdn-user-admin-bundle",
-    "type": "symfony-bundle",
     "description": "CCDN User Admin Bundle",
     "keywords": ["ccdn", "codeconsortium", "user", "User Administration", "admin"],
     "homepage": "http://github.com/codeconsortium/CCDNUserAdminBundle",
+    "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
-            "name": "reecefowell",
-            "email": "reece@codeconsortium.com"
+            "name": "Reece Fowell",
+            "email": "reece@codeconsortium.com",
+			"homepage": "http://www.reecefowell.com"
         }
     ],
     "minimum-stability": "dev",
