@@ -41,7 +41,7 @@ class ActivationController extends BaseController
         $usersPager = $this->getUserManager()->getUnactivatedUsersPaginated($page);
 
         $crumbs = $this->getCrumbs()
-            ->add($this->trans('ccdn_user_admin.crumbs.show_unactivated'), $this->path('ccdn_user_admin_show_unactivated'));
+            ->add($this->trans('crumbs.show_unactivated'), $this->path('ccdn_user_admin_show_unactivated'));
 
         return $this->renderResponse('CCDNUserAdminBundle:Activation:show_unactivated_users.html.',
             array(
@@ -71,7 +71,7 @@ class ActivationController extends BaseController
 
         $this->getUserManager()->activateUser($user)->flush();
 
-        $this->setFlash('notice', $this->trans('ccdn_user_admin.flash.user.activate.success', array('%user_name%' => $user->getUsername())));
+        $this->setFlash('notice', $this->trans('flash.success.user.activate', array('%name%' => $user->getUsername())));
 
         return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
     }
@@ -95,7 +95,7 @@ class ActivationController extends BaseController
 
         $this->getUserManager()->forceReActivateUser($user)->flush();
 
-        $this->setFlash('notice', $this->trans('ccdn_user_admin.flash.user.force_reactivation.success', array('%user_name%' => $user->getUsername())));
+        $this->setFlash('notice', $this->trans('flash.success.user.force_reactivation', array('%name%' => $user->getUsername())));
 
         return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
     }

@@ -41,7 +41,7 @@ class BanController extends BaseController
         $usersPager = $this->getUserManager()->getBannedUsersPaginated($page);
 
         $crumbs = $this->getCrumbs()
-            ->add($this->trans('ccdn_user_admin.crumbs.show_banned'), $this->path('ccdn_user_admin_show_banned'));
+            ->add($this->trans('crumbs.show_banned'), $this->path('ccdn_user_admin_show_banned'));
 
         return $this->renderResponse('CCDNUserAdminBundle:Banning:show_banned_users.html.',
             array(
@@ -71,7 +71,7 @@ class BanController extends BaseController
 
         $this->getUserManager()->banUser($user)->flush();
 
-        $this->setFlash('notice', $this->trans('ccdn_user_admin.flash.user.ban.success', array('%user_name%' => $user->getUsername())));
+        $this->setFlash('notice', $this->trans('flash.success.user.ban', array('%name%' => $user->getUsername())));
 
         return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
     }
@@ -95,7 +95,7 @@ class BanController extends BaseController
 
         $this->getUserManager()->unbanUser($user)->flush();
 
-        $this->setFlash('notice', $this->trans('ccdn_user_admin.flash.user.unban.success', array('%user_name%' => $user->getUsername())));
+        $this->setFlash('notice', $this->trans('flash.success.user.unban', array('%name%' => $user->getUsername())));
 
         return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
     }

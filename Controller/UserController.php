@@ -42,7 +42,7 @@ class UserController extends UserBaseController
         $usersPager = $this->getUserManager()->getNewestUsersPaginated($page, new \DateTime('-7 days'));
 
         $crumbs = $this->getCrumbs()
-            ->add($this->trans('ccdn_user_admin.crumbs.show_newest'), $this->path('ccdn_user_admin_show_newest'));
+            ->add($this->trans('crumbs.show_newest'), $this->path('ccdn_user_admin_show_newest'));
 
         return $this->renderResponse('CCDNUserAdminBundle:Newest:show_newest_users.html.', array(
             'crumbs' => $crumbs,
@@ -65,7 +65,7 @@ class UserController extends UserBaseController
         $this->isFound($user);
 
         $crumbs = $this->getCrumbs()
-            ->add($this->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())));
+            ->add($this->trans('crumbs.account.show', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())));
 
         return $this->renderResponse('CCDNUserAdminBundle:User:show_user.html.', array(
             'crumbs' => $crumbs,
@@ -106,8 +106,8 @@ class UserController extends UserBaseController
         }
 
         $crumbs = $this->getCrumbs()
-            ->add($this->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
-            ->add($this->trans('ccdn_user_admin.crumbs.account.edit'), $this->path('ccdn_user_admin_account_edit', array('userId' => $user->getId())));
+            ->add($this->trans('crumbs.account.show', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
+            ->add($this->trans('crumbs.account.edit'), $this->path('ccdn_user_admin_account_edit', array('userId' => $user->getId())));
 
         return $this->renderResponse('CCDNUserAdminBundle:User:update_account.html.',
             array(
@@ -145,8 +145,8 @@ class UserController extends UserBaseController
         } else {
 
             $crumbs = $this->getCrumbs()
-                ->add($this->trans('ccdn_user_admin.crumbs.account.show', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
-                ->add($this->trans('ccdn_user_admin.crumbs.account.set_roles', array('%user_name%' => $user->getUsername())), $this->path('ccdn_user_admin_set_roles', array('userId' => $user->getId())));
+                ->add($this->trans('crumbs.account.show', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
+                ->add($this->trans('crumbs.account.set_roles', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_set_roles', array('userId' => $user->getId())));
 
             return $this->renderResponse('CCDNUserAdminBundle:User:update_roles.html.',
                 array(

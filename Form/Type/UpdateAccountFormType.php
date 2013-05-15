@@ -59,28 +59,28 @@ class UpdateAccountFormType extends AbstractType
             ->add('username', 'text',
                 array(
                     'required'           => true,
-                    'label'              => 'ccdn_user_admin.form.label.account.username',
+                    'label'              => 'form.label.username',
                     'translation_domain' => 'CCDNUserAdminBundle'
                 )
             )
             ->add('email', 'text',
                 array(
                     'required'           => true,
-                    'label'              => 'ccdn_user_admin.form.label.account.email',
+                    'label'              => 'form.label.email',
                     'translation_domain' => 'CCDNUserAdminBundle'
                 )
             )
             ->add('locked', null,
                 array(
                     'required'           => false,
-                    'label'              => 'ccdn_user_admin.form.label.account.locked',
+                    'label'              => 'form.label.locked',
                     'translation_domain' => 'CCDNUserAdminBundle'
                 )
             )
             ->add('enabled', null,
                 array(
                     'required'           => false,
-                    'label'              => 'ccdn_user_admin.form.label.account.enabled',
+                    'label'              => 'form.label.enabled',
                     'translation_domain' => 'CCDNUserAdminBundle'
                 )
             )

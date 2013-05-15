@@ -2,7 +2,7 @@
 
 {% set LayoutTemplate = ccdn_user_admin.role.set_users_role.layout_template %}
 
-{% block title %}{{- truncDot('ccdn_user_admin.title.account.set_roles' |trans({'%user_name%':user.username}, 'CCDNUserAdminBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
+{% block title %}{{- truncDot('title.account.set_roles' |trans({'%name%':user.username}, 'CCDNUserAdminBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
 
 
 {% block body_content %}
@@ -16,7 +16,7 @@
 
 				<div class="control-group form-title">
 					<div class="controls">
-						<h3>{{- 'ccdn_user_admin.title.account.set_roles' |trans({'%user_name%': '<bdi>' ~ user.getUsername ~ '</bdi>'}, 'CCDNUserAdminBundle') |raw -}}</h3>
+						<h3>{{- 'title.account.set_roles' |trans({'%name%': '<bdi>' ~ user.getUsername ~ '</bdi>'}, 'CCDNUserAdminBundle') |raw -}}</h3>
 					</div>
 				</div>
 
@@ -25,10 +25,10 @@
 				{{- form_widget(form) -}}
 
 				<div class="form-actions">
-			        <input type="submit" name="submit[save]" class="btn btn-danger" value="{{- 'ccdn_user_admin.form.button.user.roles.update'|trans({}, 'CCDNUserAdminBundle') -}}">
+			        <input type="submit" name="submit[save]" class="btn btn-danger" value="{{- 'form.button.update'|trans({}, 'CCDNUserAdminBundle') -}}">
 
 					<a class="btn" href="{{- path('ccdn_user_admin_account_show', {'userId':user.id}) -}}">
-						{{- 'ccdn_user_admin.form.button.user.roles.cancel' |trans({}, 'CCDNUserAdminBundle') -}}
+						{{- 'form.button.cancel' |trans({}, 'CCDNUserAdminBundle') -}}
 					</a>
 				</div>
 

@@ -62,7 +62,7 @@ class UpdateRolesFormType extends AbstractType
                     'required'           => false,
                     'expanded'           => true,
                     'multiple'           => true,
-                    'label'              => 'ccdn_user_admin.form.label.user.roles',
+                    'label'              => 'form.label.roles',
                     'translation_domain' => 'CCDNUserAdminBundle',
                 )
             )

@@ -2,7 +2,7 @@
 
 {% set LayoutTemplate = ccdn_user_admin.account.edit_user_account.layout_template %}
 
-{% block title %}{{- truncDot('ccdn_user_admin.title.account.edit' |trans({'%user_name%': user.getUsername}, 'CCDNUserAdminBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
+{% block title %}{{- truncDot('title.account.edit' |trans({'%name%': user.getUsername}, 'CCDNUserAdminBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
 
 
 {% block body_content %}
@@ -16,7 +16,7 @@
 
 				<div class="control-group form-title">
 					<div class="controls">
-						<h3>{{- 'ccdn_user_admin.title.account.edit' |trans({'%user_name%': '<bdi>' ~ user.getUsername ~ '</bdi>'}, 'CCDNUserAdminBundle') |raw -}}</h3>
+						<h3>{{- 'title.account.edit' |trans({'%name%': '<bdi>' ~ user.getUsername ~ '</bdi>'}, 'CCDNUserAdminBundle') |raw -}}</h3>
 					</div>
 				</div>
 
@@ -28,7 +28,7 @@
 					<input type="submit" name="submit[save]" class="btn btn-primary" value="{{- 'profile.edit.submit'|trans({}, 'FOSUserBundle') -}}">
 
 					<a class="btn" href="{{- path('ccdn_user_admin_account_show', {'userId':user.id}) -}}">
-						{{- 'ccdn_user_admin.form.button.cancel' |trans({}, 'CCDNUserAdminBundle') -}}
+						{{- 'form.button.cancel' |trans({}, 'CCDNUserAdminBundle') -}}
 					</a>
 				</div>
 

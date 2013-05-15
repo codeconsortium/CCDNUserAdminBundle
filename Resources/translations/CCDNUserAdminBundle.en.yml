@@ -1,93 +1,80 @@
-ccdn_user_admin:
-    dashboard:
-        pages:
-            admin: Admin
-        categories:
-            user_admin: User Administration
+dashboard:
+    pages:
+        admin:                   "Admin"
+    categories:
+        user_admin:              "User Administration"
 
-#
-# Page Titles.
-#
-ccdn_user_admin.title.users.newest: 'New Users.'
-ccdn_user_admin.title.users.unactivated: 'Unactivated Users.'
-ccdn_user_admin.title.users.banned: 'Banned Users.'
-ccdn_user_admin.title.account.show: "Administrate %user_name%'s Account."
-ccdn_user_admin.title.account.edit: "Edit %user_name%'s Account."
-ccdn_user_admin.title.account.set_roles: "Set %user_name%'s Account Role."
+title:
+    user:
+        newest:                  "New Users"
+        unactivated:             "Unactivated Users"
+        banned:                  "Banned Users"
+    account:
+        show:                    "Administrate %name%'s Account"
+        edit:                    "Edit %name%'s Account"
+        set_roles:               "Set %name%'s Account Role"
 
-#
-# Crumbs.
-#
-ccdn_user_admin.crumbs.dashboard: 'Dashboard'
-ccdn_user_admin.crumbs.dashboard.admin: 'Admin Panel'
-ccdn_user_admin.crumbs.show_newest: 'Show Newest Users'
-ccdn_user_admin.crumbs.show_unactivated: 'Show Unactivated Users'
-ccdn_user_admin.crumbs.show_banned: 'Show Banned Users'
-ccdn_user_admin.crumbs.account.show: 'Administrate %user_name% Account'
-ccdn_user_admin.crumbs.account.edit: 'Edit Account'
-ccdn_user_admin.crumbs.account.set_roles: "Set %user_name%'s Account Role."
-ccdn_user_admin.crumbs.profile.show: "%user_name%'s Profile"
-ccdn_user_admin.crumbs.profile.edit: 'Edit Profile'
+crumbs:
+    show_newest:                 "Show Newest Users"
+    show_unactivated:            "Show Unactivated Users"
+    show_banned:                 "Show Banned Users"
+    account:
+        set_roles:               "Set %name%'s Account Role"
+        show:                    "Administrate %name%'s Account"
+        edit:                    "Edit"
 
-#
-# Flash Messages.
-#
-ccdn_user_admin.flash.user.activate.success: 'User: %user_name% activated.'
-ccdn_user_admin.flash.user.force_reactivation.success: 'User: %user_name% pending re-activation.'
-ccdn_user_admin.flash.user.ban.success: 'User: %user_name% banned.'
-ccdn_user_admin.flash.user.unban.success: 'User: %user_name% unbanned.'
-ccdn_user_admin.flash.user.set_roles.success: 'User: %user_name% roles changed.'
+sidebar:
+    header:
+        user:
+            admin:               "User Management"
 
-#
-# Sidebar.
-#
-ccdn_user_admin.sidebar.header.user_admin: 'User Management'
-ccdn_user_admin.ccdn_user_admin.sidebar.link.user.show_new: 'New Users'
-ccdn_user_admin.ccdn_user_admin.sidebar.link.user.show_unactivated: 'Unactivated Users'
-ccdn_user_admin.ccdn_user_admin.sidebar.link.user.show_banned: 'Banned Users'
-ccdn_user_admin.sidebar.link.user.activate: 'Activate'
-ccdn_user_admin.sidebar.link.user.force_reactivation: 'Force Reactivation'
-ccdn_user_admin.sidebar.link.user.ban: 'Ban User'
-ccdn_user_admin.sidebar.link.user.unban: 'Unban User'
-ccdn_user_admin.sidebar.link.user.set_roles: 'Set Roles'
+link:
+    user:
+        show_new:                "New Users"
+        show_unactivated:        "Unactivated Users"
+        show_banned:             "Banned Users"
+        activate:                "Activate"
+        force_reactivation:      "Force Reactivation"
+        ban:                     "Ban User"
+        unban:                   "Unban User"
+        set_roles:               "Set Roles"
+        edit_account:            "Edit Account"
 
-#
-# Link Labels.
-#
-ccdn_user_admin.link.account.edit: 'Edit Account'
-ccdn_user_admin.link.profile.edit: 'Edit Profile'
-ccdn_user_admin.link.profile.show: 'Show Profile'
+form:
+    required:                    "This field is required"
+    label:
+        username:                "Username"
+        email:                   "Email"
+        locked:                  "Banned"
+        enabled:                 "Activated"
+        roles:                   "set Roles"
+    button:
+        update:                  "Update Roles"
+        cancel:                  "Cancel"
 
-#
-# Forms.
-#
-ccdn_user_admin.form.field.required: 'This field is required'
-ccdn_user_admin.form.label.user.roles: 'set roles: '
-ccdn_user_admin.form.button.user.roles.update: 'Update Roles'
-ccdn_user_admin.form.button.user.roles.cancel: 'Cancel'
-ccdn_user_admin.form.label.account.username: 'Username: '
-ccdn_user_admin.form.label.account.email: 'Email: '
-ccdn_user_admin.form.label.account.locked: 'Account is Banned: '
-ccdn_user_admin.form.label.account.enabled: 'Account is Activated: '
-ccdn_user_admin.form.button.cancel: 'Cancel'
+generic:
+    user:
+        none:                    "No users were found."
+    thead:
+        username:                "Username"
+        email:                   "Email Address"
+        member_since:            "Member Since"
+        activation_status:       "Activation Status"
+        role:                    "Role"
+        banned:
+            label:               "Ban Status"
+            yes:                 "Banned"
+            no:                  "Active"
+        activated:
+            label:               "Activation Status"
+            yes:                 "Activated"
+            no:                  "Unactivated"
 
-#
-# Table Labels.
-#
-ccdn_user_admin.users.table.head.username: 'Username'
-ccdn_user_admin.users.table.head.email: 'Email Address'
-ccdn_user_admin.users.table.head.joined_date: 'Member Since'
-ccdn_user_admin.users.table.head.activation_status: 'Activation Status'
-ccdn_user_admin.users.unactivated.table.empty: 'No users were found.'
-ccdn_user_admin.users.banned.table.empty: 'No banned users were found.'
-ccdn_user_admin.users.newest.table.empty: 'No new users were found.'
-
-#
-# Generic.
-#
-ccdn_user_admin.account.show.username: 'Username: '
-ccdn_user_admin.account.show.email: 'Email: '
-ccdn_user_admin.account.show.registered_date: 'Registered: '
-ccdn_user_admin.account.show.role: 'Role: '
-ccdn_user_admin.profile.show.banned: 'Ban Status: '
-ccdn_user_admin.profile.show.activated: 'Activation Status: '
+flash:
+    success:
+        user:
+            force_reactivation:  "User %name% is now pending re-activation."
+            activate:            "User %name% has been activated."
+            ban:                 "User %name% has been banned."
+            unban:               "User %name% has been unbanned."
+            set_roles:           "User %name% has had roles changed."
