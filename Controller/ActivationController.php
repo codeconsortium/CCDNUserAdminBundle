@@ -31,13 +31,13 @@ class ActivationController extends BaseController
     /**
      *
      * @access public
-     * @param  int                             $page
      * @return RedirectResponse|RenderResponse
      */
-    public function showUnactivatedUsersAction($page)
+    public function showUnactivatedUsersAction()
     {
         $this->isAuthorised('ROLE_ADMIN');
 
+		$page = $this->getQuery('page', 1);
         $usersPager = $this->getUserManager()->getUnactivatedUsersPaginated($page);
 
         $crumbs = $this->getCrumbs()
@@ -47,7 +47,6 @@ class ActivationController extends BaseController
             array(
                 'crumbs' => $crumbs,
                 'pager' => $usersPager,
-                'users' => $usersPager->getCurrentPageResults(),
             )
         );
     }

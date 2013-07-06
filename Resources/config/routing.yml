@@ -1,39 +1,23 @@
-ccdn_user_admin_cpanel:
-    pattern: /{_locale}/dashboard/admin
-    defaults: { _controller: CCDNComponentDashboardBundle:Dashboard:show, _locale: en }
-
 #
 # Show unactivated.
 #
 ccdn_user_admin_show_unactivated:
     pattern: /{_locale}/admin/user/show/unactivated
-    defaults: { _controller: CCDNUserAdminBundle:Activation:showUnactivatedUsers, _locale: en, page: 1 }
-
-ccdn_user_admin_show_unactivated_paginated:
-    pattern: /{_locale}/admin/user/show/unactivated/page/{page}
-    defaults: { _controller: CCDNUserAdminBundle:Activation:showUnactivatedUsers, _locale: en, page: 1 }
+    defaults: { _controller: CCDNUserAdminBundle:Activation:showUnactivatedUsers, _locale: en }
 
 #
 # Show banned.
 #
 ccdn_user_admin_show_banned:
     pattern: /{_locale}/admin/user/show/banned
-    defaults: { _controller: CCDNUserAdminBundle:Ban:showBannedUsers, _locale: en, page: 1 }
-
-ccdn_user_admin_show_banned_paginated:
-    pattern: /{_locale}/admin/user/show/banned/page/{page}
-    defaults: { _controller: CCDNUserAdminBundle:Ban:showBannedUsers, _locale: en, page: 1 }
+    defaults: { _controller: CCDNUserAdminBundle:Ban:showBannedUsers, _locale: en }
 
 #
 # Show newest.
 #
 ccdn_user_admin_show_newest:
     pattern: /{_locale}/admin/user/show/newest
-    defaults: { _controller: CCDNUserAdminBundle:User:showNewestUsers, _locale: en, page: 1 }
-
-ccdn_user_admin_show_newest_paginated:
-    pattern: /{_locale}/admin/user/show/newest/page/{page}
-    defaults: { _controller: CCDNUserAdminBundle:User:showNewestUsers, _locale: en, page: 1 }
+    defaults: { _controller: CCDNUserAdminBundle:User:showNewestUsers, _locale: en }
 
 #
 # User Management.

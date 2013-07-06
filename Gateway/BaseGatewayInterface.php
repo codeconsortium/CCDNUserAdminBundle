@@ -16,8 +16,6 @@ namespace CCDNUser\AdminBundle\Gateway;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\QueryBuilder;
 
-use Pagerfanta\Pagerfanta;
-
 use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
 
 /**
@@ -39,7 +37,7 @@ interface BaseGatewayInterface
      * @param \Doctrine\Bundle\DoctrineBundle\Registry $doctrine
      * @param string                                   $entityClass
      */
-    public function __construct(Registry $doctrine, $entityClass);
+    public function __construct(Registry $doctrine, $paginator, $entityClass);
 
     /**
      *
@@ -55,6 +53,23 @@ interface BaseGatewayInterface
      */
     public function getQueryBuilder();
 
+    /**
+     *
+     * @access public
+     * @param  Array                      $aliases = null
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createSelectQuery(Array $aliases = null);
+	
+    /**
+     *
+     * @access public
+     * @param  string                     $column  = null
+     * @param  Array                      $aliases = null
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createCountQuery($column = null, Array $aliases = null);
+	
     /**
      *
      * @access public
@@ -79,7 +94,7 @@ interface BaseGatewayInterface
      * @param  \Doctrine\ORM\QueryBuilder $qb
      * @param  int                        $itemsPerPage
      * @param  int                        $page
-     * @return \Pagerfanta\Pagerfanta
+     * @return \Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination
      */
     public function paginateQuery(QueryBuilder $qb, $itemsPerPage, $page);
 

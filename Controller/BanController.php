@@ -31,13 +31,13 @@ class BanController extends BaseController
     /**
      *
      * @access public
-     * @param  int            $page
      * @return RenderResponse
      */
-    public function showBannedUsersAction($page)
+    public function showBannedUsersAction()
     {
         $this->isAuthorised('ROLE_ADMIN');
 
+		$page = $this->getQuery('page', 1);
         $usersPager = $this->getUserManager()->getBannedUsersPaginated($page);
 
         $crumbs = $this->getCrumbs()
@@ -47,7 +47,6 @@ class BanController extends BaseController
             array(
                 'crumbs' => $crumbs,
                 'pager' => $usersPager,
-                'users' => $usersPager->getCurrentPageResults(),
             )
         );
     }

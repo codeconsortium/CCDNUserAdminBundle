@@ -11,6 +11,7 @@ services:
         class: %ccdn_user_admin.gateway.user.class%
         arguments:
             - @doctrine
+            - @knp_paginator
             - %ccdn_user_admin.entity.user.class%
 
     #

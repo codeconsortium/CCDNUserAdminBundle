@@ -14,14 +14,12 @@
 	</header>
 
 	<section>
-		{%- if pager.haveToPaginate -%}
-			<div class="btn-toolbar">
-				<nav class="span12 btn-right paginate">
-			    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'ccdn_user_admin_show_banned_paginated' }) -}}
-				</nav>
-			</div>
-		{%- endif -%}
-
+		<div class="btn-toolbar">
+			<nav class="span12 btn-right paginate">
+				{{- knp_pagination_render(pager) -}}
+			</nav>
+		</div>
+		
 		<table class="table table-striped table-condensed table-hover">
 			<thead>
 				<tr>
@@ -32,7 +30,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{%- for row, user in users -%}
+				{%- for row, user in pager.getItems() -%}
 					<tr>
 						<td class="left">
 							<a href="{{- path('ccdn_user_admin_account_show', {'userId': user.getId }) -}}">
@@ -59,13 +57,11 @@
 			</tbody>
 		</table>
 
-		{%- if pager.haveToPaginate -%}
-			<div class="btn-toolbar">
-				<nav class="span12 btn-right paginate">
-			    	{{- pagerfanta(pager, 'twitter_bootstrap_compact', {'routeName': 'ccdn_user_admin_show_banned_paginated' }) -}}
-				</nav>
-			</div>
-		{%- endif -%}
+		<div class="btn-toolbar">
+			<nav class="span12 btn-right paginate">
+				{{- knp_pagination_render(pager) -}}
+			</nav>
+		</div>
 	</section>
 
 	{%- endspaceless -%}

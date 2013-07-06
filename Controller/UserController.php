@@ -32,13 +32,13 @@ class UserController extends UserBaseController
     /**
      *
      * @access public
-     * @param  int                             $page
      * @return RedirectResponse|RenderResponse
      */
-    public function showNewestUsersAction($page)
+    public function showNewestUsersAction()
     {
         $this->isAuthorised('ROLE_ADMIN');
 
+		$page = $this->getQuery('page', 1);
         $usersPager = $this->getUserManager()->getNewestUsersPaginated($page, new \DateTime('-7 days'));
 
         $crumbs = $this->getCrumbs()
@@ -47,7 +47,6 @@ class UserController extends UserBaseController
         return $this->renderResponse('CCDNUserAdminBundle:Newest:show_newest_users.html.', array(
             'crumbs' => $crumbs,
             'pager' => $usersPager,
-            'users' => $usersPager->getCurrentPageResults(),
         ));
     }
 
