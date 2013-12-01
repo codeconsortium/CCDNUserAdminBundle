@@ -60,6 +60,7 @@ generic:
         email:                   "Email Address"
         member_since:            "Member Since"
         activation_status:       "Activation Status"
+        ban_status:              "Ban Status"
         role:                    "Role"
         banned:
             label:               "Ban Status"
@@ -68,7 +69,7 @@ generic:
         activated:
             label:               "Activation Status"
             yes:                 "Activated"
-            no:                  "Unactivated"
+            no:                  "Pending"
 
 flash:
     success:

@@ -5,55 +5,56 @@
 		{%- set route = app.request.attributes.get('_route') -%}
 		{%- set path  = app.request.attributes.get('_path') -%}
 
-		{%- if route == 'ccdn_user_admin_show_newest' -%}
+
+		{%- 
+			if route == 'ccdn_user_admin_member_index'
+			or route|slice(0, 23) == 'ccdn_user_admin_account'
+		-%}
 			<li class="active">
-				<a href="{{- path('ccdn_user_admin_show_newest') -}}">
-					<i class="icon-white icon-time"></i>
+		{%- else -%}
+			<li>
+		{%- endif -%}
+				<a href="{{- path('ccdn_user_admin_member_index') -}}">
+					<i class="glyphicon glyphicon-user"></i>
+					{{- 'generic.thead.filter.all' |trans({}, 'CCDNUserAdminBundle') -}}
+				</a>
+			</li>
+
+
+		{%- if route == 'ccdn_user_admin_member_newest_index' -%}
+			<li class="active">
+		{%- else -%}
+			<li>
+		{%- endif -%}
+				<a href="{{- path('ccdn_user_admin_member_newest_index') -}}">
+					<i class="glyphicon glyphicon-time"></i>
 					{{- 'link.user.show_new'|trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
 			</li>
+
+
+		{%- if route == 'ccdn_user_admin_member_unactivated_index' -%}
+			<li class="active">
 		{%- else -%}
 			<li>
-				<a href="{{- path('ccdn_user_admin_show_newest') -}}">
-					<i class="icon-time"></i>
-					{{- 'link.user.show_new'|trans({}, 'CCDNUserAdminBundle') -}}
-				</a>
-			</li>
 		{%- endif -%}
-
-
-		{%- if route == 'ccdn_user_admin_show_unactivated' -%}
-			<li class="active">
-				<a href="{{- path('ccdn_user_admin_show_unactivated') -}}">
-					<i class="icon-white icon-road"></i>
+				<a href="{{- path('ccdn_user_admin_member_unactivated_index') -}}">
+					<i class="glyphicon glyphicon-road"></i>
 					{{- 'link.user.show_unactivated'|trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
 			</li>
-		{%- else -%}
-			<li>
-				<a href="{{- path('ccdn_user_admin_show_unactivated') -}}">
-					<i class="icon-road"></i>
-					{{- 'link.user.show_unactivated'|trans({}, 'CCDNUserAdminBundle') -}}
-				</a>
-			</li>
-		{%- endif -%}
 
-
-		{%- if route == 'ccdn_user_admin_show_banned' -%}
+		{%- if route == 'ccdn_user_admin_member_banned_index' -%}
 			<li class="active">
-				<a href="{{- path('ccdn_user_admin_show_banned') -}}">
-					<i class="icon-white icon-lock"></i>
-					{{- 'link.user.show_banned'|trans({}, 'CCDNUserAdminBundle') -}}
-				</a>
-			</li>
 		{%- else -%}
 			<li>
-				<a href="{{- path('ccdn_user_admin_show_banned') -}}">
-					<i class="icon-lock"></i>
+		{%- endif -%}
+				<a href="{{- path('ccdn_user_admin_member_banned_index') -}}">
+					<i class="glyphicon glyphicon-lock"></i>
 					{{- 'link.user.show_banned'|trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
 			</li>
-		{%- endif -%}
+
 	</ul>
 
 {%- endspaceless -%}

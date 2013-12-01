@@ -33,10 +33,10 @@ class CrumbBuilder extends BaseCrumbBuilder
      * @access public
      * @return \CCDNUser\AdminBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUsersUnactivatedIndex()
+    public function addMemberIndex()
     {
         return $this->createCrumbTrail()
-            ->add('crumbs.show_unactivated', 'ccdn_user_admin_show_unactivated')
+            ->add('crumbs.show_all', 'ccdn_user_admin_member_index')
         ;
     }
 
@@ -45,10 +45,10 @@ class CrumbBuilder extends BaseCrumbBuilder
      * @access public
      * @return \CCDNUser\AdminBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUsersBannedIndex()
+    public function addMemberUnactivatedIndex()
     {
         return $this->createCrumbTrail()
-            ->add('crumbs.show_banned', 'ccdn_user_admin_show_banned')
+            ->add('crumbs.show_unactivated', 'ccdn_user_admin_member_unactivated_index')
         ;
     }
 
@@ -57,10 +57,22 @@ class CrumbBuilder extends BaseCrumbBuilder
      * @access public
      * @return \CCDNUser\AdminBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUsersNewestIndex()
+    public function addMemberBannedIndex()
     {
         return $this->createCrumbTrail()
-            ->add('crumbs.show_newest', 'ccdn_user_admin_show_newest')
+            ->add('crumbs.show_banned', 'ccdn_user_admin_member_banned_index')
+        ;
+    }
+
+    /**
+     *
+     * @access public
+     * @return \CCDNUser\AdminBundle\Component\Crumbs\Factory\CrumbTrail
+     */
+    public function addMemberNewestIndex()
+    {
+        return $this->createCrumbTrail()
+            ->add('crumbs.show_newest', 'ccdn_user_admin_member_newest_index')
         ;
     }
 
@@ -71,7 +83,7 @@ class CrumbBuilder extends BaseCrumbBuilder
      */
     public function addAccountShow(UserInterface $user)
     {
-        return $this->addUsersNewestIndex()
+        return $this->addMemberIndex()
             ->add(
                 array(
                     'label' => 'crumbs.account.show',
@@ -118,7 +130,7 @@ class CrumbBuilder extends BaseCrumbBuilder
                     'label' => 'crumbs.account.set_roles',
                 ),
                 array(
-                    'route' => 'ccdn_user_admin_set_roles',
+                    'route' => 'ccdn_user_admin_account_set_roles',
                     'params' => array('userId' => $user->getId())
                 )
             )

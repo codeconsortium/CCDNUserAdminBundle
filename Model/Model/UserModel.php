@@ -39,6 +39,31 @@ class UserModel extends BaseModel implements ModelInterface
      * @param  int                                          $itemsPerPage
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
+    public function findAllUsersPaginated($page = 1, $itemsPerPage = 25)
+    {
+        return $this->getRepository()->findAllUsersPaginated($page, $itemsPerPage);
+    }
+
+    /**
+     *
+     * @access public
+     * @param  char                                         $alpha
+     * @param  int                                          $page
+     * @param  int                                          $itemsPerPage
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function findAllUsersFilteredAtoZPaginated($alpha, $page = 1, $itemsPerPage = 25)
+	{
+        return $this->getRepository()->findAllUsersFilteredAtoZPaginated($alpha, $page, $itemsPerPage);
+	}
+
+    /**
+     *
+     * @access public
+     * @param  int                                          $page
+     * @param  int                                          $itemsPerPage
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
     public function findAllUnactivatedUsersPaginated($page, $itemsPerPage = 25)
     {
         return $this->getRepository()->findAllUnactivatedUsersPaginated($page, $itemsPerPage);

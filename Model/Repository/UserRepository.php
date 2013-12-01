@@ -37,6 +37,49 @@ class UserRepository extends BaseRepository implements RepositoryInterface
      * @param  int                                          $itemsPerPage
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
+    public function findAllUsersPaginated($page = 1, $itemsPerPage = 25)
+    {
+        $qb = $this->createSelectQuery(array('u'));
+
+        $qb
+			->addOrderBy('u.username', 'DESC')
+            ->addOrderBy('u.registeredDate', 'DESC')
+        ;
+
+        return $this->gateway->paginateQuery($qb, $itemsPerPage, $page);
+    }
+
+    /**
+     *
+     * @access public
+     * @param  char                                         $alpha
+     * @param  int                                          $page
+     * @param  int                                          $itemsPerPage
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function findAllUsersFilteredAtoZPaginated($alpha, $page = 1, $itemsPerPage = 25)
+    {
+        $qb = $this->createSelectQuery(array('u'));
+
+        $params = array(':filter' => $alpha . '%');
+
+        $qb
+            ->where('u.username LIKE :filter')
+            ->setParameters($params)
+            ->addOrderBy('u.username', 'DESC')
+            ->addOrderBy('u.registeredDate', 'DESC')
+        ;
+
+        return $this->gateway->paginateQuery($qb, $itemsPerPage, $page);
+    }
+
+    /**
+     *
+     * @access public
+     * @param  int                                          $page
+     * @param  int                                          $itemsPerPage
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
     public function findAllUnactivatedUsersPaginated($page, $itemsPerPage = 25)
     {
         $qb = $this->createSelectQuery(array('u'));

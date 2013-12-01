@@ -16,26 +16,26 @@
 	<section>
 		<div class="btn-toolbar">
 			{% if user.enabled %}
-				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_force_reactivation', {'userId': user.getId }) -}}">
+				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_force_reactivation', {'userId': user.getId }) -}}">
 					{{- 'link.user.force_reactivation'|trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
 			{% else %}
-				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_activate', {'userId': user.getId }) -}}">
+				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_activate', {'userId': user.getId }) -}}">
 					{{- 'link.user.activate'|trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
 			{% endif %}
 
 			{% if user.locked %}
-				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_unban', {'userId': user.getId }) -}}">
+				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_unban', {'userId': user.getId }) -}}">
 					{{- 'link.user.unban'|trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
 			{% else %}
-				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_ban', {'userId': user.getId }) -}}">
+				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_ban', {'userId': user.getId }) -}}">
 					{{- 'link.user.ban'|trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
 			{% endif %}
 
-			<a class="btn btn-danger" href="{{- path('ccdn_user_admin_set_roles', {'userId': user.getId }) -}}">
+			<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_set_roles', {'userId': user.getId }) -}}">
 				{{- 'link.user.set_roles'|trans({}, 'CCDNUserAdminBundle') -}}
 			</a>
 			<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_edit', {'userId': user.getId}) -}}">

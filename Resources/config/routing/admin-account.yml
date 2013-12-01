@@ -1,0 +1,39 @@
+#
+# User Management.
+#
+ccdn_user_admin_account_show:
+    pattern: /{userId}/show
+    defaults: { _controller: CCDNUserAdminBundle:Account:show, _locale: en }
+
+ccdn_user_admin_account_edit:
+    pattern: /{userId}/edit
+    defaults: { _controller: CCDNUserAdminBundle:Account:edit, _locale: en }
+
+#
+# User Activation.
+#
+ccdn_user_admin_account_activate:
+    pattern: /{userId}/activate
+    defaults: { _controller: CCDNUserAdminBundle:Account:activate, _locale: en }
+
+ccdn_user_admin_account_force_reactivation:
+    pattern: /{userId}/force-reactivation
+    defaults: { _controller: CCDNUserAdminBundle:Account:forceReActivation, _locale: en }
+
+#
+# User Banning.
+#
+ccdn_user_admin_account_ban:
+    pattern: /{userId}/ban
+    defaults: { _controller: CCDNUserAdminBundle:Account:ban, _locale: en }
+
+ccdn_user_admin_account_unban:
+    pattern: /{userId}/unban
+    defaults: { _controller: CCDNUserAdminBundle:Account:unban, _locale: en }
+
+#
+# User Roles.
+#
+ccdn_user_admin_account_set_roles:
+    pattern: /{userId}/set-roles
+    defaults: { _controller: CCDNUserAdminBundle:Account:changeRoles, _locale: en }

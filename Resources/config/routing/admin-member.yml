@@ -1,0 +1,16 @@
+
+ccdn_user_admin_member_unactivated_index:
+    pattern: /unactivated
+    defaults: { _controller: CCDNUserAdminBundle:Member:showUnactivated, _locale: en }
+
+ccdn_user_admin_member_banned_index:
+    pattern: /banned
+    defaults: { _controller: CCDNUserAdminBundle:Member:showBanned, _locale: en }
+
+ccdn_user_admin_member_newest_index:
+    pattern: /newest
+    defaults: { _controller: CCDNUserAdminBundle:Member:showNewest, _locale: en }
+
+ccdn_user_admin_member_index:
+    pattern:  /
+    defaults: { _controller: CCDNUserAdminBundle:Member:show, _locale: en }
