@@ -14,7 +14,6 @@
 namespace CCDNUser\AdminBundle\Controller;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use CCDNUser\AdminBundle\Controller\UserBaseController;
 
 /**
  *
@@ -27,7 +26,7 @@ use CCDNUser\AdminBundle\Controller\UserBaseController;
  * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
-class MemberController extends UserBaseController
+class MemberController extends BaseController
 {
     /**
      *

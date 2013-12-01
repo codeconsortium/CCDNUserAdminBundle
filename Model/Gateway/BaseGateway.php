@@ -203,26 +203,13 @@ abstract class BaseGateway implements GatewayInterface
 
     /**
      *
-     * @access protected
-     * @param $item
+     * @access public
+     * @param  $item
      * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
-    protected function persist($item)
+    public function persist($item)
     {
         $this->em->persist($item);
-
-        return $this;
-    }
-
-    /**
-     *
-     * @access protected
-     * @param $item
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
-     */
-    protected function remove($item)
-    {
-        $this->em->remove($item);
 
         return $this;
     }
@@ -235,6 +222,31 @@ abstract class BaseGateway implements GatewayInterface
     public function flush()
     {
         $this->em->flush();
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access public
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     */
+    public function refresh($item)
+    {
+        $this->em->refresh($item);
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access public
+     * @param  $item
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     */
+    public function remove($item)
+    {
+        $this->em->remove($item);
 
         return $this;
     }

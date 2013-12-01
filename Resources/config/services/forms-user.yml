@@ -18,7 +18,7 @@ services:
         arguments:
             - @form.factory
             - @ccdn_user_admin.form.type.update_roles
-            - @ccdn_user_admin.manager.user
+            - @ccdn_user_admin.model.user
             - @ccdn_component_common.component.helper.role
 
     #
@@ -34,4 +34,4 @@ services:
         arguments:
             - @form.factory
             - @ccdn_user_admin.form.type.update_account
-            - @ccdn_user_admin.manager.user
+            - @ccdn_user_admin.model.user

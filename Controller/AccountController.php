@@ -13,8 +13,6 @@
 
 namespace CCDNUser\AdminBundle\Controller;
 
-use CCDNUser\AdminBundle\Controller\BaseController;
-
 /**
  *
  * @category CCDNUser
@@ -26,7 +24,7 @@ use CCDNUser\AdminBundle\Controller\BaseController;
  * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
-class AccountController extends BaseController
+class AccountController extends AccountBaseController
 {
 	 /**
 	 *
@@ -40,7 +38,7 @@ class AccountController extends BaseController
 	    $user = $this->getUserModel()->findOneUserById($userId);
 	    $this->isFound($user);
    	
-	    return $this->renderResponse('CCDNUserAdminBundle:User:User/show_user.html.', array(
+	    return $this->renderResponse('CCDNUserAdminBundle:Admin:Account/show_account.html.', array(
 	        'crumbs' => $this->getCrumbs()->addAccountShow($user),
 	        'user' => $user,
 	    ));
@@ -63,11 +61,10 @@ class AccountController extends BaseController
 	    }
    	
 	    $formHandler = $this->getFormHandlerToUpdateAccount($user);
-   	
-	    if ($formHandler->process($this->getRequest())) {
+	    if ($formHandler->process()) {
 	        $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
 	    } else {
-	     $response = $this->renderResponse('CCDNUserAdminBundle:User:User/update_account.html.', array(
+	    	$response = $this->renderResponse('CCDNUserAdminBundle:Admin:Account/update_account.html.', array(
 	            'crumbs' => $this->getCrumbs()->addAccountEdit($user),
 	            'form' => $formHandler->getForm()->createView(),
 	            'theme' => $this->container->getParameter('ccdn_user_admin.account.edit_user_account.form_theme'),
@@ -95,13 +92,11 @@ class AccountController extends BaseController
        }
 
        $formHandler = $this->getFormHandlerToUpdateRolesForUser($user);
-
-       if ($formHandler->process($this->getRequest())) {
+       if ($formHandler->process()) {
            $this->setFlash('notice', $this->trans('ccdn_user_admin.flash.user.set_roles.success', array('%user_name%' => $user->getUsername())));
-
            $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())));
        } else {
-           $response = $this->renderResponse('CCDNUserAdminBundle:User:User/update_roles.html.', array(
+           $response = $this->renderResponse('CCDNUserAdminBundle:Admin:Account/update_roles.html.', array(
                'crumbs' => $this->getCrumbs()->addAccountChangeRoles($user),
                'form' => $formHandler->getForm()->createView(),
                'theme' => $this->container->getParameter('ccdn_user_admin.account.edit_user_account.form_theme'),
@@ -129,9 +124,7 @@ class AccountController extends BaseController
         }
 
         $this->getUserModel()->activateUser($user)->flush();
-
         $this->setFlash('notice', $this->trans('flash.success.user.activate', array('%name%' => $user->getUsername())));
-
         return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
     }
 
@@ -152,9 +145,7 @@ class AccountController extends BaseController
         }
 
         $this->getUserModel()->forceReActivateUser($user)->flush();
-
         $this->setFlash('notice', $this->trans('flash.success.user.force_reactivation', array('%name%' => $user->getUsername())));
-
         return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
     }
 
@@ -175,9 +166,7 @@ class AccountController extends BaseController
         }
 
         $this->getUserModel()->banUser($user)->flush();
-
         $this->setFlash('notice', $this->trans('flash.success.user.ban', array('%name%' => $user->getUsername())));
-
         return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
     }
 
@@ -198,9 +187,7 @@ class AccountController extends BaseController
         }
 
         $this->getUserModel()->unbanUser($user)->flush();
-
         $this->setFlash('notice', $this->trans('flash.success.user.unban', array('%name%' => $user->getUsername())));
-
         return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
     }
 }

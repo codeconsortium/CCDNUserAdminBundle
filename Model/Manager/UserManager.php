@@ -39,7 +39,7 @@ class UserManager extends BaseManager implements ManagerInterface
      */
     public function updateUser(UserInterface $user)
     {
-        $this->persist($user)->flush();
+        $this->gateway->updateUser($user);
 
         return $this;
     }
@@ -54,7 +54,7 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         $user->setLocked(true);
 
-        $this->persist($user)->flush();
+        $this->gateway->updateUser($user);
 
         return $this;
     }
@@ -69,7 +69,7 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         $user->setLocked(false);
 
-        $this->persist($user)->flush();
+        $this->gateway->updateUser($user);
 
         return $this;
     }
@@ -84,7 +84,7 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         $user->setEnabled(true);
 
-        $this->persist($user)->flush();
+        $this->gateway->updateUser($user);
 
         return $this;
     }
@@ -99,7 +99,7 @@ class UserManager extends BaseManager implements ManagerInterface
     {
         $user->setEnabled(false);
 
-        $this->persist($user)->flush();
+        $this->gateway->updateUser($user);
 
         return $this;
     }
