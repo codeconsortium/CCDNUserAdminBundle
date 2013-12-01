@@ -40,12 +40,9 @@ class BanController extends BaseController
 		$page = $this->getQuery('page', 1);
         $usersPager = $this->getUserModel()->findAllBannedUsersPaginated($page, 25);
 
-        $crumbs = $this->getCrumbs()
-            ->add($this->trans('crumbs.show_banned'), $this->path('ccdn_user_admin_show_banned'));
-
         return $this->renderResponse('CCDNUserAdminBundle:User:Banning/show_banned_users.html.',
             array(
-                'crumbs' => $crumbs,
+                'crumbs' => $this->getCrumbs()->addUsersBannedIndex(),
                 'pager' => $usersPager,
             )
         );

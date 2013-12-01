@@ -40,12 +40,9 @@ class ActivationController extends BaseController
 		$page = $this->getQuery('page', 1);
         $usersPager = $this->getUserModel()->findAllUnactivatedUsersPaginated($page, 25);
 
-        $crumbs = $this->getCrumbs()
-            ->add($this->trans('crumbs.show_unactivated'), $this->path('ccdn_user_admin_show_unactivated'));
-
         return $this->renderResponse('CCDNUserAdminBundle:User:Activation/show_unactivated_users.html.',
             array(
-                'crumbs' => $crumbs,
+                'crumbs' => $this->getCrumbs()->addUsersUnactivatedIndex(),
                 'pager' => $usersPager,
             )
         );
