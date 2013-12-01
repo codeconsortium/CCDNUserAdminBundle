@@ -11,12 +11,10 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Gateway;
+namespace CCDNUser\AdminBundle\Model\Gateway;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\QueryBuilder;
-
-use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
 
 /**
  *
@@ -29,15 +27,17 @@ use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
  * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
-interface BaseGatewayInterface
+interface GatewayInterface
 {
     /**
      *
      * @access public
-     * @param \Doctrine\Bundle\DoctrineBundle\Registry $doctrine
-     * @param string                                   $entityClass
+     * @param  \Doctrine\Bundle\DoctrineBundle\Registry $doctrine
+     * @param                                           $paginator
+     * @param  string                                   $entityClass
+     * @param  string                                   $pagerTheme
      */
-    public function __construct(Registry $doctrine, $paginator, $entityClass);
+    public function __construct(Registry $doctrine, $paginator, $entityClass, $pagerTheme);
 
     /**
      *
@@ -101,7 +101,7 @@ interface BaseGatewayInterface
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     public function flush();
 }

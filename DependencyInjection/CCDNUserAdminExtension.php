@@ -56,30 +56,36 @@ class CCDNUserAdminExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         // Class file namespaces.
-        $this
-            ->getEntitySection($config, $container)
-            ->getGatewaySection($config, $container)
-            ->getManagerSection($config, $container)
-            ->getFormSection($config, $container)
-            ->getComponentSection($config, $container)
-        ;
+        $this->getEntitySection($config, $container);
+        $this->getGatewaySection($config, $container);
+        $this->getRepositorySection($config, $container);
+        $this->getManagerSection($config, $container);
+        $this->getModelSection($config, $container);
+        $this->getFormSection($config, $container);
+        $this->getComponentSection($config, $container);
 
         // Configuration stuff.
         $container->setParameter('ccdn_user_admin.template.engine', $config['template']['engine']);
+        $container->setParameter('ccdn_user_admin.template.pager_theme', $config['template']['pager_theme']);
         $container->setParameter('ccdn_user_admin.users_per_page', $config['users_per_page']);
 
-        $this
-            ->getSEOSection($config, $container)
-            ->getUserSection($config, $container)
-            ->getBanSection($config, $container)
-            ->getActivationSection($config, $container)
-            ->getRoleSection($config, $container)
-            ->getSidebarSection($config, $container)
-        ;
+        $this->getSEOSection($config, $container);
+        $this->getUserSection($config, $container);
+        $this->getBanSection($config, $container);
+        $this->getActivationSection($config, $container);
+        $this->getRoleSection($config, $container);
+        $this->getSidebarSection($config, $container);
 
         // Load Service definitions.
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $loader->load('services/components.yml');
+        $loader->load('services/model.yml');
+        $loader->load('services/model-gateway.yml');
+        $loader->load('services/model-repository.yml');
+        $loader->load('services/model-manager.yml');
+        $loader->load('services/forms-user.yml');
     }
 
     /**
@@ -121,9 +127,37 @@ class CCDNUserAdminExtension extends Extension
      * @param  \Symfony\Component\DependencyInjection\ContainerBuilder          $container
      * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
      */
+    private function getRepositorySection(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ccdn_user_admin.repository.user.class', $config['repository']['user']['class']);
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access private
+     * @param  array                                                            $config
+     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder          $container
+     * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
+     */
     private function getManagerSection(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ccdn_user_admin.manager.user.class', $config['manager']['user']['class']);
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access private
+     * @param  array                                                            $config
+     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder          $container
+     * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
+     */
+    private function getModelSection(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ccdn_user_admin.model.user.class', $config['model']['user']['class']);
 
         return $this;
     }

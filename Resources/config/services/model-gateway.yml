@@ -1,0 +1,16 @@
+parameters:
+
+    # Service Parameters defined in app/config
+
+services:
+
+    #
+    # Gateways.
+    #
+    ccdn_user_admin.gateway.user:
+        class: %ccdn_user_admin.gateway.user.class%
+        arguments:
+            - @doctrine
+            - @knp_paginator
+            - %ccdn_user_admin.entity.user.class%
+            - %ccdn_user_admin.template.pager_theme%

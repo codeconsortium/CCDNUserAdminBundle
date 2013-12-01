@@ -64,9 +64,9 @@ class BaseController extends ContainerAware
 
     /**
      *
-     * @var \CCDNUser\AdminBundle\Manager\UserManager $userManager
+     * @var \CCDNUser\AdminBundle\Model\Model\UserModel $userModel
      */
-    private $userManager;
+    private $userModel;
 
     /**
      *
@@ -328,15 +328,15 @@ class BaseController extends ContainerAware
     /**
      *
      * @access protected
-     * @return \CCDNUser\AdminBundle\Manager\UserManager
+     * @return \CCDNUser\AdminBundle\Model\Model\UserModel
      */
-    protected function getUserManager()
+    protected function getUserModel()
     {
-        if (null == $this->userManager) {
-            $this->userManager = $this->container->get('ccdn_user_admin.manager.user');
+        if (null == $this->userModel) {
+            $this->userModel = $this->container->get('ccdn_user_admin.model.user');
         }
 
-        return $this->userManager;
+        return $this->userModel;
     }
 
     /**

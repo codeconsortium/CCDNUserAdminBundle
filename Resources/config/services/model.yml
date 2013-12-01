@@ -1,0 +1,15 @@
+parameters:
+
+    # Service Parameters defined in app/config
+
+services:
+
+    #
+    # Models.
+    #
+    ccdn_user_admin.model.user:
+        class: %ccdn_user_admin.model.user.class%
+        arguments:
+            - @event_dispatcher
+            - @ccdn_user_admin.repository.user
+            - @ccdn_user_admin.manager.user

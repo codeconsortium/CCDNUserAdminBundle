@@ -1,0 +1,37 @@
+parameters:
+
+    # Service Parameters defined in app/config
+
+services:
+
+    #
+    # Role Forms.
+    #
+    ccdn_user_admin.form.type.update_roles:
+        class: %ccdn_user_admin.form.type.update_roles.class%
+        arguments:
+        #    - @ccdn_component_common.component.helper.role
+            - %ccdn_user_admin.entity.user.class%
+
+    ccdn_user_admin.form.handler.update_roles:
+        class: %ccdn_user_admin.form.handler.update_roles.class%
+        arguments:
+            - @form.factory
+            - @ccdn_user_admin.form.type.update_roles
+            - @ccdn_user_admin.manager.user
+            - @ccdn_component_common.component.helper.role
+
+    #
+    # Account Forms.
+    #
+    ccdn_user_admin.form.type.update_account:
+        class: %ccdn_user_admin.form.type.update_account.class%
+        arguments:
+            - %ccdn_user_admin.entity.user.class%
+
+    ccdn_user_admin.form.handler.update_account:
+        class: %ccdn_user_admin.form.handler.update_account.class%
+        arguments:
+            - @form.factory
+            - @ccdn_user_admin.form.type.update_account
+            - @ccdn_user_admin.manager.user

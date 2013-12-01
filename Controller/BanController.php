@@ -38,7 +38,7 @@ class BanController extends BaseController
         $this->isAuthorised('ROLE_ADMIN');
 
 		$page = $this->getQuery('page', 1);
-        $usersPager = $this->getUserManager()->getBannedUsersPaginated($page);
+        $usersPager = $this->getUserModel()->findAllBannedUsersPaginated($page, 25);
 
         $crumbs = $this->getCrumbs()
             ->add($this->trans('crumbs.show_banned'), $this->path('ccdn_user_admin_show_banned'));
@@ -61,14 +61,14 @@ class BanController extends BaseController
     {
         $this->isAuthorised('ROLE_ADMIN');
 
-        $user = $this->getUserManager()->findOneById($userId);
+        $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->getUserManager()->banUser($user)->flush();
+        $this->getUserModel()->banUser($user)->flush();
 
         $this->setFlash('notice', $this->trans('flash.success.user.ban', array('%name%' => $user->getUsername())));
 
@@ -85,14 +85,14 @@ class BanController extends BaseController
     {
         $this->isAuthorised('ROLE_ADMIN');
 
-        $user = $this->getUserManager()->findOneById($userId);
+        $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->getUserManager()->unbanUser($user)->flush();
+        $this->getUserModel()->unbanUser($user)->flush();
 
         $this->setFlash('notice', $this->trans('flash.success.user.unban', array('%name%' => $user->getUsername())));
 

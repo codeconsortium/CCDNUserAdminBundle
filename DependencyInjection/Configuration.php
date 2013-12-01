@@ -66,29 +66,28 @@ class Configuration implements ConfigurationInterface
                     ->canBeUnset()
                     ->children()
                         ->scalarNode('engine')->defaultValue('twig')->end()
+                        ->scalarNode('pager_theme')->defaultValue('CCDNUserAdminBundle:Common:Paginator/twitter_bootstrap.html.twig')->end()
                     ->end()
                 ->end()
                 ->scalarNode('users_per_page')->defaultValue('30')->end()
             ->end();
 
         // Class file namespaces.
-        $this
-            ->addEntitySection($rootNode)
-            ->addGatewaySection($rootNode)
-            ->addManagerSection($rootNode)
-            ->addFormSection($rootNode)
-            ->addComponentSection($rootNode)
-        ;
+        $this->addEntitySection($rootNode);
+        $this->addGatewaySection($rootNode);
+        $this->addRepositorySection($rootNode);
+        $this->addManagerSection($rootNode);
+	    $this->addModelSection($rootNode);
+        $this->addFormSection($rootNode);
+        $this->addComponentSection($rootNode);
 
         // Configuration stuff.
-        $this
-            ->addSEOSection($rootNode)
-            ->addUserSection($rootNode)
-            ->addBanSection($rootNode)
-            ->addActivationSection($rootNode)
-            ->addRoleSection($rootNode)
-            ->addSidebarSection($rootNode)
-        ;
+        $this->addSEOSection($rootNode);
+        $this->addUserSection($rootNode);
+        $this->addBanSection($rootNode);
+        $this->addActivationSection($rootNode);
+        $this->addRoleSection($rootNode);
+        $this->addSidebarSection($rootNode);
 
         return $treeBuilder;
     }
@@ -105,12 +104,10 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->arrayNode('entity')
-                    ->addDefaultsIfNotSet()
-                    ->canBeUnset()
                     ->children()
                         ->arrayNode('user')
                             ->children()
-                                ->scalarNode('class')->end()
+                                ->scalarNode('class')->isRequired()->end()
                             ->end()
                         ->end()
                     ->end()
@@ -140,7 +137,37 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->scalarNode('class')->defaultValue('CCDNUser\AdminBundle\Gateway\UserGateway')->end()
+                                ->scalarNode('class')->defaultValue('CCDNUser\AdminBundle\Model\Gateway\UserGateway')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access private
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @return \CCDNUser\AdminBundle\DependencyInjection\Configuration
+     */
+    private function addRepositorySection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('repository')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('user')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                            ->children()
+                                ->scalarNode('class')->defaultValue('CCDNUser\AdminBundle\Model\Repository\UserRepository')->end()
                             ->end()
                         ->end()
                     ->end()
@@ -170,7 +197,37 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->scalarNode('class')->defaultValue('CCDNUser\AdminBundle\Manager\UserManager')->end()
+                                ->scalarNode('class')->defaultValue('CCDNUser\AdminBundle\Model\Manager\UserManager')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access private
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @return \CCDNUser\AdminBundle\DependencyInjection\Configuration
+     */
+    private function addModelSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('model')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('user')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                            ->children()
+                                ->scalarNode('class')->defaultValue('CCDNUser\AdminBundle\Model\Model\UserModel')->end()
                             ->end()
                         ->end()
                     ->end()

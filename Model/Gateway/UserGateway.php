@@ -11,14 +11,11 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Gateway;
+namespace CCDNUser\AdminBundle\Model\Gateway;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use Doctrine\ORM\QueryBuilder;
-
-use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
-use CCDNUser\AdminBundle\Gateway\BaseGateway;
 
 /**
  *
@@ -31,7 +28,7 @@ use CCDNUser\AdminBundle\Gateway\BaseGateway;
  * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
-class UserGateway extends BaseGateway implements BaseGatewayInterface
+class UserGateway extends BaseGateway implements GatewayInterface
 {
     /**
      *
@@ -102,7 +99,7 @@ class UserGateway extends BaseGateway implements BaseGatewayInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     public function persistUser(UserInterface $user)
     {
@@ -115,7 +112,7 @@ class UserGateway extends BaseGateway implements BaseGatewayInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     public function updateUser(UserInterface $user)
     {
@@ -128,7 +125,7 @@ class UserGateway extends BaseGateway implements BaseGatewayInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     public function deleteUser(UserInterface $user)
     {

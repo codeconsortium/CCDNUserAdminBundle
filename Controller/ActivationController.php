@@ -38,7 +38,7 @@ class ActivationController extends BaseController
         $this->isAuthorised('ROLE_ADMIN');
 
 		$page = $this->getQuery('page', 1);
-        $usersPager = $this->getUserManager()->getUnactivatedUsersPaginated($page);
+        $usersPager = $this->getUserModel()->findAllUnactivatedUsersPaginated($page, 25);
 
         $crumbs = $this->getCrumbs()
             ->add($this->trans('crumbs.show_unactivated'), $this->path('ccdn_user_admin_show_unactivated'));
@@ -61,14 +61,14 @@ class ActivationController extends BaseController
     {
         $this->isAuthorised('ROLE_ADMIN');
 
-        $user = $this->getUserManager()->findOneById($userId);
+        $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->getUserManager()->activateUser($user)->flush();
+        $this->getUserModel()->activateUser($user)->flush();
 
         $this->setFlash('notice', $this->trans('flash.success.user.activate', array('%name%' => $user->getUsername())));
 
@@ -85,14 +85,14 @@ class ActivationController extends BaseController
     {
         $this->isAuthorised('ROLE_ADMIN');
 
-        $user = $this->getUserManager()->findOneById($userId);
+        $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->getUserManager()->forceReActivateUser($user)->flush();
+        $this->getUserModel()->forceReActivateUser($user)->flush();
 
         $this->setFlash('notice', $this->trans('flash.success.user.force_reactivation', array('%name%' => $user->getUsername())));
 

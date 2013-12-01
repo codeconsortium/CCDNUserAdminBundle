@@ -11,12 +11,10 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Gateway;
+namespace CCDNUser\AdminBundle\Model\Gateway;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\QueryBuilder;
-
-use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
 
 /**
  *
@@ -30,7 +28,7 @@ use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
  *
  * @abstract
  */
-abstract class BaseGateway implements BaseGatewayInterface
+abstract class BaseGateway implements GatewayInterface
 {
     /**
      *
@@ -62,19 +60,26 @@ abstract class BaseGateway implements BaseGatewayInterface
 
     /**
      *
-     * @access public
-     * @param \Doctrine\Bundle\DoctrineBundle\Registry $doctrine
-     * @param string                                   $entityClass
+     * @access private
+     * @var string $pagerTheme
      */
-    public function __construct(Registry $doctrine, $paginator, $entityClass)
+    protected $pagerTheme;
+
+    /**
+     *
+     * @access public
+     * @param  \Doctrine\Bundle\DoctrineBundle\Registry $doctrine
+     * @param                                           $paginator
+     * @param  string                                   $entityClass
+     * @param  string                                   $pagerTheme
+     */
+    public function __construct(Registry $doctrine, $paginator, $entityClass, $pagerTheme)
     {
         $this->doctrine = $doctrine;
-
 		$this->paginator = $paginator;
-		
         $this->em = $doctrine->getEntityManager();
-
         $this->entityClass = $entityClass;
+		$this->pagerTheme = $pagerTheme;
     }
 
     /**
@@ -183,21 +188,24 @@ abstract class BaseGateway implements BaseGatewayInterface
     /**
      *
      * @access public
-     * @param  \Doctrine\ORM\QueryBuilder $qb
-     * @param  int                        $itemsPerPage
-     * @param  int                        $page
+     * @param  \Doctrine\ORM\QueryBuilder                               $qb
+     * @param  int                                                      $itemsPerPage
+     * @param  int                                                      $page
      * @return \Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination
      */
     public function paginateQuery(QueryBuilder $qb, $itemsPerPage, $page)
     {
-		return $this->paginator->paginate($qb, $page, $itemsPerPage);
+		$pager = $this->paginator->paginate($qb, $page, $itemsPerPage);
+        $pager->setTemplate($this->pagerTheme);
+		
+		return $pager;
     }
 
     /**
      *
      * @access protected
      * @param $item
-     * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     protected function persist($item)
     {
@@ -210,7 +218,7 @@ abstract class BaseGateway implements BaseGatewayInterface
      *
      * @access protected
      * @param $item
-     * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     protected function remove($item)
     {
@@ -222,7 +230,7 @@ abstract class BaseGateway implements BaseGatewayInterface
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     public function flush()
     {

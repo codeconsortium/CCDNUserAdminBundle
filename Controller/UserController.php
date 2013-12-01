@@ -39,13 +39,10 @@ class UserController extends UserBaseController
         $this->isAuthorised('ROLE_ADMIN');
 
 		$page = $this->getQuery('page', 1);
-        $usersPager = $this->getUserManager()->getNewestUsersPaginated($page, new \DateTime('-7 days'));
-
-        $crumbs = $this->getCrumbs()
-            ->add($this->trans('crumbs.show_newest'), $this->path('ccdn_user_admin_show_newest'));
+        $usersPager = $this->getUserModel()->findAllNewestUsersPaginated($page, 25, new \DateTime('-7 days'));
 
         return $this->renderResponse('CCDNUserAdminBundle:User:Newest/show_newest_users.html.', array(
-            'crumbs' => $crumbs,
+            'crumbs' => $this->getCrumbs()->add($this->trans('crumbs.show_newest'), $this->path('ccdn_user_admin_show_newest')),
             'pager' => $usersPager,
         ));
     }
@@ -60,14 +57,11 @@ class UserController extends UserBaseController
     {
         $this->isAuthorised('ROLE_ADMIN');
 
-        $user = $this->getUserManager()->findOneById($userId);
+        $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
 
-        $crumbs = $this->getCrumbs()
-            ->add($this->trans('crumbs.account.show', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())));
-
         return $this->renderResponse('CCDNUserAdminBundle:User:User/show_user.html.', array(
-            'crumbs' => $crumbs,
+            'crumbs' => $this->getCrumbs()->add($this->trans('crumbs.account.show', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId()))),
             'user' => $user,
         ));
     }
@@ -91,7 +85,7 @@ class UserController extends UserBaseController
     {
         $this->isAuthorised('ROLE_ADMIN');
 
-        $user = $this->getUserManager()->findOneById($userId);
+        $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {
@@ -128,7 +122,7 @@ class UserController extends UserBaseController
     {
         $this->isAuthorised('ROLE_SUPER_ADMIN');
 
-        $user = $this->getUserManager()->findOneById($userId);
+        $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
 
         if ($user->getId() == $this->getUser()->getId()) {

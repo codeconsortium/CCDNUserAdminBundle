@@ -11,16 +11,13 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Manager;
+namespace CCDNUser\AdminBundle\Model\Manager;
 
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\SecurityContext;
-
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\QueryBuilder;
 
-use CCDNUser\AdminBundle\Manager\BaseManagerInterface;
-use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
+use CCDNUser\AdminBundle\Model\Manager\ManagerInterface;
+use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
+use CCDNUser\AdminBundle\Model\Model\ModelInterface;
 
 /**
  *
@@ -34,89 +31,49 @@ use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
  *
  * @abstract
  */
-abstract class BaseManager implements BaseManagerInterface
+abstract class BaseManager implements ManagerInterface
 {
     /**
      *
      * @access protected
-     * @var \Doctrine\Bundle\DoctrineBundle\Registry $doctrine
-     */
-    protected $doctrine;
-
-    /**
-     *
-     * @access protected
-     * @var \Doctrine\ORM\EntityManager $em
-     */
-    protected $em;
-
-    /**
-     *
-     * @access protected
-     * @var \Symfony\Component\Security\Core\SecurityContext $securityContext
-     */
-    protected $securityContext;
-
-    /**
-     *
-     * @access protected
-     * @var \CCDNUser\AdminBundle\Manager\BaseManagerInterface $gateway
+     * @var \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface $gateway
      */
     protected $gateway;
 
     /**
      *
      * @access protected
-     * @var int $usersPerPage
+     * @var \CCDNUser\AdminBundle\Model\Model\ModelInterface $model
      */
-    protected $usersPerPage;
+    protected $model;
 
     /**
      *
      * @access public
-     * @param \Doctrine\Bundle\DoctrineBundle\Registry           $doctrine
-     * @param \Symfony\Component\Security\Core\SecurityContext   $securityContext
-     * @param \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface $gateway
-     * @param int                                                $usersPerPage
+     * @param \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface $gateway
      */
-    public function __construct(Registry $doctrine, SecurityContext $securityContext, BaseGatewayInterface $gateway, $usersPerPage)
+    public function __construct(GatewayInterface $gateway)
     {
-        $this->doctrine = $doctrine;
-
-        $this->em = $doctrine->getEntityManager();
-
-        $this->securityContext = $securityContext;
-
         $this->gateway = $gateway;
-
-        $this->usersPerPage = $usersPerPage;
     }
 
     /**
      *
      * @access public
-     * @param  string $role
-     * @return bool
+     * @param  \CCDNUser\AdminBundle\Model\Model\ModelInterface     $model
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
-    public function isGranted($role)
+    public function setModel(ModelInterface $model)
     {
-        return $this->securityContext->isGranted($role);
+        $this->model = $model;
+		
+		return $this;
     }
 
     /**
      *
      * @access public
-     * @return \Symfony\Component\Security\Core\User\UserInterface
-     */
-    public function getUser()
-    {
-        return $this->securityContext->getToken()->getUser();
-    }
-
-    /**
-     *
-     * @access public
-     * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     public function getGateway()
     {
@@ -181,12 +138,12 @@ abstract class BaseManager implements BaseManagerInterface
     /**
      *
      * @access public
-     * @param $entity
-     * @return \CCDNUser\AdminBundle\Manager\BaseManagerInterface
+     * @param  $entity
+     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
      */
     public function persist($entity)
     {
-        $this->em->persist($entity);
+        $this->gateway->persist($entity);
 
         return $this;
     }
@@ -194,12 +151,12 @@ abstract class BaseManager implements BaseManagerInterface
     /**
      *
      * @access public
-     * @param $entity
-     * @return \CCDNUser\AdminBundle\Manager\BaseManagerInterface
+     * @param  $entity
+     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
      */
     public function remove($entity)
     {
-        $this->em->remove($entity);
+        $this->gateway->remove($entity);
 
         return $this;
     }
@@ -207,11 +164,11 @@ abstract class BaseManager implements BaseManagerInterface
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Manager\BaseManagerInterface
+     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
      */
     public function flush()
     {
-        $this->em->flush();
+        $this->gateway->flush();
 
         return $this;
     }
@@ -219,23 +176,13 @@ abstract class BaseManager implements BaseManagerInterface
     /**
      *
      * @access public
-     * @param $entity
-     * @return \CCDNUser\AdminBundle\Manager\BaseManagerInterface
+     * @param  $entity
+     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
      */
     public function refresh($entity)
     {
-        $this->em->refresh($entity);
+        $this->gateway->refresh($entity);
 
         return $this;
-    }
-
-    /**
-     *
-     * @access public
-     * @return int
-     */
-    public function getUsersPerPage()
-    {
-        return $this->usersPerPage;
     }
 }

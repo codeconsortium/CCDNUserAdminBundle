@@ -1,0 +1,13 @@
+parameters:
+
+    # Service Parameters defined in app/config
+
+services:
+
+    #
+    # Repositories.
+    #
+    ccdn_user_admin.repository.user:
+        class: %ccdn_user_admin.repository.user.class%
+        arguments:
+            - @ccdn_user_admin.gateway.user

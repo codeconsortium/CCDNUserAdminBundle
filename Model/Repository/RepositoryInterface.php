@@ -11,16 +11,12 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Manager;
+namespace CCDNUser\AdminBundle\Model\Repository;
 
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\SecurityContext;
-
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\QueryBuilder;
 
-use CCDNUser\AdminBundle\Manager\BaseManagerInterface;
-use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
+use CCDNUser\AdminBundle\Model\Model\ModelInterface;
+use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
 
 /**
  *
@@ -33,37 +29,27 @@ use CCDNUser\AdminBundle\Gateway\BaseGatewayInterface;
  * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
-interface BaseManagerInterface
+interface RepositoryInterface
 {
     /**
      *
      * @access public
-     * @param \Doctrine\Bundle\DoctrineBundle\Registry           $doctrine
-     * @param \Symfony\Component\Security\Core\SecurityContext   $securityContext
-     * @param \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface $gateway
-     * @param int                                                $usersPerPage
+     * @param  \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface $gateway
      */
-    public function __construct(Registry $doctrine, SecurityContext $securityContext, BaseGatewayInterface $gateway, $usersPerPage);
+    public function __construct(GatewayInterface $gateway);
 
     /**
      *
      * @access public
-     * @param  string $role
-     * @return bool
+     * @param  \CCDNUser\AdminBundle\Model\Model\ModelInterface           $model
+     * @return \CCDNUser\AdminBundle\Model\Repository\RepositoryInterface
      */
-    public function isGranted($role);
+    public function setModel($model);
 
     /**
      *
      * @access public
-     * @return \Symfony\Component\Security\Core\User\UserInterface
-     */
-    public function getUser();
-
-    /**
-     *
-     * @access public
-     * @return \CCDNUser\AdminBundle\Gateway\BaseGatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     public function getGateway();
 
@@ -106,42 +92,4 @@ interface BaseManagerInterface
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function all(QueryBuilder $qb);
-
-    /**
-     *
-     * @access public
-     * @param $entity
-     * @return \CCDNUser\AdminBundle\Manager\BaseManagerInterface
-     */
-    public function persist($entity);
-
-    /**
-     *
-     * @access public
-     * @param $entity
-     * @return \CCDNUser\AdminBundle\Manager\BaseManagerInterface
-     */
-    public function remove($entity);
-
-    /**
-     *
-     * @access public
-     * @return \CCDNUser\AdminBundle\Manager\BaseManagerInterface
-     */
-    public function flush();
-
-    /**
-     *
-     * @access public
-     * @param $entity
-     * @return \CCDNUser\AdminBundle\Manager\BaseManagerInterface
-     */
-    public function refresh($entity);
-
-    /**
-     *
-     * @access public
-     * @return int
-     */
-    public function getUsersPerPage();
 }

@@ -1,0 +1,13 @@
+parameters:
+
+    # Service Parameters defined in app/config
+
+services:
+
+    #
+    # Dashboard Integrator.
+    #
+    ccdn_user_admin.component.dashboard.integrator:
+        class: %ccdn_user_admin.component.dashboard.integrator.class%
+        tags:
+            - { name: ccdn_component_dashboard.integrator }

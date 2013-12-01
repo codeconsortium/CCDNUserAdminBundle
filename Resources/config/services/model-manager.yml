@@ -1,0 +1,13 @@
+parameters:
+
+    # Service Parameters defined in app/config
+
+services:
+
+    #
+    # Managers.
+    #
+    ccdn_user_admin.manager.user:
+        class: %ccdn_user_admin.manager.user.class%
+        arguments:
+            - @ccdn_user_admin.gateway.user
