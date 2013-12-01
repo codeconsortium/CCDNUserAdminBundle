@@ -1,0 +1,59 @@
+{%- spaceless -%}
+
+	<ul class="nav nav-pills nav-stacked">
+
+		{%- set route = app.request.attributes.get('_route') -%}
+		{%- set path  = app.request.attributes.get('_path') -%}
+
+		{%- if route == 'ccdn_user_admin_show_newest' -%}
+			<li class="active">
+				<a href="{{- path('ccdn_user_admin_show_newest') -}}">
+					<i class="icon-white icon-time"></i>
+					{{- 'link.user.show_new'|trans({}, 'CCDNUserAdminBundle') -}}
+				</a>
+			</li>
+		{%- else -%}
+			<li>
+				<a href="{{- path('ccdn_user_admin_show_newest') -}}">
+					<i class="icon-time"></i>
+					{{- 'link.user.show_new'|trans({}, 'CCDNUserAdminBundle') -}}
+				</a>
+			</li>
+		{%- endif -%}
+
+
+		{%- if route == 'ccdn_user_admin_show_unactivated' -%}
+			<li class="active">
+				<a href="{{- path('ccdn_user_admin_show_unactivated') -}}">
+					<i class="icon-white icon-road"></i>
+					{{- 'link.user.show_unactivated'|trans({}, 'CCDNUserAdminBundle') -}}
+				</a>
+			</li>
+		{%- else -%}
+			<li>
+				<a href="{{- path('ccdn_user_admin_show_unactivated') -}}">
+					<i class="icon-road"></i>
+					{{- 'link.user.show_unactivated'|trans({}, 'CCDNUserAdminBundle') -}}
+				</a>
+			</li>
+		{%- endif -%}
+
+
+		{%- if route == 'ccdn_user_admin_show_banned' -%}
+			<li class="active">
+				<a href="{{- path('ccdn_user_admin_show_banned') -}}">
+					<i class="icon-white icon-lock"></i>
+					{{- 'link.user.show_banned'|trans({}, 'CCDNUserAdminBundle') -}}
+				</a>
+			</li>
+		{%- else -%}
+			<li>
+				<a href="{{- path('ccdn_user_admin_show_banned') -}}">
+					<i class="icon-lock"></i>
+					{{- 'link.user.show_banned'|trans({}, 'CCDNUserAdminBundle') -}}
+				</a>
+			</li>
+		{%- endif -%}
+	</ul>
+
+{%- endspaceless -%}

@@ -1,8 +1,8 @@
-{% extends 'CCDNUserAdminBundle::base.html.twig' %}
+{% extends 'CCDNUserAdminBundle:Common:Layout/base.html.twig' %}
 
 {% set LayoutTemplate = ccdn_user_admin.account.show_newest_users.layout_template %}
 
-{% block title %}{{- truncDot('title.user.newest' | trans({}, 'CCDNUserAdminBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
+{% block title %}{{- 'title.user.newest' | trans({}, 'CCDNUserAdminBundle') |slice(0, ccdn_user_admin.seo.title_length) -}}{% endblock %}
 
 
 {% block body_content %}

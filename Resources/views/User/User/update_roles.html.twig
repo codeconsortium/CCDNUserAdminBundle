@@ -1,8 +1,8 @@
-{% extends 'CCDNUserAdminBundle::base.html.twig' %}
+{% extends 'CCDNUserAdminBundle:Common:Layout/base.html.twig' %}
 
 {% set LayoutTemplate = ccdn_user_admin.role.set_users_role.layout_template %}
 
-{% block title %}{{- truncDot('title.account.set_roles' |trans({'%name%':user.username}, 'CCDNUserAdminBundle'), ccdn_user_admin.seo.title_length) -}}{% endblock %}
+{% block title %}{{- 'title.account.set_roles' |trans({'%name%':user.username}, 'CCDNUserAdminBundle') |slice(0, ccdn_user_admin.seo.title_length) -}}{% endblock %}
 
 
 {% block body_content %}

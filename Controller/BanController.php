@@ -43,7 +43,7 @@ class BanController extends BaseController
         $crumbs = $this->getCrumbs()
             ->add($this->trans('crumbs.show_banned'), $this->path('ccdn_user_admin_show_banned'));
 
-        return $this->renderResponse('CCDNUserAdminBundle:Banning:show_banned_users.html.',
+        return $this->renderResponse('CCDNUserAdminBundle:User:Banning/show_banned_users.html.',
             array(
                 'crumbs' => $crumbs,
                 'pager' => $usersPager,

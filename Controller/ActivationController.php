@@ -43,7 +43,7 @@ class ActivationController extends BaseController
         $crumbs = $this->getCrumbs()
             ->add($this->trans('crumbs.show_unactivated'), $this->path('ccdn_user_admin_show_unactivated'));
 
-        return $this->renderResponse('CCDNUserAdminBundle:Activation:show_unactivated_users.html.',
+        return $this->renderResponse('CCDNUserAdminBundle:User:Activation/show_unactivated_users.html.',
             array(
                 'crumbs' => $crumbs,
                 'pager' => $usersPager,

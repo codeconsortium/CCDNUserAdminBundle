@@ -35,6 +35,20 @@ class Configuration implements ConfigurationInterface
 {
     /**
      *
+     * @access protected
+     * @var string $defaultValueLayoutTemplate
+     */
+    protected $defaultValueLayoutTemplate = 'CCDNUserAdminBundle::base.html.twig';
+
+    /**
+     *
+     * @access protected
+     * @var string $defaultValueFormTheme
+     */
+    protected $defaultValueFormTheme = 'CCDNUserAdminBundle:Common:Form/fields.html.twig';
+
+    /**
+     *
      * @access public
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
      */
@@ -311,7 +325,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
+                                ->scalarNode('layout_template')->defaultValue($this->defaultValueLayoutTemplate)->end()
                                 ->scalarNode('member_since_datetime_format')->defaultValue('d-m-Y - H:i')->end()
                             ->end()
                         ->end()
@@ -343,7 +357,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
+                                ->scalarNode('layout_template')->defaultValue($this->defaultValueLayoutTemplate)->end()
                                 ->scalarNode('member_since_datetime_format')->defaultValue('d-m-Y - H:i')->end()
                             ->end()
                         ->end()
@@ -375,8 +389,8 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
-                                ->scalarNode('form_theme')->defaultValue('CCDNUserAdminBundle:Form:fields.html.twig')->end()
+                                ->scalarNode('layout_template')->defaultValue($this->defaultValueLayoutTemplate)->end()
+                                ->scalarNode('form_theme')->defaultValue($this->defaultValueFormTheme)->end()
                             ->end()
                         ->end()
                     ->end()
@@ -407,7 +421,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
+                                ->scalarNode('layout_template')->defaultValue($this->defaultValueLayoutTemplate)->end()
                                 ->scalarNode('member_since_datetime_format')->defaultValue('d-m-Y - H:i')->end()
                             ->end()
                         ->end()
@@ -415,7 +429,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
+                                ->scalarNode('layout_template')->defaultValue($this->defaultValueLayoutTemplate)->end()
                                 ->scalarNode('member_since_datetime_format')->defaultValue('d-m-Y - H:i')->end()
                             ->end()
                         ->end()
@@ -423,16 +437,16 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
-                                ->scalarNode('form_theme')->defaultValue('CCDNUserAdminBundle:Form:fields.html.twig')->end()
+                                ->scalarNode('layout_template')->defaultValue($this->defaultValueLayoutTemplate)->end()
+                                ->scalarNode('form_theme')->defaultValue($this->defaultValueFormTheme)->end()
                             ->end()
                         ->end()
                         ->arrayNode('edit_user_profile')
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
-                                ->scalarNode('layout_template')->defaultValue('CCDNComponentCommonBundle:Layout:layout_body_right.html.twig')->end()
-                                ->scalarNode('form_theme')->defaultValue('CCDNUserAdminBundle:Form:fields.html.twig')->end()
+                                ->scalarNode('layout_template')->defaultValue($this->defaultValueLayoutTemplate)->end()
+                                ->scalarNode('form_theme')->defaultValue($this->defaultValueFormTheme)->end()
                             ->end()
                         ->end()
                     ->end()

@@ -44,7 +44,7 @@ class UserController extends UserBaseController
         $crumbs = $this->getCrumbs()
             ->add($this->trans('crumbs.show_newest'), $this->path('ccdn_user_admin_show_newest'));
 
-        return $this->renderResponse('CCDNUserAdminBundle:Newest:show_newest_users.html.', array(
+        return $this->renderResponse('CCDNUserAdminBundle:User:Newest/show_newest_users.html.', array(
             'crumbs' => $crumbs,
             'pager' => $usersPager,
         ));
@@ -66,7 +66,7 @@ class UserController extends UserBaseController
         $crumbs = $this->getCrumbs()
             ->add($this->trans('crumbs.account.show', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())));
 
-        return $this->renderResponse('CCDNUserAdminBundle:User:show_user.html.', array(
+        return $this->renderResponse('CCDNUserAdminBundle:User:User/show_user.html.', array(
             'crumbs' => $crumbs,
             'user' => $user,
         ));
@@ -108,7 +108,7 @@ class UserController extends UserBaseController
             ->add($this->trans('crumbs.account.show', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
             ->add($this->trans('crumbs.account.edit'), $this->path('ccdn_user_admin_account_edit', array('userId' => $user->getId())));
 
-        return $this->renderResponse('CCDNUserAdminBundle:User:update_account.html.',
+        return $this->renderResponse('CCDNUserAdminBundle:User:User/update_account.html.',
             array(
                 'crumbs' => $crumbs,
                 'form' => $formHandler->getForm()->createView(),
@@ -147,7 +147,7 @@ class UserController extends UserBaseController
                 ->add($this->trans('crumbs.account.show', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())))
                 ->add($this->trans('crumbs.account.set_roles', array('%name%' => $user->getUsername())), $this->path('ccdn_user_admin_set_roles', array('userId' => $user->getId())));
 
-            return $this->renderResponse('CCDNUserAdminBundle:User:update_roles.html.',
+            return $this->renderResponse('CCDNUserAdminBundle:User:User/update_roles.html.',
                 array(
                     'crumbs' => $crumbs,
                     'form' => $formHandler->getForm()->createView(),
