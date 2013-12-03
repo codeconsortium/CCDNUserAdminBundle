@@ -40,7 +40,7 @@ class AccountController extends AccountBaseController
 	    $this->isAuthorised('ROLE_ADMIN');
 	    $user = $this->getUserModel()->findOneUserById($userId);
 	    $this->isFound($user);
-   	
+
 	    return $this->renderResponse('CCDNUserAdminBundle:Admin:Account/show_account.html.', array(
 	        'crumbs' => $this->getCrumbs()->addAccountShow($user),
 	        'user' => $user,
@@ -58,11 +58,8 @@ class AccountController extends AccountBaseController
 	    $this->isAuthorised('ROLE_ADMIN');
 	    $user = $this->getUserModel()->findOneUserById($userId);
 	    $this->isFound($user);
-   	
-	    if ($user->getId() == $this->getUser()->getId()) {
-	        throw new AccessDeniedException('You cannot administrate yourself.');
-	    }
-   	
+		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
+
 	    $formHandler = $this->getFormHandlerToUpdateAccount($user);
 	    if ($formHandler->process()) {
 	        $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
@@ -91,10 +88,7 @@ class AccountController extends AccountBaseController
        $this->isAuthorised('ROLE_SUPER_ADMIN');
        $user = $this->getUserModel()->findOneUserById($userId);
        $this->isFound($user);
-
-       if ($user->getId() == $this->getUser()->getId()) {
-           throw new AccessDeniedException('You cannot administrate yourself.');
-       }
+	   $this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
        $formHandler = $this->getFormHandlerToUpdateRolesForUser($user);
        if ($formHandler->process()) {
@@ -124,10 +118,7 @@ class AccountController extends AccountBaseController
         $this->isAuthorised('ROLE_ADMIN');
         $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
-
-        if ($user->getId() == $this->getUser()->getId()) {
-            throw new AccessDeniedException('You cannot administrate yourself.');
-        }
+		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
         $this->getUserModel()->activateUser($user);
         $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
@@ -148,10 +139,7 @@ class AccountController extends AccountBaseController
         $this->isAuthorised('ROLE_ADMIN');
         $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
-
-        if ($user->getId() == $this->getUser()->getId()) {
-            throw new AccessDeniedException('You cannot administrate yourself.');
-        }
+		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
         $this->getUserModel()->forceReActivateUser($user);
         $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
@@ -172,10 +160,7 @@ class AccountController extends AccountBaseController
         $this->isAuthorised('ROLE_ADMIN');
         $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
-
-        if ($user->getId() == $this->getUser()->getId()) {
-            throw new AccessDeniedException('You cannot administrate yourself.');
-        }
+		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
         $this->getUserModel()->banUser($user);
         $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
@@ -196,10 +181,7 @@ class AccountController extends AccountBaseController
         $this->isAuthorised('ROLE_ADMIN');
         $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
-
-        if ($user->getId() == $this->getUser()->getId()) {
-            throw new AccessDeniedException('You cannot administrate yourself.');
-        }
+		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
         $this->getUserModel()->unbanUser($user);
         $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
