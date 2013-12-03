@@ -197,7 +197,7 @@ abstract class BaseGateway implements GatewayInterface
     {
 		$pager = $this->paginator->paginate($qb, $page, $itemsPerPage);
         $pager->setTemplate($this->pagerTheme);
-		
+
 		return $pager;
     }
 

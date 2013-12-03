@@ -61,7 +61,7 @@ class MemberController extends BaseController
     {
         $this->isAuthorised('ROLE_ADMIN');
 		$page = $this->getQuery('page', 1);
-        $usersPager = $this->getUserModel()->findAllNewestUsersPaginated($page, 25, new \DateTime('-7 days'));
+        $usersPager = $this->getUserModel()->findAllNewestUsersPaginated(new \DateTime('-7 days'), $page, 25);
 
         return $this->renderResponse('CCDNUserAdminBundle:Admin:Member/list_newest.html.', array(
             'crumbs' => $this->getCrumbs()->addMemberNewestIndex(),

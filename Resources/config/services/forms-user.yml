@@ -20,7 +20,6 @@ services:
             - @form.factory
             - @ccdn_user_admin.form.type.update_roles
             - @ccdn_user_admin.model.user
-            - @ccdn_component_common.component.helper.role
 
     #
     # Account Forms.

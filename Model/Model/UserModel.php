@@ -84,14 +84,14 @@ class UserModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
+     * @param  \Datetime                                    $dateLimit
      * @param  int                                          $page
      * @param  int                                          $itemsPerPage
-     * @param  \Datetime                                    $dateLimit
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findAllNewestUsersPaginated($page, $itemsPerPage = 25, \Datetime $dateLimit)
+    public function findAllNewestUsersPaginated(\Datetime $dateLimit, $page, $itemsPerPage = 25)
     {
-        return $this->getRepository()->findAllNewestUsersPaginated($page, $itemsPerPage, $dateLimit);
+        return $this->getRepository()->findAllNewestUsersPaginated($dateLimit, $page, $itemsPerPage);
     }
 
     /**

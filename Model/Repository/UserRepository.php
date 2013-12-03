@@ -40,12 +40,7 @@ class UserRepository extends BaseRepository implements RepositoryInterface
     public function findAllUsersPaginated($page = 1, $itemsPerPage = 25)
     {
         $qb = $this->createSelectQuery(array('u'));
-
-        $qb
-			->addOrderBy('u.username', 'DESC')
-            ->addOrderBy('u.registeredDate', 'DESC')
-        ;
-
+		
         return $this->gateway->paginateQuery($qb, $itemsPerPage, $page);
     }
 
@@ -66,8 +61,6 @@ class UserRepository extends BaseRepository implements RepositoryInterface
         $qb
             ->where('u.username LIKE :filter')
             ->setParameters($params)
-            ->addOrderBy('u.username', 'DESC')
-            ->addOrderBy('u.registeredDate', 'DESC')
         ;
 
         return $this->gateway->paginateQuery($qb, $itemsPerPage, $page);
@@ -80,13 +73,12 @@ class UserRepository extends BaseRepository implements RepositoryInterface
      * @param  int                                          $itemsPerPage
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findAllUnactivatedUsersPaginated($page, $itemsPerPage = 25)
+    public function findAllUnactivatedUsersPaginated($page = 1, $itemsPerPage = 25)
     {
         $qb = $this->createSelectQuery(array('u'));
 
         $qb
             ->where('u.enabled = FALSE')
-            ->orderBy('u.registeredDate', 'DESC')
         ;
 
         return $this->gateway->paginateQuery($qb, $itemsPerPage, $page);
@@ -99,13 +91,12 @@ class UserRepository extends BaseRepository implements RepositoryInterface
      * @param  int                                          $itemsPerPage
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findAllBannedUsersPaginated($page, $itemsPerPage = 25)
+    public function findAllBannedUsersPaginated($page = 1, $itemsPerPage = 25)
     {
         $qb = $this->createSelectQuery(array('u'));
 
         $qb
             ->where('u.locked = TRUE')
-            ->orderBy('u.registeredDate', 'DESC')
         ;
 
         return $this->gateway->paginateQuery($qb, $itemsPerPage, $page);
@@ -114,12 +105,12 @@ class UserRepository extends BaseRepository implements RepositoryInterface
     /**
      *
      * @access public
+     * @param  \Datetime                                    $dateLimit
      * @param  int                                          $page
      * @param  int                                          $itemsPerPage
-     * @param  \Datetime                                    $dateLimit
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findAllNewestUsersPaginated($page, $itemsPerPage = 25, \Datetime $dateLimit)
+    public function findAllNewestUsersPaginated(\Datetime $dateLimit, $page = 1, $itemsPerPage = 25)
     {
         $qb = $this->createSelectQuery(array('u'));
 
@@ -128,7 +119,6 @@ class UserRepository extends BaseRepository implements RepositoryInterface
         $qb
             ->where('u.registeredDate > :date')
             ->setParameters($params)
-            ->orderBy('u.registeredDate', 'DESC')
         ;
 
         return $this->gateway->paginateQuery($qb, $itemsPerPage, $page);
