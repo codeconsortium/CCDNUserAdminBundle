@@ -91,16 +91,18 @@ class TestBase extends WebTestCase
 		return $user;
 	}
 
-	protected function addFixturesForUsers()
+	protected function addFixturesForUsers($persist = true, $andFlush = true)
 	{
 		$userNames = array('admin', 'tom', 'dick', 'harry');
 		$users = array();
 		
 		foreach ($userNames as $username) {
-			$users[$username] = $this->addNewUser($username, $username . '@foobar.com', 'password', true, false);
+			$users[$username] = $this->addNewUser($username, $username . '@foobar.com', 'password', $persist, $andFlush);
 		}
 
-		$this->em->flush();
+		if ($persist && $andFlush) {
+			$this->em->flush();
+		}
 	
 		return $users;
 	}
