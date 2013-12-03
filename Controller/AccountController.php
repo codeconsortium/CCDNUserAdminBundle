@@ -13,6 +13,9 @@
 
 namespace CCDNUser\AdminBundle\Controller;
 
+use CCDNUser\AdminBundle\Component\Dispatcher\AdminEvents;
+use CCDNUser\AdminBundle\Component\Dispatcher\Event\AdminUserResponseEvent;
+
 /**
  *
  * @category CCDNUser
@@ -72,6 +75,8 @@ class AccountController extends AccountBaseController
 	        ));
 	    }
 
+        $this->dispatch(AdminEvents::ADMIN_USER_UPDATE_ACCOUNT_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $formHandler->getForm()->getData()));
+
         return $response;
 	}
 
@@ -93,7 +98,6 @@ class AccountController extends AccountBaseController
 
        $formHandler = $this->getFormHandlerToUpdateRolesForUser($user);
        if ($formHandler->process()) {
-           $this->setFlash('notice', $this->trans('ccdn_user_admin.flash.user.set_roles.success', array('%user_name%' => $user->getUsername())));
            $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $user->getId())));
        } else {
            $response = $this->renderResponse('CCDNUserAdminBundle:Admin:Account/update_roles.html.', array(
@@ -103,8 +107,10 @@ class AccountController extends AccountBaseController
                'user' => $user,
            ));
        }
-	
-	return $response;
+
+       $this->dispatch(AdminEvents::ADMIN_USER_UPDATE_ROLES_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $formHandler->getForm()->getData()));
+
+	   return $response;
    }
 
     /**
@@ -123,9 +129,12 @@ class AccountController extends AccountBaseController
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->getUserModel()->activateUser($user)->flush();
-        $this->setFlash('notice', $this->trans('flash.success.user.activate', array('%name%' => $user->getUsername())));
-        return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
+        $this->getUserModel()->activateUser($user);
+        $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
+
+        $this->dispatch(AdminEvents::ADMIN_USER_ACTIVATE_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $user));
+		
+		return $response;
     }
 
     /**
@@ -144,9 +153,12 @@ class AccountController extends AccountBaseController
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->getUserModel()->forceReActivateUser($user)->flush();
-        $this->setFlash('notice', $this->trans('flash.success.user.force_reactivation', array('%name%' => $user->getUsername())));
-        return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
+        $this->getUserModel()->forceReActivateUser($user);
+        $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
+		
+        $this->dispatch(AdminEvents::ADMIN_USER_DEACTIVATE_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $user));
+		
+		return $response;
     }
 
     /**
@@ -165,9 +177,12 @@ class AccountController extends AccountBaseController
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->getUserModel()->banUser($user)->flush();
-        $this->setFlash('notice', $this->trans('flash.success.user.ban', array('%name%' => $user->getUsername())));
-        return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
+        $this->getUserModel()->banUser($user);
+        $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
+		
+        $this->dispatch(AdminEvents::ADMIN_USER_BAN_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $user));
+		
+		return $response;
     }
 
     /**
@@ -186,8 +201,11 @@ class AccountController extends AccountBaseController
             throw new AccessDeniedException('You cannot administrate yourself.');
         }
 
-        $this->getUserModel()->unbanUser($user)->flush();
-        $this->setFlash('notice', $this->trans('flash.success.user.unban', array('%name%' => $user->getUsername())));
-        return $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
+        $this->getUserModel()->unbanUser($user);
+        $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
+		
+        $this->dispatch(AdminEvents::ADMIN_USER_UNBAN_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $user));
+		
+		return $response;
     }
 }

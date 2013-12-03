@@ -16,6 +16,7 @@ services:
     ccdn_user_admin.form.handler.update_roles:
         class: %ccdn_user_admin.form.handler.update_roles.class%
         arguments:
+            - @event_dispatcher
             - @form.factory
             - @ccdn_user_admin.form.type.update_roles
             - @ccdn_user_admin.model.user
@@ -32,6 +33,7 @@ services:
     ccdn_user_admin.form.handler.update_account:
         class: %ccdn_user_admin.form.handler.update_account.class%
         arguments:
+            - @event_dispatcher
             - @form.factory
             - @ccdn_user_admin.form.type.update_account
             - @ccdn_user_admin.model.user

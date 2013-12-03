@@ -3,6 +3,7 @@ parameters:
     # Service Parameters defined in app/config
     ccdn_user_admin.component.crumb_builder.class: CCDNUser\AdminBundle\Component\Crumbs\CrumbBuilder
     ccdn_user_admin.component.crumb_factory.class: CCDNUser\AdminBundle\Component\Crumbs\Factory\CrumbFactory
+    ccdn_user_admin.component.event_listener.flash.class: CCDNUser\AdminBundle\Component\Dispatcher\Listener\FlashListener
 
 services:
 
@@ -27,3 +28,14 @@ services:
         class: %ccdn_user_admin.component.crumb_builder.class%
         arguments:
             - @ccdn_user_admin.component.crumb_factory
+
+    #
+    # Event Subscribers.
+    #
+    ccdn_user_admin.component.event_listener.flash:
+        class: %ccdn_user_admin.component.event_listener.flash.class%
+        arguments:
+            - @session
+            - @translator
+        tags:
+            - { name: kernel.event_subscriber }

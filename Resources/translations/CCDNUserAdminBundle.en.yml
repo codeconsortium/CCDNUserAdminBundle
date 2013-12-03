@@ -74,8 +74,9 @@ generic:
 flash:
     success:
         user:
-            force_reactivation:  "User %name% is now pending re-activation."
+            update_account:      "User %name% has been updated."
+            update_roles:        "User %name% has had roles changed."
             activate:            "User %name% has been activated."
+            force_reactivation:  "User %name% is now pending re-activation."
             ban:                 "User %name% has been banned."
             unban:               "User %name% has been unbanned."
-            set_roles:           "User %name% has had roles changed."
