@@ -67,7 +67,6 @@ class AccountController extends AccountBaseController
 	    	$response = $this->renderResponse('CCDNUserAdminBundle:Admin:Account/update_account.html.', array(
 	            'crumbs' => $this->getCrumbs()->addAccountEdit($user),
 	            'form' => $formHandler->getForm()->createView(),
-	            'theme' => $this->container->getParameter('ccdn_user_admin.account.edit_user_account.form_theme'),
 	            'user' => $user,
 	        ));
 	    }
@@ -97,7 +96,6 @@ class AccountController extends AccountBaseController
            $response = $this->renderResponse('CCDNUserAdminBundle:Admin:Account/update_roles.html.', array(
                'crumbs' => $this->getCrumbs()->addAccountChangeRoles($user),
                'form' => $formHandler->getForm()->createView(),
-               'theme' => $this->container->getParameter('ccdn_user_admin.account.edit_user_account.form_theme'),
                'user' => $user,
            ));
        }
