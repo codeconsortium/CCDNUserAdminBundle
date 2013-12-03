@@ -97,7 +97,7 @@ class TestBase extends WebTestCase
 		$users = array();
 		
 		foreach ($userNames as $username) {
-			$users[$username] = $this->addNewUser($username, $username . '@foobar.com', 'password', $persist, $andFlush);
+			$users[$username] = $this->addNewUser($username, $username . '@foobar.com', 'password', true, false, $persist, $andFlush);
 		}
 
 		if ($persist && $andFlush) {
