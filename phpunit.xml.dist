@@ -14,7 +14,7 @@
 >
 
     <testsuites>
-        <testsuite name="CCDNUser SecurityBundle Test Suite">
+        <testsuite name="CCDNUser AdminBundle Test Suite">
             <directory>./Tests/Repository</directory>
 			<directory>./Tests/Manager</directory>
         </testsuite>

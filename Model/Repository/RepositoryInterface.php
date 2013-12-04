@@ -14,7 +14,6 @@
 namespace CCDNUser\AdminBundle\Model\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-
 use CCDNUser\AdminBundle\Model\Model\ModelInterface;
 use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
 
@@ -44,7 +43,7 @@ interface RepositoryInterface
      * @param  \CCDNUser\AdminBundle\Model\Model\ModelInterface           $model
      * @return \CCDNUser\AdminBundle\Model\Repository\RepositoryInterface
      */
-    public function setModel($model);
+    public function setModel(ModelInterface $model);
 
     /**
      *

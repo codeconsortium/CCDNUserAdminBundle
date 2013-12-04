@@ -13,8 +13,6 @@
 
 namespace CCDNUser\AdminBundle\Controller;
 
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
 /**
  *
  * @category CCDNUser

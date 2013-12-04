@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the CCDNUser SecurityBundle
+ * This file is part of the CCDNUser AdminBundle
  *
  * (c) CCDN (c) CodeConsortium <http://www.codeconsortium.com/>
  *
@@ -25,12 +25,12 @@ use CCDNUser\AdminBundle\Tests\Functional\src\Entity\User;
  * Features context.
  *
  * @category CCDNUser
- * @package  SecurityBundle
+ * @package  AdminBundle
  *
  * @author   Reece Fowell <reece@codeconsortium.com>
  * @license  http://opensource.org/licenses/MIT MIT
  * @version  Release: 2.0
- * @link     https://github.com/codeconsortium/CCDNUserSecurityBundle
+ * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
 class DataContext extends BehatContext implements KernelAwareInterface

@@ -79,42 +79,42 @@ class FlashListener implements EventSubscriberInterface
     public function onUpdateAccountComplete(AdminUserEvent $event)
     {
         if ($user = $event->getUser()) {
-        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.update_account', array('%name%' => $event->getUser()->getUsername())));
+        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.update_account', array('%name%' => $user->getUsername())));
         }
     }
 
     public function onUpdateRolesComplete(AdminUserEvent $event)
     {
         if ($user = $event->getUser()) {
-        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.update_roles', array('%name%' => $event->getUser()->getUsername())));
+        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.update_roles', array('%name%' => $user->getUsername())));
         }
     }
 
     public function onActivateComplete(AdminUserResponseEvent $event)
     {
         if ($user = $event->getUser()) {
-        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.activate', array('%name%' => $event->getUser()->getUsername())));
+        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.activate', array('%name%' => $user->getUsername())));
         }
     }
 
     public function onDeactivateComplete(AdminUserResponseEvent $event)
     {
         if ($user = $event->getUser()) {
-        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.force_reactivation', array('%name%' => $event->getUser()->getUsername())));
+        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.force_reactivation', array('%name%' => $user->getUsername())));
         }
     }
 
 	public function onBanComplete(AdminUserResponseEvent $event)
 	{
         if ($user = $event->getUser()) {
-        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.ban', array('%name%' => $event->getUser()->getUsername())));
+        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.ban', array('%name%' => $user->getUsername())));
         }
 	}
 
 	public function onUnbanComplete(AdminUserResponseEvent $event)
 	{
         if ($user = $event->getUser()) {
-        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.unban', array('%name%' => $event->getUser()->getUsername())));
+        	$this->session->setFlash('success', $this->translator->trans('ccdn_user_admin.flash.success.user.unban', array('%name%' => $user->getUsername())));
         }
 	}
 }

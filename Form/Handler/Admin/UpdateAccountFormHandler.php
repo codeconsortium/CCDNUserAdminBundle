@@ -16,9 +16,7 @@ namespace CCDNUser\AdminBundle\Form\Handler\Admin;
 use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
-
 use CCDNUser\AdminBundle\Model\Model\ModelInterface;
 use CCDNUser\AdminBundle\Form\Handler\BaseFormHandler;
 use CCDNUser\AdminBundle\Component\Dispatcher\AdminEvents;

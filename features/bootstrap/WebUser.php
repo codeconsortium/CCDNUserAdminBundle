@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the CCDNUser SecurityBundle
+ * This file is part of the CCDNUser AdminBundle
  *
  * (c) CCDN (c) CodeConsortium <http://www.codeconsortium.com/>
  *
@@ -16,18 +16,19 @@ namespace CCDNUser\AdminBundle\features\bootstrap;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use CCDNUser\AdminBundle\features\bootstrap\DataContext;
 
 /**
  *
  * Web user context.
  *
  * @category CCDNUser
- * @package  SecurityBundle
+ * @package  AdminBundle
  *
  * @author   Reece Fowell <reece@codeconsortium.com>
  * @license  http://opensource.org/licenses/MIT MIT
  * @version  Release: 2.0
- * @link     https://github.com/codeconsortium/CCDNUserSecurityBundle
+ * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
 class WebUser extends MinkContext implements KernelAwareInterface

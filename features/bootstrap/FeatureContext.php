@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the CCDNUser SecurityBundle
+ * This file is part of the CCDNUser AdminBundle
  *
  * (c) CCDN (c) CodeConsortium <http://www.codeconsortium.com/>
  *
@@ -14,25 +14,23 @@
 namespace CCDNUser\AdminBundle\features\bootstrap;
 
 use Behat\MinkExtension\Context\RawMinkContext;
-use Behat\Mink\Element\NodeElement;
-
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Symfony\Component\HttpKernel\KernelInterface;
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use CCDNUser\AdminBundle\features\bootstrap\WebUser;
 
 /**
  *
  * Features context.
  *
  * @category CCDNUser
- * @package  SecurityBundle
+ * @package  AdminBundle
  *
  * @author   Reece Fowell <reece@codeconsortium.com>
  * @license  http://opensource.org/licenses/MIT MIT
  * @version  Release: 2.0
- * @link     https://github.com/codeconsortium/CCDNUserSecurityBundle
+ * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
 class FeatureContext extends RawMinkContext implements KernelAwareInterface
@@ -149,7 +147,6 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
         foreach ($elements as $element) {
 			$cells = $element->findAll('css', 'td');
             if (strpos(strtolower($cells[0]->getText()), 'ban status') !== false) {
-				//ldd($cells[1]->getText());
                 $didFindBanStatus = true;
 				$banStatus = strtolower($cells[1]->getText());
 	            if (strpos($banStatus, 'banned') !== false) {

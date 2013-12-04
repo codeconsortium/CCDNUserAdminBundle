@@ -13,9 +13,7 @@
 
 namespace CCDNUser\AdminBundle\Model\Repository;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\QueryBuilder;
-
 use CCDNUser\AdminBundle\Model\Model\ModelInterface;
 use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
 
@@ -64,7 +62,7 @@ abstract class BaseRepository
      * @param  \CCDNUser\AdminBundle\Model\Model\ModelInterface           $model
      * @return \CCDNUser\AdminBundle\Model\Repository\RepositoryInterface
      */
-    public function setModel($model)
+    public function setModel(ModelInterface $model)
     {
         $this->model = $model;
 

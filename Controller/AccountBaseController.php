@@ -47,7 +47,7 @@ class AccountBaseController extends BaseController
         return $roles;
     }
 
-    public function getFormHandlerToUpdateAccount(UserInterface $user)
+    protected function getFormHandlerToUpdateAccount(UserInterface $user)
     {
         $formHandler = $this->container->get('ccdn_user_admin.form.handler.update_account');
         $formHandler
@@ -58,7 +58,7 @@ class AccountBaseController extends BaseController
         return $formHandler;
     }
 
-    public function getFormHandlerToUpdateRolesForUser(UserInterface $user)
+    protected function getFormHandlerToUpdateRolesForUser(UserInterface $user)
     {
         $formHandler = $this->container->get('ccdn_user_admin.form.handler.update_roles');
 
