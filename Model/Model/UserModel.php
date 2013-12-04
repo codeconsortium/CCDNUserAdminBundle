@@ -17,7 +17,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 use CCDNUser\AdminBundle\Model\Model\BaseModel;
 use CCDNUser\AdminBundle\Model\Model\ModelInterface;
-use CCDNUser\AdminBundle\Entity\Profile;
 
 /**
  *
@@ -155,8 +154,8 @@ class UserModel extends BaseModel implements ModelInterface
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
      * @return \CCDNUser\AdminBundle\Model\Manager\UserManager
      */
-    public function forceReActivateUser(UserInterface $user)
+    public function deactivateUser(UserInterface $user)
     {
-        return $this->getManager()->forceReActivateUser($user);
+        return $this->getManager()->deactivateUser($user);
     }
 }

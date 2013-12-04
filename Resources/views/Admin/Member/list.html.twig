@@ -1,8 +1,8 @@
 {% extends 'CCDNUserAdminBundle:Common:Layout/base.html.twig' %}
 
-{% set LayoutTemplate = ccdn_user_profile.member.list.layout_template %}
+{% set LayoutTemplate = ccdn_user_admin.ban.show_banned_users.layout_template %}
 
-{% block title %}{{- 'title.members' | trans({}, 'CCDNUserAdminBundle') |slice(0, ccdn_user_profile.seo.title_length) -}}{% endblock -%}
+{% block title %}{{- 'title.members' | trans({}, 'CCDNUserAdminBundle') |slice(0, ccdn_user_admin.seo.title_length) -}}{% endblock -%}
 
 
 {% block body_content %}

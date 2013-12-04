@@ -67,10 +67,6 @@ class CCDNUserAdminBundle extends Bundle
 	                    'layout_template' => $this->container->getParameter('ccdn_user_admin.account.edit_user_account.layout_template'),
 	                    'form_theme' => $this->container->getParameter('ccdn_user_admin.account.edit_user_account.form_theme'),
 	                ),
-	                'edit_user_profile' => array(
-	                    'layout_template' => $this->container->getParameter('ccdn_user_admin.account.edit_user_profile.layout_template'),
-	                    'form_theme' => $this->container->getParameter('ccdn_user_admin.account.edit_user_profile.form_theme'),
-	                ),
 	            ),
 	            'role' => array(
 	                'set_users_role' => array(

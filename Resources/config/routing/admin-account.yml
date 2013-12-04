@@ -16,9 +16,9 @@ ccdn_user_admin_account_activate:
     pattern: /{userId}/activate
     defaults: { _controller: CCDNUserAdminBundle:Account:activate, _locale: en }
 
-ccdn_user_admin_account_force_reactivation:
+ccdn_user_admin_account_deactivate:
     pattern: /{userId}/force-reactivation
-    defaults: { _controller: CCDNUserAdminBundle:Account:forceReActivation, _locale: en }
+    defaults: { _controller: CCDNUserAdminBundle:Account:deactivate, _locale: en }
 
 #
 # User Banning.

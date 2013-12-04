@@ -16,8 +16,8 @@
 	<section>
 		<div class="btn-toolbar">
 			{% if user.enabled %}
-				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_force_reactivation', {'userId': user.getId }) -}}">
-					{{- 'link.user.force_reactivation'|trans({}, 'CCDNUserAdminBundle') -}}
+				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_deactivate', {'userId': user.getId }) -}}">
+					{{- 'link.user.deactivate'|trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
 			{% else %}
 				<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_activate', {'userId': user.getId }) -}}">
@@ -36,7 +36,7 @@
 			{% endif %}
 
 			<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_set_roles', {'userId': user.getId }) -}}">
-				{{- 'link.user.set_roles'|trans({}, 'CCDNUserAdminBundle') -}}
+				{{- 'link.user.change_roles'|trans({}, 'CCDNUserAdminBundle') -}}
 			</a>
 			<a class="btn btn-danger" href="{{- path('ccdn_user_admin_account_edit', {'userId': user.getId}) -}}">
 				{{- 'link.user.edit_account' |trans({}, 'CCDNUserAdminBundle') -}}

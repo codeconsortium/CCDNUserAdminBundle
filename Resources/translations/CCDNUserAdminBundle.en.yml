@@ -30,14 +30,15 @@ sidebar:
 
 link:
     user:
+        show_all:                "All Users"
         show_new:                "New Users"
         show_unactivated:        "Unactivated Users"
         show_banned:             "Banned Users"
         activate:                "Activate"
-        force_reactivation:      "Force Reactivation"
-        ban:                     "Ban User"
-        unban:                   "Unban User"
-        set_roles:               "Set Roles"
+        deactivate:              "Deactivate"
+        ban:                     "Ban"
+        unban:                   "Unban"
+        change_roles:            "Change Roles"
         edit_account:            "Edit Account"
 
 form:
@@ -47,9 +48,9 @@ form:
         email:                   "Email"
         locked:                  "Banned"
         enabled:                 "Activated"
-        roles:                   "set Roles"
+        roles:                   "Set Roles"
     button:
-        update:                  "Update Roles"
+        update:                  "Update"
         cancel:                  "Cancel"
 
 generic:
@@ -77,6 +78,6 @@ flash:
             update_account:      "User %name% has been updated."
             update_roles:        "User %name% has had roles changed."
             activate:            "User %name% has been activated."
-            force_reactivation:  "User %name% is now pending re-activation."
+            deactivate:          "User %name% is now pending re-activation."
             ban:                 "User %name% has been banned."
             unban:               "User %name% has been unbanned."

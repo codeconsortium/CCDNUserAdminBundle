@@ -30,4 +30,27 @@ class User extends BaseUser
             $this->registeredDate = new \DateTime('now');
         }
     }
+
+    /**
+     * Get registeredDate
+     *
+     * @return \Datetime
+     */
+    public function getRegisteredDate()
+    {
+        return $this->registeredDate;
+    }
+
+    /**
+     * Set registeredDate
+     *
+     * @param  \Datetime $registeredDate
+     * @return User
+     */
+    public function setRegisteredDate($registeredDate)
+    {
+        $this->registeredDate = $registeredDate;
+
+        return $this;
+    }
 }

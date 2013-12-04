@@ -132,14 +132,14 @@ class AccountController extends AccountBaseController
      * @param  int              $userId
      * @return RedirectResponse
      */
-    public function forceReActivationAction($userId)
+    public function deactivateAction($userId)
     {
         $this->isAuthorised('ROLE_ADMIN');
         $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
 		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
-        $this->getUserModel()->forceReActivateUser($user);
+        $this->getUserModel()->deactivateUser($user);
         $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
 		
         $this->dispatch(AdminEvents::ADMIN_USER_DEACTIVATE_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $user));

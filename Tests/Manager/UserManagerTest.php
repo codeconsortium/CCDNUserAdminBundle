@@ -74,11 +74,11 @@ class UserManagerTest extends TestBase
 		$this->assertTrue($userFound->isEnabled());
     }
 
-    public function testForceReActivateUser()
+    public function testDeactivateUser()
     {
 		$users = $this->addFixturesForUsers();
 		
-        $this->getUserModel()->forceReActivateUser($users['harry']);
+        $this->getUserModel()->deactivateUser($users['harry']);
         $userFound = $this->getUserModel()->findOneUserById($users['harry']->getId());
 		
 		$this->assertNotNull($userFound);

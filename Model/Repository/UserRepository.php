@@ -17,7 +17,7 @@ use CCDNUser\AdminBundle\Model\Repository\BaseRepository;
 use CCDNUser\AdminBundle\Model\Repository\RepositoryInterface;
 
 /**
- * ProfileRepository
+ * UserRepository
  *
  * @category CCDNUser
  * @package  AdminBundle

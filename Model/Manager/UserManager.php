@@ -95,7 +95,7 @@ class UserManager extends BaseManager implements ManagerInterface
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
      * @return \CCDNUser\AdminBundle\Manager\UserManager
      */
-    public function forceReActivateUser(UserInterface $user)
+    public function deactivateUser(UserInterface $user)
     {
         $user->setEnabled(false);
 
