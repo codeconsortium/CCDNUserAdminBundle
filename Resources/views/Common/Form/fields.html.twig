@@ -90,7 +90,7 @@
 	{%- spaceless -%}
 		{%- set attr = attr|merge({'id': 'label[' ~ id ~ ']', 'class': attr.class|default('') ~ ' col-lg-2 control-label' ~ (required ? ' control-label-required':'')}) -%}
 	    <label for="{{- id -}}" class="{{ attr['class'] -}}">
-			{%- if required -%}<span title="{{- 'form.required' |trans({}, 'CCDNUserAdminBundle') -}}">*</span>{%- endif -%}
+			{%- if required -%}<span title="{{- 'form.required' |trans({}, translation_domain) -}}">*</span>{%- endif -%}
 			{{- label |trans({}, translation_domain) | raw -}}
 		</label>
 	{%- endspaceless -%}
@@ -142,7 +142,7 @@
 {% block choice_widget_expanded %}
 	{%- spaceless -%}
 		{%- set attr = attr|merge({'class': attr.class|default('')}) -%}
-		<div {{ block('widget_container_attributes') }}>
+		<div {{ block('widget_container_attributes') -}}>
 		    <table class="table table-condensed">
 		        <tbody>
 		            {%- for child in form -%}
