@@ -1,0 +1,4 @@
+ccdn_user_admin:
+    entity:
+        user:
+            class: CCDNUser\AdminBundle\Tests\Functional\src\Entity\User
