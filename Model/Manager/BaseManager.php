@@ -138,7 +138,7 @@ abstract class BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @param  $entity
+     * @param  Object                                               $entity
      * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
      */
     public function persist($entity)
@@ -151,7 +151,7 @@ abstract class BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @param  $entity
+     * @param  Object                                               $entity
      * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
      */
     public function remove($entity)
@@ -176,7 +176,7 @@ abstract class BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @param  $entity
+     * @param  Object                                               $entity
      * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
      */
     public function refresh($entity)
