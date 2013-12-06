@@ -101,7 +101,31 @@ interface GatewayInterface
     /**
      *
      * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     */
+    public function persist($entity);
+
+    /**
+     *
+     * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     */
+    public function remove($entity);
+
+    /**
+     *
+     * @access public
      * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
     public function flush();
+
+    /**
+     *
+     * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     */
+    public function refresh($entity);
 }

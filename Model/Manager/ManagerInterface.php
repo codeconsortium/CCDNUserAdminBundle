@@ -14,7 +14,6 @@
 namespace CCDNUser\AdminBundle\Model\Manager;
 
 use Doctrine\ORM\QueryBuilder;
-
 use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
 use CCDNUser\AdminBundle\Model\Model\ModelInterface;
 

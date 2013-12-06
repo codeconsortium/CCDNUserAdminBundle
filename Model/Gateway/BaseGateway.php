@@ -78,6 +78,11 @@ abstract class BaseGateway implements GatewayInterface
         $this->doctrine = $doctrine;
 		$this->paginator = $paginator;
         $this->em = $doctrine->getEntityManager();
+		
+        if (null == $entityClass) {
+            throw new \Exception('Entity class for gateway must be specified!');
+        }
+		
         $this->entityClass = $entityClass;
 		$this->pagerTheme = $pagerTheme;
     }
@@ -204,12 +209,25 @@ abstract class BaseGateway implements GatewayInterface
     /**
      *
      * @access public
-     * @param  $item
+     * @param  Object                                               $entity
      * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
-    public function persist($item)
+    public function persist($entity)
     {
-        $this->em->persist($item);
+        $this->em->persist($entity);
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     */
+    public function remove($entity)
+    {
+        $this->em->remove($entity);
 
         return $this;
     }
@@ -229,24 +247,12 @@ abstract class BaseGateway implements GatewayInterface
     /**
      *
      * @access public
+     * @param  Object                                               $entity
      * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
      */
-    public function refresh($item)
+    public function refresh($entity)
     {
-        $this->em->refresh($item);
-
-        return $this;
-    }
-
-    /**
-     *
-     * @access public
-     * @param  $item
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
-     */
-    public function remove($item)
-    {
-        $this->em->remove($item);
+        $this->em->refresh($entity);
 
         return $this;
     }
