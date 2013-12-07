@@ -13,6 +13,7 @@ Installation takes only 3 steps:
 2. Register bundles with AppKernel.php.
 3. Update your app/config/routing.yml.
 4. Update your app/config/config.yml.
+5. Update your user entity.
 
 ### Step 1: Download and install dependencies via Composer.
 
@@ -60,6 +61,7 @@ public function registerBundles()
 In your app/config/routing.yml add:
 
 ``` yml
+# app/config/routing.yml
 CCDNUserAdminBundle:
     resource: "@CCDNUserAdminBundle/Resources/config/routing.yml"
     prefix: /
@@ -79,13 +81,53 @@ ccdn_user_admin:
 
 Replace Acme\YourUserBundle\Entity\User with the user class of your chosen user bundle.
 
+### Step 5: Update your user entity.
+
+In order for the bundle to function correctly you need to add the following to your user entity:
+
+``` php
+/**
+ *
+ * @access protected
+ * @var \DateTime $registeredDate
+ */
+protected $registeredDate;
+
+public function __construct()
+{
+    parent::__construct();
+	
+    // your own logic
+	$this->registeredDate = new \Datetime('now');
+}
+
+/**
+ * Get registeredDate
+ *
+ * @return \Datetime
+ */
+public function getRegisteredDate()
+{
+    return $this->registeredDate;
+}
+
+/**
+ * Set registeredDate
+ *
+ * @param  \Datetime $registeredDate
+ */
+public function setRegisteredDate(\Datetime $registeredDate)
+{
+    $this->registeredDate = $registeredDate;
+}
+```
+
 ### Translations
 
 If you wish to use default texts provided in this bundle, you have to make sure you have translator enabled in your config.
 
 ``` yaml
 # app/config/config.yml
-
 framework:
     translator: ~
 ```
