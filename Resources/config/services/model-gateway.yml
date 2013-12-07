@@ -10,7 +10,7 @@ services:
     ccdn_user_admin.gateway.user:
         class: %ccdn_user_admin.gateway.user.class%
         arguments:
-            - @doctrine
-            - @knp_paginator
+            - @doctrine.orm.entity_manager
             - %ccdn_user_admin.entity.user.class%
+            - @knp_paginator
             - %ccdn_user_admin.template.pager_theme%
