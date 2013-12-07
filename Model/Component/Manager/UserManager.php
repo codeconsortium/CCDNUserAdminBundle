@@ -11,12 +11,12 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Manager;
+namespace CCDNUser\AdminBundle\Model\Component\Manager;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-use CCDNUser\AdminBundle\Model\Manager\ManagerInterface;
-use CCDNUser\AdminBundle\Model\Manager\BaseManager;
+use CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface;
+use CCDNUser\AdminBundle\Model\Component\Manager\BaseManager;
 
 /**
  *

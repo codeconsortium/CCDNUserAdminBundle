@@ -11,12 +11,12 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Model;
+namespace CCDNUser\AdminBundle\Model\FrontModel;
 
 use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
 
-use CCDNUser\AdminBundle\Model\Manager\ManagerInterface;
-use CCDNUser\AdminBundle\Model\Repository\RepositoryInterface;
+use CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface;
+use CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface;
 
 /**
  *
@@ -42,14 +42,14 @@ abstract class BaseModel
     /**
      *
      * @access protected
-     * @var \CCDNUser\AdminBundle\Model\Repository\RepositoryInterface
+     * @var \CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface
      */
     protected $repository;
 
     /**
      *
      * @access protected
-     * @var \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
+     * @var \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
      */
     protected $manager;
 
@@ -57,8 +57,8 @@ abstract class BaseModel
      *
      * @access public
      * @param \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher $dispatcher
-     * @param \CCDNUser\AdminBundle\Model\Repository\RepositoryInterface       $repository
-     * @param \CCDNUser\AdminBundle\Model\Manager\ManagerInterface             $manager
+     * @param \CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface       $repository
+     * @param \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface             $manager
      */
     public function __construct(ContainerAwareEventDispatcher $dispatcher, RepositoryInterface $repository, ManagerInterface $manager)
     {
@@ -74,7 +74,7 @@ abstract class BaseModel
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Model\Repository\RepositoryInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface
      */
     public function getRepository()
     {
@@ -84,7 +84,7 @@ abstract class BaseModel
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
      */
     public function getManager()
     {

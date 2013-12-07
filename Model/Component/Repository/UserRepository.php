@@ -11,10 +11,10 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Repository;
+namespace CCDNUser\AdminBundle\Model\Component\Repository;
 
-use CCDNUser\AdminBundle\Model\Repository\BaseRepository;
-use CCDNUser\AdminBundle\Model\Repository\RepositoryInterface;
+use CCDNUser\AdminBundle\Model\Component\Repository\BaseRepository;
+use CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface;
 
 /**
  * UserRepository

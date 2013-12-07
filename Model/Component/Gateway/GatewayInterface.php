@@ -11,11 +11,11 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Manager;
+namespace CCDNUser\AdminBundle\Model\Component\Gateway;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\QueryBuilder;
-use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
-use CCDNUser\AdminBundle\Model\Model\ModelInterface;
+use Knp\Component\Pager\Paginator;
 
 /**
  *
@@ -28,29 +28,24 @@ use CCDNUser\AdminBundle\Model\Model\ModelInterface;
  * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
-interface ManagerInterface
+interface GatewayInterface
 {
     /**
      *
      * @access public
-     * @param \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface $gateway
+     * @param  \Doctrine\Common\Persistence\ObjectManager $em
+     * @param  string                                     $entityClass
+     * @param  \Knp\Component\Pager\Paginator             $paginator
+     * @param  string                                     $pagerTheme
      */
-    public function __construct(GatewayInterface $gateway);
+    public function __construct(ObjectManager $em, $entityClass, Paginator $paginator = null, $pagerTheme = null);
 
     /**
      *
      * @access public
-     * @param  \CCDNUser\AdminBundle\Model\Model\ModelInterface     $model
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return string
      */
-    public function setModel(ModelInterface $model);
-
-    /**
-     *
-     * @access public
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
-     */
-    public function getGateway();
+    public function getEntityClass();
 
     /**
      *
@@ -62,41 +57,53 @@ interface ManagerInterface
     /**
      *
      * @access public
-     * @param  string                                       $column  = null
-     * @param  Array                                        $aliases = null
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @param  Array                      $aliases = null
+     * @return \Doctrine\ORM\QueryBuilder
      */
-    public function createCountQuery($column = null, Array $aliases = null);
-
+    public function createSelectQuery(Array $aliases = null);
+	
     /**
      *
      * @access public
-     * @param  Array                                        $aliases = null
+     * @param  string                     $column  = null
+     * @param  Array                      $aliases = null
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createCountQuery($column = null, Array $aliases = null);
+	
+    /**
+     *
+     * @access public
+     * @param  \Doctrine\ORM\QueryBuilder                   $qb
+     * @param  Array                                        $parameters
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function createSelectQuery(Array $aliases = null);
+    public function one(QueryBuilder $qb, $parameters = array());
 
     /**
      *
      * @access public
      * @param  \Doctrine\ORM\QueryBuilder                   $qb
+     * @param  Array                                        $parameters
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function one(QueryBuilder $qb);
+    public function all(QueryBuilder $qb, $parameters = array());
 
     /**
      *
      * @access public
      * @param  \Doctrine\ORM\QueryBuilder $qb
-     * @return \Doctrine\ORM\QueryBuilder
+     * @param  int                        $itemsPerPage
+     * @param  int                        $page
+     * @return \Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination
      */
-    public function all(QueryBuilder $qb);
+    public function paginateQuery(QueryBuilder $qb, $itemsPerPage, $page);
 
     /**
      *
      * @access public
      * @param  Object                                               $entity
-     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function persist($entity);
 
@@ -104,14 +111,14 @@ interface ManagerInterface
      *
      * @access public
      * @param  Object                                               $entity
-     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function remove($entity);
 
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function flush();
 
@@ -119,7 +126,7 @@ interface ManagerInterface
      *
      * @access public
      * @param  Object                                               $entity
-     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function refresh($entity);
 }

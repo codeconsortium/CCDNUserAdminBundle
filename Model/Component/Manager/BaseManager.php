@@ -11,11 +11,13 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Repository;
+namespace CCDNUser\AdminBundle\Model\Component\Manager;
 
 use Doctrine\ORM\QueryBuilder;
-use CCDNUser\AdminBundle\Model\Model\ModelInterface;
-use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
+
+use CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface;
+use CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface;
+use CCDNUser\AdminBundle\Model\FrontModel\ModelInterface;
 
 /**
  *
@@ -28,28 +30,27 @@ use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
  * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  * @abstract
- *
  */
-abstract class BaseRepository
+abstract class BaseManager implements ManagerInterface
 {
     /**
      *
      * @access protected
-     * @var \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface $gateway
+     * @var \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface $gateway
      */
     protected $gateway;
 
     /**
      *
      * @access protected
-     * @var \CCDNUser\AdminBundle\Model\Model\ModelInterface $model
+     * @var \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface $model
      */
     protected $model;
 
     /**
      *
      * @access public
-     * @param  \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface $gateway
+     * @param \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface $gateway
      */
     public function __construct(GatewayInterface $gateway)
     {
@@ -59,20 +60,20 @@ abstract class BaseRepository
     /**
      *
      * @access public
-     * @param  \CCDNUser\AdminBundle\Model\Model\ModelInterface           $model
-     * @return \CCDNUser\AdminBundle\Model\Repository\RepositoryInterface
+     * @param  \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface     $model
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function setModel(ModelInterface $model)
     {
         $this->model = $model;
-
-        return $this;
+		
+		return $this;
     }
 
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function getGateway()
     {
@@ -132,5 +133,56 @@ abstract class BaseRepository
     public function all(QueryBuilder $qb)
     {
         return $this->gateway->all($qb);
+    }
+
+    /**
+     *
+     * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
+     */
+    public function persist($entity)
+    {
+        $this->gateway->persist($entity);
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
+     */
+    public function remove($entity)
+    {
+        $this->gateway->remove($entity);
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access public
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
+     */
+    public function flush()
+    {
+        $this->gateway->flush();
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
+     */
+    public function refresh($entity)
+    {
+        $this->gateway->refresh($entity);
+
+        return $this;
     }
 }

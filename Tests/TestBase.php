@@ -109,14 +109,14 @@ class TestBase extends WebTestCase
 
     /**
      *
-     * @var \CCDNUser\AdminBundle\Model\Model\UserModel $userModel
+     * @var \CCDNUser\AdminBundle\Model\FrontModel\UserModel $userModel
      */
     private $userModel;
 
     /**
      *
      * @access protected
-     * @return \CCDNUser\AdminBundle\Model\Model\UserModel
+     * @return \CCDNUser\AdminBundle\Model\FrontModel\UserModel
      */
     protected function getUserModel()
     {

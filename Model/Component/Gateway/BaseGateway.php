@@ -11,7 +11,7 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Gateway;
+namespace CCDNUser\AdminBundle\Model\Component\Gateway;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\QueryBuilder;
@@ -202,7 +202,7 @@ abstract class BaseGateway implements GatewayInterface
      *
      * @access public
      * @param  Object                                               $entity
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function persist($entity)
     {
@@ -215,7 +215,7 @@ abstract class BaseGateway implements GatewayInterface
      *
      * @access public
      * @param  Object                                               $entity
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function remove($entity)
     {
@@ -227,7 +227,7 @@ abstract class BaseGateway implements GatewayInterface
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function flush()
     {
@@ -240,7 +240,7 @@ abstract class BaseGateway implements GatewayInterface
      *
      * @access public
      * @param  Object                                               $entity
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function refresh($entity)
     {

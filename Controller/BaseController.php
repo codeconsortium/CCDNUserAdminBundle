@@ -70,7 +70,7 @@ class BaseController extends ContainerAware
 
     /**
      *
-     * @var \CCDNUser\AdminBundle\Model\Model\UserModel $userModel
+     * @var \CCDNUser\AdminBundle\Model\FrontModel\UserModel $userModel
      */
     private $userModel;
 
@@ -344,7 +344,7 @@ class BaseController extends ContainerAware
     /**
      *
      * @access protected
-     * @return \CCDNUser\AdminBundle\Model\Model\UserModel
+     * @return \CCDNUser\AdminBundle\Model\FrontModel\UserModel
      */
     protected function getUserModel()
     {

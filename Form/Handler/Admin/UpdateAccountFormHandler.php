@@ -17,7 +17,7 @@ use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Security\Core\User\UserInterface;
-use CCDNUser\AdminBundle\Model\Model\ModelInterface;
+use CCDNUser\AdminBundle\Model\FrontModel\ModelInterface;
 use CCDNUser\AdminBundle\Form\Handler\BaseFormHandler;
 use CCDNUser\AdminBundle\Component\Dispatcher\AdminEvents;
 use CCDNUser\AdminBundle\Component\Dispatcher\Event\AdminUserEvent;
@@ -45,7 +45,7 @@ class UpdateAccountFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @var \CCDNUser\AdminBundle\Model\Model\ModelInterface $userModel
+     * @var \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface $userModel
      */
     protected $userModel;
 
@@ -55,7 +55,7 @@ class UpdateAccountFormHandler extends BaseFormHandler
      * @param \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher $dispatcher
      * @param \Symfony\Component\Form\FormFactory                              $factory
      * @param \CCDNUser\AdminBundle\Form\Type\UpdateAccountFormType            $updateAccountFormType
-     * @param \CCDNUser\AdminBundle\Model\Model\ModelInterface                 $userModel
+     * @param \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface                 $userModel
      */
     public function __construct(ContainerAwareEventDispatcher $dispatcher, FormFactory $factory, $updateAccountFormType, ModelInterface $userModel)
     {

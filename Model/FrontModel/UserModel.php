@@ -11,12 +11,12 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Model;
+namespace CCDNUser\AdminBundle\Model\FrontModel;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-use CCDNUser\AdminBundle\Model\Model\BaseModel;
-use CCDNUser\AdminBundle\Model\Model\ModelInterface;
+use CCDNUser\AdminBundle\Model\FrontModel\BaseModel;
+use CCDNUser\AdminBundle\Model\FrontModel\ModelInterface;
 
 /**
  *
@@ -108,7 +108,7 @@ class UserModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Model\Manager\UserManager
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function updateUser(UserInterface $user)
     {
@@ -119,7 +119,7 @@ class UserModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Model\Manager\UserManager
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function banUser(UserInterface $user)
     {
@@ -130,7 +130,7 @@ class UserModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Model\Manager\UserManager
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function unbanUser(UserInterface $user)
     {
@@ -141,7 +141,7 @@ class UserModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Model\Manager\UserManager
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function activateUser(UserInterface $user)
     {
@@ -152,7 +152,7 @@ class UserModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Model\Manager\UserManager
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function deactivateUser(UserInterface $user)
     {

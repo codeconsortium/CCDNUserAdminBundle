@@ -11,11 +11,11 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Repository;
+namespace CCDNUser\AdminBundle\Model\Component\Manager;
 
 use Doctrine\ORM\QueryBuilder;
-use CCDNUser\AdminBundle\Model\Model\ModelInterface;
-use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
+use CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface;
+use CCDNUser\AdminBundle\Model\FrontModel\ModelInterface;
 
 /**
  *
@@ -28,27 +28,27 @@ use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
  * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  */
-interface RepositoryInterface
+interface ManagerInterface
 {
     /**
      *
      * @access public
-     * @param  \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface $gateway
+     * @param \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface $gateway
      */
     public function __construct(GatewayInterface $gateway);
 
     /**
      *
      * @access public
-     * @param  \CCDNUser\AdminBundle\Model\Model\ModelInterface           $model
-     * @return \CCDNUser\AdminBundle\Model\Repository\RepositoryInterface
+     * @param  \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface     $model
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function setModel(ModelInterface $model);
 
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function getGateway();
 
@@ -91,4 +91,35 @@ interface RepositoryInterface
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function all(QueryBuilder $qb);
+
+    /**
+     *
+     * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
+     */
+    public function persist($entity);
+
+    /**
+     *
+     * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
+     */
+    public function remove($entity);
+
+    /**
+     *
+     * @access public
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
+     */
+    public function flush();
+
+    /**
+     *
+     * @access public
+     * @param  Object                                               $entity
+     * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
+     */
+    public function refresh($entity);
 }

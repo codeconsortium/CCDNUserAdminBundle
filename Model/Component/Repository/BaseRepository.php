@@ -11,13 +11,11 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Manager;
+namespace CCDNUser\AdminBundle\Model\Component\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-
-use CCDNUser\AdminBundle\Model\Manager\ManagerInterface;
-use CCDNUser\AdminBundle\Model\Gateway\GatewayInterface;
-use CCDNUser\AdminBundle\Model\Model\ModelInterface;
+use CCDNUser\AdminBundle\Model\FrontModel\ModelInterface;
+use CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface;
 
 /**
  *
@@ -30,27 +28,28 @@ use CCDNUser\AdminBundle\Model\Model\ModelInterface;
  * @link     https://github.com/codeconsortium/CCDNUserAdminBundle
  *
  * @abstract
+ *
  */
-abstract class BaseManager implements ManagerInterface
+abstract class BaseRepository
 {
     /**
      *
      * @access protected
-     * @var \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface $gateway
+     * @var \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface $gateway
      */
     protected $gateway;
 
     /**
      *
      * @access protected
-     * @var \CCDNUser\AdminBundle\Model\Model\ModelInterface $model
+     * @var \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface $model
      */
     protected $model;
 
     /**
      *
      * @access public
-     * @param \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface $gateway
+     * @param  \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface $gateway
      */
     public function __construct(GatewayInterface $gateway)
     {
@@ -60,20 +59,20 @@ abstract class BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @param  \CCDNUser\AdminBundle\Model\Model\ModelInterface     $model
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @param  \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface           $model
+     * @return \CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface
      */
     public function setModel(ModelInterface $model)
     {
         $this->model = $model;
-		
-		return $this;
+
+        return $this;
     }
 
     /**
      *
      * @access public
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function getGateway()
     {
@@ -133,56 +132,5 @@ abstract class BaseManager implements ManagerInterface
     public function all(QueryBuilder $qb)
     {
         return $this->gateway->all($qb);
-    }
-
-    /**
-     *
-     * @access public
-     * @param  Object                                               $entity
-     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
-     */
-    public function persist($entity)
-    {
-        $this->gateway->persist($entity);
-
-        return $this;
-    }
-
-    /**
-     *
-     * @access public
-     * @param  Object                                               $entity
-     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
-     */
-    public function remove($entity)
-    {
-        $this->gateway->remove($entity);
-
-        return $this;
-    }
-
-    /**
-     *
-     * @access public
-     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
-     */
-    public function flush()
-    {
-        $this->gateway->flush();
-
-        return $this;
-    }
-
-    /**
-     *
-     * @access public
-     * @param  Object                                               $entity
-     * @return \CCDNUser\AdminBundle\Model\Manager\ManagerInterface
-     */
-    public function refresh($entity)
-    {
-        $this->gateway->refresh($entity);
-
-        return $this;
     }
 }

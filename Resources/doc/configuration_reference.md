@@ -17,16 +17,16 @@ ccdn_user_admin:                      # Required
             class:                    Acme\YourUserBundle\Entity\User # Required
     gateway:
         user:
-            class:                    CCDNUser\AdminBundle\Model\Gateway\UserGateway
+            class:                    CCDNUser\AdminBundle\Model\Component\Gateway\UserGateway
     repository:
         user:
-            class:                    CCDNUser\AdminBundle\Model\Repository\UserRepository
+            class:                    CCDNUser\AdminBundle\Model\Component\Repository\UserRepository
     manager:
         user:
-            class:                    CCDNUser\AdminBundle\Model\Manager\UserManager
+            class:                    CCDNUser\AdminBundle\Model\Component\Manager\UserManager
     model:
         user:
-            class:                    CCDNUser\AdminBundle\Model\Model\UserModel
+            class:                    CCDNUser\AdminBundle\Model\FrontModel\UserModel
     form:
         type:
             update_account:

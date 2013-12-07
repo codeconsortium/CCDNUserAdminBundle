@@ -11,7 +11,7 @@
  * file that was distributed with this source code.
  */
 
-namespace CCDNUser\AdminBundle\Model\Gateway;
+namespace CCDNUser\AdminBundle\Model\Component\Gateway;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -99,7 +99,7 @@ class UserGateway extends BaseGateway implements GatewayInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function saveUser(UserInterface $user)
     {
@@ -112,7 +112,7 @@ class UserGateway extends BaseGateway implements GatewayInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function updateUser(UserInterface $user)
     {
@@ -125,7 +125,7 @@ class UserGateway extends BaseGateway implements GatewayInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNUser\AdminBundle\Model\Gateway\GatewayInterface
+     * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function removeUser(UserInterface $user)
     {
