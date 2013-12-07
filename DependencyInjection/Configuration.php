@@ -49,6 +49,13 @@ class Configuration implements ConfigurationInterface
 
     /**
      *
+     * @access protected
+     * @var string $defaultValuePaginatorTheme
+     */
+    protected $defaultValuePaginatorTheme = 'CCDNUserAdminBundle:Common:Paginator/twitter_bootstrap.html.twig';
+
+    /**
+     *
      * @access public
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
      */
@@ -66,7 +73,7 @@ class Configuration implements ConfigurationInterface
                     ->canBeUnset()
                     ->children()
                         ->scalarNode('engine')->defaultValue('twig')->end()
-                        ->scalarNode('pager_theme')->defaultValue('CCDNUserAdminBundle:Common:Paginator/twitter_bootstrap.html.twig')->end()
+                        ->scalarNode('pager_theme')->defaultValue($this->defaultValuePaginatorTheme)->end()
                     ->end()
                 ->end()
                 ->scalarNode('users_per_page')->defaultValue('30')->end()
@@ -87,7 +94,6 @@ class Configuration implements ConfigurationInterface
         $this->addBanSection($rootNode);
         $this->addActivationSection($rootNode);
         $this->addRoleSection($rootNode);
-        $this->addSidebarSection($rootNode);
 
         return $treeBuilder;
     }
@@ -101,12 +107,21 @@ class Configuration implements ConfigurationInterface
     private function addEntitySection(ArrayNodeDefinition $node)
     {
         $node
-            ->children()
+            ->isRequired()
+            ->cannotBeEmpty()
+			->children()
                 ->arrayNode('entity')
+                    ->isRequired()
+                    ->cannotBeEmpty()
                     ->children()
                         ->arrayNode('user')
+		                    ->isRequired()
+		                    ->cannotBeEmpty()
                             ->children()
-                                ->scalarNode('class')->isRequired()->end()
+                                ->scalarNode('class')
+				                    ->isRequired()
+				                    ->cannotBeEmpty()
+								->end()
                             ->end()
                         ->end()
                     ->end()
@@ -495,40 +510,6 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('layout_template')->defaultValue($this->defaultValueLayoutTemplate)->end()
                                 ->scalarNode('form_theme')->defaultValue($this->defaultValueFormTheme)->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-
-        return $this;
-    }
-
-    /**
-     *
-     * @access private
-     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     * @return \CCDNUser\AdminBundle\DependencyInjection\Configuration
-     */
-    private function addSidebarSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->addDefaultsIfNotSet()
-            ->canBeUnset()
-            ->children()
-                ->arrayNode('sidebar')
-                    ->addDefaultsIfNotSet()
-                    ->canBeUnset()
-                    ->children()
-                        ->arrayNode('links')
-                            ->prototype('array')
-                                ->children()
-                                    ->scalarNode('bundle')->end()
-                                    ->scalarNode('label')->end()
-                                    ->scalarNode('route')->defaultNull()->end()
-                                    ->scalarNode('path')->defaultNull()->end()
-                                ->end()
                             ->end()
                         ->end()
                     ->end()

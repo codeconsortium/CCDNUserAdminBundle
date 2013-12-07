@@ -48,7 +48,7 @@ abstract class BaseGateway implements GatewayInterface
     /**
      *
      * @access protected
-     * @var $paginator
+     * @var \Knp\Component\Pager\Paginator $paginator
      */
     protected $paginator;
 	

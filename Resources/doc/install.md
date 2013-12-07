@@ -1,13 +1,9 @@
-Installing CCDNUser AdminBundle 1.x
+Installing CCDNUser AdminBundle 2.x
 ===================================
 
 ## Dependencies:
 
-1. [PagerFantaBundle](http://github.com/whiteoctober/WhiteOctoberPagerfantaBundle).
-2. [CCDNComponent CommonBundle](https://github.com/codeconsortium/CCDNComponentCommonBundle).
-3. [CCDNComponent CrumbTrailBundle](https://github.com/codeconsortium/CCDNComponentCrumbTrailBundle).
-4. [CCDNComponent DashboardBundle](https://github.com/codeconsortium/CCDNComponentDashboardBundle).
-5. [CCDNUser UserBundle](http://github.com/codeconsortium/CCDNUserUserBundle).
+> Note you will need a User Bundle so that you can map the UserInterface to your own User entity. You can use whatecer User Bundle you prefer. FOSUserBundle is highly rated.
 
 ## Installation:
 
@@ -16,6 +12,7 @@ Installation takes only 3 steps:
 1. Download and install dependencies via Composer.
 2. Register bundles with AppKernel.php.
 3. Update your app/config/routing.yml.
+4. Update your app/config/config.yml.
 
 ### Step 1: Download and install dependencies via Composer.
 
@@ -67,6 +64,20 @@ CCDNUserAdminBundle:
     resource: "@CCDNUserAdminBundle/Resources/config/routing.yml"
     prefix: /
 ```
+
+### Step 4: Update your app/config/config.yml.
+
+In your app/config/config.yml add:
+
+``` yml
+# app/config/config.yml
+ccdn_user_admin:
+    entity:
+        user:
+            class: Acme\YourUserBundle\Entity\User
+```
+
+Replace Acme\YourUserBundle\Entity\User with the user class of your chosen user bundle.
 
 ### Translations
 

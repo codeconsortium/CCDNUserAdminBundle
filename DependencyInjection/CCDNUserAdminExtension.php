@@ -74,12 +74,10 @@ class CCDNUserAdminExtension extends Extension
         $this->getBanSection($config, $container);
         $this->getActivationSection($config, $container);
         $this->getRoleSection($config, $container);
-        $this->getSidebarSection($config, $container);
 
         // Load Service definitions.
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-
         $loader->load('services/components.yml');
         $loader->load('services/model.yml');
         $loader->load('services/model-gateway.yml');
@@ -269,20 +267,6 @@ class CCDNUserAdminExtension extends Extension
 
         $container->setParameter('ccdn_user_admin.account.edit_user_account.layout_template', $config['account']['edit_user_account']['layout_template']);
         $container->setParameter('ccdn_user_admin.account.edit_user_account.form_theme', $config['account']['edit_user_account']['form_theme']);
-
-        return $this;
-    }
-
-    /**
-     *
-     * @access private
-     * @param  array                                                            $config
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder          $container
-     * @return \CCDNUser\AdminBundle\DependencyInjection\CCDNUserAdminExtension
-     */
-    private function getSidebarSection(array $config, ContainerBuilder $container)
-    {
-        $container->setParameter('ccdn_user_admin.sidebar.links', $config['sidebar']['links']);
 
         return $this;
     }
