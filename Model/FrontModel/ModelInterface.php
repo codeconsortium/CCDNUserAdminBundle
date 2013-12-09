@@ -14,7 +14,6 @@
 namespace CCDNUser\AdminBundle\Model\FrontModel;
 
 use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
-
 use CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface;
 use CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface;
 
@@ -35,9 +34,9 @@ interface ModelInterface
     /**
      *
      * @access public
-     * @param \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher $dispatcher
-     * @param \CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface       $repository
-     * @param \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface             $manager
+     * @param  \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher     $dispatcher
+     * @param  \CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface $repository
+     * @param  \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface       $manager
      */
     public function __construct(ContainerAwareEventDispatcher $dispatcher, RepositoryInterface $repository, ManagerInterface $manager);
 
