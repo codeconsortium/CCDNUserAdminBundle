@@ -1,6 +1,7 @@
 CCDNUser AdminBundle README.
 ============================
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a37f7674-cfe2-487d-b9e3-f8f5ce158083/mini.png)](https://insight.sensiolabs.com/projects/a37f7674-cfe2-487d-b9e3-f8f5ce158083) [![Build Status](https://secure.travis-ci.org/codeconsortium/CCDNUserAdminBundle.png)](https://travis-ci.org/codeconsortium/CCDNUserAdminBundle) [![Latest Stable Version](https://poser.pugx.org/codeconsortium/ccdn-user-admin-bundle/v/stable.png)](https://packagist.org/packages/codeconsortium/ccdn-user-admin-bundle) [![Total Downloads](https://poser.pugx.org/codeconsortium/ccdn-user-admin-bundle/downloads.png)](https://packagist.org/packages/codeconsortium/ccdn-user-admin-bundle)
 
 ## Notes: 
 
@@ -21,8 +22,6 @@ Theme and Sprite graphics courtesy of [twitter bootstrap](http://twitter.github.
 Other graphics are works of CodeConsortium.
 
 For the full copyright and license information, please view the [LICENSE](http://github.com/codeconsortium/CCDNUserAdminBundle/blob/master/Resources/meta/LICENSE) file that was distributed with this source code.
-
-[![Build Status](https://secure.travis-ci.org/codeconsortium/CCDNUserAdminBundle.png)](https://travis-ci.org/codeconsortium/CCDNUserAdminBundle) [![Latest Stable Version](https://poser.pugx.org/codeconsortium/ccdn-user-admin-bundle/v/stable.png)](https://packagist.org/packages/codeconsortium/ccdn-user-admin-bundle) [![Total Downloads](https://poser.pugx.org/codeconsortium/ccdn-user-admin-bundle/downloads.png)](https://packagist.org/packages/codeconsortium/ccdn-user-admin-bundle)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a37f7674-cfe2-487d-b9e3-f8f5ce158083/big.png)](https://insight.sensiolabs.com/projects/a37f7674-cfe2-487d-b9e3-f8f5ce158083)
 [![knpbundles.com](http://knpbundles.com/codeconsortium/CCDNUserAdminBundle/badge-short)](http://knpbundles.com/codeconsortium/CCDNUserAdminBundle) 
