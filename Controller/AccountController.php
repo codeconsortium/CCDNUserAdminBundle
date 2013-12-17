@@ -29,52 +29,52 @@ use CCDNUser\AdminBundle\Component\Dispatcher\Event\AdminUserResponseEvent;
  */
 class AccountController extends AccountBaseController
 {
-	 /**
-	 *
-	 * @access public
-	 * @param  int                             $userId
-	 * @return RedirectResponse|RenderResponse
-	 */
-	public function showAction($userId)
-	{
-	    $this->isAuthorised('ROLE_ADMIN');
-	    $user = $this->getUserModel()->findOneUserById($userId);
-	    $this->isFound($user);
+     /**
+     *
+     * @access public
+     * @param  int                             $userId
+     * @return RedirectResponse|RenderResponse
+     */
+    public function showAction($userId)
+    {
+        $this->isAuthorised('ROLE_ADMIN');
+        $user = $this->getUserModel()->findOneUserById($userId);
+        $this->isFound($user);
 
-	    return $this->renderResponse('CCDNUserAdminBundle:Admin:Account/show_account.html.', array(
-	        'crumbs' => $this->getCrumbs()->addAccountShow($user),
-	        'user' => $user,
-	    ));
-	}
+        return $this->renderResponse('CCDNUserAdminBundle:Admin:Account/show_account.html.', array(
+            'crumbs' => $this->getCrumbs()->addAccountShow($user),
+            'user' => $user,
+        ));
+    }
 
-	/**
-	 *
-	 * @access public
-	 * @param  int                             $userId
-	 * @return RedirectResponse|RenderResponse
-	 */
-	public function editAction($userId)
-	{
-	    $this->isAuthorised('ROLE_ADMIN');
-	    $user = $this->getUserModel()->findOneUserById($userId);
-	    $this->isFound($user);
-		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
+    /**
+     *
+     * @access public
+     * @param  int                             $userId
+     * @return RedirectResponse|RenderResponse
+     */
+    public function editAction($userId)
+    {
+        $this->isAuthorised('ROLE_ADMIN');
+        $user = $this->getUserModel()->findOneUserById($userId);
+        $this->isFound($user);
+        $this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
-	    $formHandler = $this->getFormHandlerToUpdateAccount($user);
-	    if ($formHandler->process()) {
-	        $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
-	    } else {
-	    	$response = $this->renderResponse('CCDNUserAdminBundle:Admin:Account/update_account.html.', array(
-	            'crumbs' => $this->getCrumbs()->addAccountEdit($user),
-	            'form' => $formHandler->getForm()->createView(),
-	            'user' => $user,
-	        ));
-	    }
+        $formHandler = $this->getFormHandlerToUpdateAccount($user);
+        if ($formHandler->process()) {
+            $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
+        } else {
+            $response = $this->renderResponse('CCDNUserAdminBundle:Admin:Account/update_account.html.', array(
+                'crumbs' => $this->getCrumbs()->addAccountEdit($user),
+                'form' => $formHandler->getForm()->createView(),
+                'user' => $user,
+            ));
+        }
 
         $this->dispatch(AdminEvents::ADMIN_USER_UPDATE_ACCOUNT_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $formHandler->getForm()->getData()));
 
         return $response;
-	}
+    }
 
    /**
     *
@@ -87,7 +87,7 @@ class AccountController extends AccountBaseController
        $this->isAuthorised('ROLE_SUPER_ADMIN');
        $user = $this->getUserModel()->findOneUserById($userId);
        $this->isFound($user);
-	   $this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
+       $this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
        $formHandler = $this->getFormHandlerToUpdateRolesForUser($user);
        if ($formHandler->process()) {
@@ -102,7 +102,7 @@ class AccountController extends AccountBaseController
 
        $this->dispatch(AdminEvents::ADMIN_USER_UPDATE_ROLES_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $formHandler->getForm()->getData()));
 
-	   return $response;
+       return $response;
    }
 
     /**
@@ -116,14 +116,14 @@ class AccountController extends AccountBaseController
         $this->isAuthorised('ROLE_ADMIN');
         $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
-		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
+        $this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
         $this->getUserModel()->activateUser($user);
         $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
 
         $this->dispatch(AdminEvents::ADMIN_USER_ACTIVATE_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $user));
-		
-		return $response;
+
+        return $response;
     }
 
     /**
@@ -137,14 +137,14 @@ class AccountController extends AccountBaseController
         $this->isAuthorised('ROLE_ADMIN');
         $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
-		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
+        $this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
         $this->getUserModel()->deactivateUser($user);
         $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
-		
+
         $this->dispatch(AdminEvents::ADMIN_USER_DEACTIVATE_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $user));
-		
-		return $response;
+
+        return $response;
     }
 
     /**
@@ -158,14 +158,14 @@ class AccountController extends AccountBaseController
         $this->isAuthorised('ROLE_ADMIN');
         $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
-		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
+        $this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
         $this->getUserModel()->banUser($user);
         $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
-		
+
         $this->dispatch(AdminEvents::ADMIN_USER_BAN_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $user));
-		
-		return $response;
+
+        return $response;
     }
 
     /**
@@ -179,13 +179,13 @@ class AccountController extends AccountBaseController
         $this->isAuthorised('ROLE_ADMIN');
         $user = $this->getUserModel()->findOneUserById($userId);
         $this->isFound($user);
-		$this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
+        $this->isAuthorised($user->getId() != $this->getUser()->getId(), 'You cannot administrate yourself.');
 
         $this->getUserModel()->unbanUser($user);
         $response = $this->redirectResponse($this->path('ccdn_user_admin_account_show', array('userId' => $userId)));
-		
+
         $this->dispatch(AdminEvents::ADMIN_USER_UNBAN_RESPONSE, new AdminUserResponseEvent($this->getRequest(), $response, $user));
-		
-		return $response;
+
+        return $response;
     }
 }

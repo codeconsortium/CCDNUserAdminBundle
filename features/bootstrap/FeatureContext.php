@@ -103,8 +103,8 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
         $session->setBasicAuth($user . '@foo.com', 'root');
     }
 
-	const RESULT_BANNED = 1;
-	const RESULT_ACTIVE = 2;
+    const RESULT_BANNED = 1;
+    const RESULT_ACTIVE = 2;
 
     /**
      * @Given /^the user should not be banned$/
@@ -113,24 +113,24 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     {
         $elements = $this->getPage()->findAll('css', 'table > tbody > tr');
         $didFindBanStatus = false;
-		$result = 0;
+        $result = 0;
 
         foreach ($elements as $element) {
-			$cells = $element->findAll('css', 'td');
+            $cells = $element->findAll('css', 'td');
             if (strpos(strtolower($cells[0]->getText()), 'ban status') !== false) {
                 $didFindBanStatus = true;
-				$banStatus = strtolower($cells[1]->getText());
-	            if (strpos($banStatus, 'banned') !== false) {
-					$result = self::RESULT_BANNED;
-				}
-	            if (strpos($banStatus, 'active') !== false) {
-					$result = self::RESULT_ACTIVE;
-				}
-				
-				break;
+                $banStatus = strtolower($cells[1]->getText());
+                if (strpos($banStatus, 'banned') !== false) {
+                    $result = self::RESULT_BANNED;
+                }
+                if (strpos($banStatus, 'active') !== false) {
+                    $result = self::RESULT_ACTIVE;
+                }
+
+                break;
             }
         }
-        
+
         WebTestCase::assertTrue($didFindBanStatus, "ban status was not found.");
         WebTestCase::assertSame(self::RESULT_ACTIVE, $result, "user should is banned but should be active.");
     }
@@ -142,21 +142,21 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
     {
         $elements = $this->getPage()->findAll('css', 'table > tbody > tr');
         $didFindBanStatus = false;
-		$result = 0;
+        $result = 0;
 
         foreach ($elements as $element) {
-			$cells = $element->findAll('css', 'td');
+            $cells = $element->findAll('css', 'td');
             if (strpos(strtolower($cells[0]->getText()), 'ban status') !== false) {
                 $didFindBanStatus = true;
-				$banStatus = strtolower($cells[1]->getText());
-	            if (strpos($banStatus, 'banned') !== false) {
-					$result = self::RESULT_BANNED;
-				}
-	            if (strpos($banStatus, 'active') !== false) {
-					$result = self::RESULT_ACTIVE;
-				}
-				
-				break;
+                $banStatus = strtolower($cells[1]->getText());
+                if (strpos($banStatus, 'banned') !== false) {
+                    $result = self::RESULT_BANNED;
+                }
+                if (strpos($banStatus, 'active') !== false) {
+                    $result = self::RESULT_ACTIVE;
+                }
+
+                break;
             }
         }
 
@@ -169,19 +169,19 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
      */
     public function iUpdateTheUser($buttonLabel)
     {
-		$label = strtolower($buttonLabel);
+        $label = strtolower($buttonLabel);
         $elements = $this->getPage()->findAll('css', 'a.btn');
-		$didFindButton = false;
-		$button = null;
-		
+        $didFindButton = false;
+        $button = null;
+
         foreach ($elements as $element) {
             if (strtolower($element->getText()) == $label) {
                 $didFindButton = true;
-				$button = $element;
+                $button = $element;
             }
         }
-        
+
         WebTestCase::assertTrue($didFindButton, "the ban button was not found.");
-		$button->click();
+        $button->click();
     }
 }

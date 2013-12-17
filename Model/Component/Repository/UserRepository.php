@@ -40,7 +40,7 @@ class UserRepository extends BaseRepository implements RepositoryInterface
     public function findAllUsersPaginated($page = 1, $itemsPerPage = 25)
     {
         $qb = $this->createSelectQuery(array('u'));
-		
+
         return $this->gateway->paginateQuery($qb, $itemsPerPage, $page);
     }
 

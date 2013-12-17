@@ -51,7 +51,7 @@ abstract class BaseGateway implements GatewayInterface
      * @var \Knp\Component\Pager\Paginator $paginator
      */
     protected $paginator;
-	
+
     /**
      *
      * @access private
@@ -62,21 +62,21 @@ abstract class BaseGateway implements GatewayInterface
     /**
      *
      * @access public
-     * @param  \Doctrine\Common\Persistence\ObjectManager $em
-     * @param  string                                     $entityClass
-     * @param  \Knp\Component\Pager\Paginator             $paginator
-     * @param  string                                     $pagerTheme
+     * @param \Doctrine\Common\Persistence\ObjectManager $em
+     * @param string                                     $entityClass
+     * @param \Knp\Component\Pager\Paginator             $paginator
+     * @param string                                     $pagerTheme
      */
     public function __construct(ObjectManager $em, $entityClass, Paginator $paginator = null, $pagerTheme = null)
     {
         if (null == $entityClass) {
             throw new \Exception('Entity class for gateway must be specified!');
         }
-		
+
         $this->entityClass = $entityClass;
         $this->em = $em;
-		$this->paginator = $paginator;
-		$this->pagerTheme = $pagerTheme;
+        $this->paginator = $paginator;
+        $this->pagerTheme = $pagerTheme;
     }
 
     /**
@@ -117,7 +117,7 @@ abstract class BaseGateway implements GatewayInterface
 
         return $this->getQueryBuilder()->select($aliases)->from($this->entityClass, $this->queryAlias);
     }
-	
+
     /**
      *
      * @access public
@@ -141,7 +141,7 @@ abstract class BaseGateway implements GatewayInterface
 
         return $this->getQueryBuilder()->select($aliases)->from($this->entityClass, $this->queryAlias);
     }
-	
+
     /**
      *
      * @access public
@@ -192,16 +192,16 @@ abstract class BaseGateway implements GatewayInterface
      */
     public function paginateQuery(QueryBuilder $qb, $itemsPerPage, $page)
     {
-		$pager = $this->paginator->paginate($qb, $page, $itemsPerPage);
+        $pager = $this->paginator->paginate($qb, $page, $itemsPerPage);
         $pager->setTemplate($this->pagerTheme);
 
-		return $pager;
+        return $pager;
     }
 
     /**
      *
      * @access public
-     * @param  Object                                               $entity
+     * @param  Object                                                         $entity
      * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function persist($entity)
@@ -214,7 +214,7 @@ abstract class BaseGateway implements GatewayInterface
     /**
      *
      * @access public
-     * @param  Object                                               $entity
+     * @param  Object                                                         $entity
      * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function remove($entity)
@@ -239,7 +239,7 @@ abstract class BaseGateway implements GatewayInterface
     /**
      *
      * @access public
-     * @param  Object                                               $entity
+     * @param  Object                                                         $entity
      * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function refresh($entity)

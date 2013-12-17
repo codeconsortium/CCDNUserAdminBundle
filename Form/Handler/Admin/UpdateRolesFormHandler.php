@@ -62,11 +62,11 @@ class UpdateRolesFormHandler extends BaseFormHandler
      * @param \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher $dispatcher
      * @param \Symfony\Component\Form\FormFactory                              $factory
      * @param \CCDNUser\AdminBundle\Form\Type\UpdateRolesFormType              $updateRolesFormType
-     * @param \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface                 $userModel
+     * @param \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface            $userModel
      */
     public function __construct(ContainerAwareEventDispatcher $dispatcher, FormFactory $factory, $updateRolesFormType, ModelInterface $userModel)
     {
-		$this->dispatcher = $dispatcher;
+        $this->dispatcher = $dispatcher;
         $this->factory = $factory;
         $this->updateRolesFormType = $updateRolesFormType;
         $this->userModel = $userModel;
@@ -108,14 +108,14 @@ class UpdateRolesFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @param  \Symfony\Component\Security\Core\User\UserInterface $user
+     * @param \Symfony\Component\Security\Core\User\UserInterface $user
      */
     protected function onSuccess(UserInterface $user)
     {
         $this->dispatcher->dispatch(AdminEvents::ADMIN_USER_UPDATE_ROLES_SUCCESS, new AdminUserEvent($this->request, $user));
-		
+
         $this->userModel->updateUser($user)->flush();
-		
+
         $this->dispatcher->dispatch(AdminEvents::ADMIN_USER_UPDATE_ROLES_COMPLETE, new AdminUserEvent($this->request, $user));
     }
 }

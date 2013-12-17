@@ -55,11 +55,11 @@ class UpdateAccountFormHandler extends BaseFormHandler
      * @param \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher $dispatcher
      * @param \Symfony\Component\Form\FormFactory                              $factory
      * @param \CCDNUser\AdminBundle\Form\Type\UpdateAccountFormType            $updateAccountFormType
-     * @param \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface                 $userModel
+     * @param \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface            $userModel
      */
     public function __construct(ContainerAwareEventDispatcher $dispatcher, FormFactory $factory, $updateAccountFormType, ModelInterface $userModel)
     {
-		$this->dispatcher = $dispatcher;
+        $this->dispatcher = $dispatcher;
         $this->factory = $factory;
         $this->updateAccountFormType = $updateAccountFormType;
         $this->userModel = $userModel;
@@ -74,7 +74,7 @@ class UpdateAccountFormHandler extends BaseFormHandler
     {
         if (null == $this->form) {
             $this->dispatcher->dispatch(AdminEvents::ADMIN_USER_UPDATE_ACCOUNT_INITIALISE, new AdminUserEvent($this->request, $this->user));
-			
+
             $this->form = $this->factory->create($this->updateAccountFormType, $this->user);
         }
 
@@ -84,14 +84,14 @@ class UpdateAccountFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @param  \Symfony\Component\Security\Core\User\UserInterface $user
+     * @param \Symfony\Component\Security\Core\User\UserInterface $user
      */
     protected function onSuccess(UserInterface $user)
     {
         $this->dispatcher->dispatch(AdminEvents::ADMIN_USER_UPDATE_ACCOUNT_SUCCESS, new AdminUserEvent($this->request, $user));
-		
+
         $this->userModel->updateUser($user)->flush();
-		
+
         $this->dispatcher->dispatch(AdminEvents::ADMIN_USER_UPDATE_ACCOUNT_COMPLETE, new AdminUserEvent($this->request, $user));
     }
 }

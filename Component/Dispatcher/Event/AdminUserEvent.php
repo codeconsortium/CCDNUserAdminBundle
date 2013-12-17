@@ -53,7 +53,7 @@ class AdminUserEvent extends Event
     public function __construct(Request $request, UserInterface $user)
     {
         $this->request = $request;
-		$this->user = $user;
+        $this->user = $user;
     }
 
     /**

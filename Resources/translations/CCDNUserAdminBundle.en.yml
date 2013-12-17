@@ -3,6 +3,10 @@ dashboard:
         admin:                   "Admin"
     categories:
         user_admin:              "User Administration"
+    links:
+        unactivated:             "Unactivated"
+        banned:                  "Banned"
+        newest:                  "Newest"
 
 title:
     user:

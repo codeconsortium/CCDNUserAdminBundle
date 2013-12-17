@@ -52,9 +52,9 @@ class UserModel extends BaseModel implements ModelInterface
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function findAllUsersFilteredAtoZPaginated($alpha, $page = 1, $itemsPerPage = 25)
-	{
+    {
         return $this->getRepository()->findAllUsersFilteredAtoZPaginated($alpha, $page, $itemsPerPage);
-	}
+    }
 
     /**
      *
@@ -107,7 +107,7 @@ class UserModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @param  \Symfony\Component\Security\Core\User\UserInterface $user
+     * @param  \Symfony\Component\Security\Core\User\UserInterface       $user
      * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function updateUser(UserInterface $user)
@@ -118,7 +118,7 @@ class UserModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @param  \Symfony\Component\Security\Core\User\UserInterface $user
+     * @param  \Symfony\Component\Security\Core\User\UserInterface       $user
      * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function banUser(UserInterface $user)
@@ -129,7 +129,7 @@ class UserModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @param  \Symfony\Component\Security\Core\User\UserInterface $user
+     * @param  \Symfony\Component\Security\Core\User\UserInterface       $user
      * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function unbanUser(UserInterface $user)
@@ -140,7 +140,7 @@ class UserModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @param  \Symfony\Component\Security\Core\User\UserInterface $user
+     * @param  \Symfony\Component\Security\Core\User\UserInterface       $user
      * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function activateUser(UserInterface $user)
@@ -151,7 +151,7 @@ class UserModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @param  \Symfony\Component\Security\Core\User\UserInterface $user
+     * @param  \Symfony\Component\Security\Core\User\UserInterface       $user
      * @return \CCDNUser\AdminBundle\Model\Component\Manager\UserManager
      */
     public function deactivateUser(UserInterface $user)

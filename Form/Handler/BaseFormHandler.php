@@ -80,7 +80,7 @@ class BaseFormHandler
     /**
      *
      * @access public
-     * @param  \Symfony\Component\HttpFoundation\Request           $request
+     * @param  \Symfony\Component\HttpFoundation\Request          $request
      * @return \CCDNUser\AdminBundle\Form\Handler\BaseFormHandler
      */
     public function setRequest(Request $request)
@@ -108,8 +108,8 @@ class BaseFormHandler
                     $formData = $this->form->getData();
 
                     $this->onSuccess($formData);
-					
-					return true;
+
+                    return true;
                 }
             }
         }

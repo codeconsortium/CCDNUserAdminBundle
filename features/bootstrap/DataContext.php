@@ -96,8 +96,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
     public function thereAreFollowingUsersDefined(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-			$username = isset($data['name']) ? $data['name'] : sha1(uniqid(mt_rand(), true));
-			
+            $username = isset($data['name']) ? $data['name'] : sha1(uniqid(mt_rand(), true));
+
             $this->users[$username] = $this->thereIsUser(
                 $username,
                 isset($data['email']) ? $data['email'] : sha1(uniqid(mt_rand(), true)),
@@ -107,8 +107,8 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 isset($data['banned']) ? $data['banned'] : false
             );
         }
-		
-		$this->getEntityManager()->flush();
+
+        $this->getEntityManager()->flush();
     }
 
     public function thereIsUser($username, $email, $password, $role = 'ROLE_USER', $activated = true, $banned = false)
@@ -118,13 +118,13 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $user->setUsername($username);
         $user->setEmail($email);
         $user->setEnabled((bool) $activated);
-		$user->setLocked((bool) $banned);
+        $user->setLocked((bool) $banned);
         $user->setPlainPassword($password);
 
         if (null !== $role) {
             $user->addRole($role);
         }
-		
+
         $this->getEntityManager()->persist($user);
 
         return $user;

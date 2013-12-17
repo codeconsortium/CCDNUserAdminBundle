@@ -84,7 +84,7 @@ class Configuration implements ConfigurationInterface
         $this->addGatewaySection($rootNode);
         $this->addRepositorySection($rootNode);
         $this->addManagerSection($rootNode);
-	    $this->addModelSection($rootNode);
+        $this->addModelSection($rootNode);
         $this->addFormSection($rootNode);
         $this->addComponentSection($rootNode);
 
@@ -109,19 +109,19 @@ class Configuration implements ConfigurationInterface
         $node
             ->isRequired()
             ->cannotBeEmpty()
-			->children()
+            ->children()
                 ->arrayNode('entity')
                     ->isRequired()
                     ->cannotBeEmpty()
                     ->children()
                         ->arrayNode('user')
-		                    ->isRequired()
-		                    ->cannotBeEmpty()
+                            ->isRequired()
+                            ->cannotBeEmpty()
                             ->children()
                                 ->scalarNode('class')
-				                    ->isRequired()
-				                    ->cannotBeEmpty()
-								->end()
+                                    ->isRequired()
+                                    ->cannotBeEmpty()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

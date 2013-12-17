@@ -40,7 +40,7 @@ interface ManagerInterface
     /**
      *
      * @access public
-     * @param  \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface     $model
+     * @param  \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface          $model
      * @return \CCDNUser\AdminBundle\Model\Component\Gateway\GatewayInterface
      */
     public function setModel(ModelInterface $model);
@@ -95,7 +95,7 @@ interface ManagerInterface
     /**
      *
      * @access public
-     * @param  Object                                               $entity
+     * @param  Object                                                         $entity
      * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
      */
     public function persist($entity);
@@ -103,7 +103,7 @@ interface ManagerInterface
     /**
      *
      * @access public
-     * @param  Object                                               $entity
+     * @param  Object                                                         $entity
      * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
      */
     public function remove($entity);
@@ -118,7 +118,7 @@ interface ManagerInterface
     /**
      *
      * @access public
-     * @param  Object                                               $entity
+     * @param  Object                                                         $entity
      * @return \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface
      */
     public function refresh($entity);

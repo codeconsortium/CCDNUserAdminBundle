@@ -34,19 +34,19 @@ class MemberController extends BaseController
     public function showAction()
     {
         $this->isAuthorised('ROLE_ADMIN');
-		$page = $this->getQuery('page', 1);
-		$alpha = $this->getQuery('alpha', null);
-		
-		if ($alpha) {
-			$membersPager = $this->getUserModel()->findAllUsersFilteredAtoZPaginated($page, $alpha);
-		} else {
-	        $membersPager = $this->getUserModel()->findAllUsersPaginated($page);
-		}
+        $page = $this->getQuery('page', 1);
+        $alpha = $this->getQuery('alpha', null);
+
+        if ($alpha) {
+            $membersPager = $this->getUserModel()->findAllUsersFilteredAtoZPaginated($page, $alpha);
+        } else {
+            $membersPager = $this->getUserModel()->findAllUsersPaginated($page);
+        }
 
         return $this->renderResponse('CCDNUserAdminBundle:Admin:Member/list.html.', array(
-			'crumbs' => $this->getCrumbs()->addMemberIndex(),
+            'crumbs' => $this->getCrumbs()->addMemberIndex(),
             'pager' => $membersPager,
-			'alpha' => $alpha,
+            'alpha' => $alpha,
         ));
     }
 
@@ -58,7 +58,7 @@ class MemberController extends BaseController
     public function showNewestAction()
     {
         $this->isAuthorised('ROLE_ADMIN');
-		$page = $this->getQuery('page', 1);
+        $page = $this->getQuery('page', 1);
         $usersPager = $this->getUserModel()->findAllNewestUsersPaginated(new \DateTime('-7 days'), $page, 25);
 
         return $this->renderResponse('CCDNUserAdminBundle:Admin:Member/list_newest.html.', array(
@@ -75,13 +75,13 @@ class MemberController extends BaseController
     public function showUnactivatedAction()
     {
         $this->isAuthorised('ROLE_ADMIN');
-		$page = $this->getQuery('page', 1);
+        $page = $this->getQuery('page', 1);
         $usersPager = $this->getUserModel()->findAllUnactivatedUsersPaginated($page, 25);
 
         return $this->renderResponse('CCDNUserAdminBundle:Admin:Member/list_unactivated.html.', array(
             'crumbs' => $this->getCrumbs()->addMemberUnactivatedIndex(),
             'pager' => $usersPager,
-		));
+        ));
     }
 
     /**
@@ -92,12 +92,12 @@ class MemberController extends BaseController
     public function showBannedAction()
     {
         $this->isAuthorised('ROLE_ADMIN');
-		$page = $this->getQuery('page', 1);
+        $page = $this->getQuery('page', 1);
         $usersPager = $this->getUserModel()->findAllBannedUsersPaginated($page, 25);
 
         return $this->renderResponse('CCDNUserAdminBundle:Admin:Member/list_banned.html.', array(
             'crumbs' => $this->getCrumbs()->addMemberBannedIndex(),
             'pager' => $usersPager,
-		));
+        ));
     }
 }

@@ -51,10 +51,10 @@ class AccountBaseController extends BaseController
     {
         $formHandler = $this->container->get('ccdn_user_admin.form.handler.update_account');
         $formHandler
-			->setUser($user)
-			->setRequest($this->getRequest())
-		;
-		
+            ->setUser($user)
+            ->setRequest($this->getRequest())
+        ;
+
         return $formHandler;
     }
 
@@ -64,7 +64,7 @@ class AccountBaseController extends BaseController
 
         $formHandler
             ->setUser($user)
-			->setRequest($this->getRequest())
+            ->setRequest($this->getRequest())
             ->setRoleHierarchy($this->getRoleHierarchy())
         ;
 
