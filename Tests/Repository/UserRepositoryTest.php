@@ -30,8 +30,7 @@ class UserRepositoryTest extends TestBase
 {
     public function testFindAllUsersPaginated()
     {
-		$users = $this->addFixturesForUsers();
-		
+		$this->addFixturesForUsers();
         $pager = $this->getUserModel()->findAllUsersPaginated(1, 25);
 		$usersFound = $pager->getItems();
 
@@ -40,8 +39,7 @@ class UserRepositoryTest extends TestBase
 
     public function testFindAllUsersFilteredAtoZPaginated()
 	{
-		$users = $this->addFixturesForUsers();
-		
+		$this->addFixturesForUsers();
         $pager = $this->getUserModel()->findAllUsersFilteredAtoZPaginated('h', 1, 25);
 		$usersFound = $pager->getItems();
 
@@ -50,11 +48,9 @@ class UserRepositoryTest extends TestBase
 
     public function testFindAllUnactivatedUsersPaginated()
     {
-		$users = $this->addFixturesForUsers();
-		
+		$this->addFixturesForUsers();
 		$this->addNewUser('foo1', 'foo1@bar.com', 'pass', false, true, true, true);
 		$this->addNewUser('foo2', 'foo2@bar.com', 'pass', false, false, true, true);
-
         $pager = $this->getUserModel()->findAllUnactivatedUsersPaginated(1, 25);
 		$usersFound = $pager->getItems();
 
@@ -63,11 +59,9 @@ class UserRepositoryTest extends TestBase
 
     public function testFindAllBannedUsersPaginated()
     {
-		$users = $this->addFixturesForUsers();
-		
+		$this->addFixturesForUsers();
 		$this->addNewUser('foo1', 'foo1@bar.com', 'pass', false, true, true, true);
 		$this->addNewUser('foo2', 'foo2@bar.com', 'pass', true, true, true, true);
-
         $pager = $this->getUserModel()->findAllBannedUsersPaginated(1, 25);
 		$usersFound = $pager->getItems();
 
@@ -76,8 +70,7 @@ class UserRepositoryTest extends TestBase
 
     public function testFindAllNewestUsersPaginated()
     {
-		$users = $this->addFixturesForUsers();
-		
+		$this->addFixturesForUsers();
         $pager = $this->getUserModel()->findAllNewestUsersPaginated(new \Datetime('-7 days'), 1, 25);
 		$usersFound = $pager->getItems();
 
@@ -87,7 +80,6 @@ class UserRepositoryTest extends TestBase
     public function testFindOneUserById()
     {
 		$users = $this->addFixturesForUsers();
-		
         $userFound = $this->getUserModel()->findOneUserById($users['harry']->getId());
 		
 		$this->assertNotNull($userFound);
