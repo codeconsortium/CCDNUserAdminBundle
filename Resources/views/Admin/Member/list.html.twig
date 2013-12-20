@@ -11,10 +11,8 @@
 
 	<section>
 
-		<nav class="btn-toolbar center-block text-center clearfix">
-			{%- set route = app.request.attributes.get('_route') -%}
-
-			<div class="btn-group center-block text-center">
+		<div class="btn-toolbar center-block text-center clearfix row">
+			<div class="btn-group" style="float:none;">
 				<a class="btn btn-default btn-xs{{- alpha is empty ? ' active':'' -}}" href="{{- path('ccdn_user_admin_member_index') -}}">
 					{{- 'generic.thead.filter.all' |trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
@@ -26,13 +24,9 @@
 					</a>
 				{%- endfor -%}
 			</div>
-		</nav>
-
-		<div class="btn-toolbar clearfix">
-			<nav class="col-md-12 btn-right paginate">
-				{{- knp_pagination_render(pager) -}}
-			</nav>
 		</div>
+
+		{{- knp_pagination_render(pager) -}}
 
 		<table class="table table-striped table-condensed table-hover">
 			<thead>
@@ -85,11 +79,7 @@
 			</tbody>
 		</table>
 
-		<div class="btn-toolbar">
-			<nav class="col-md-12 btn-right paginate">
-				{{- knp_pagination_render(pager) -}}
-			</nav>
-		</div>
+		{{- knp_pagination_render(pager) -}}
 
 	</section>
 
