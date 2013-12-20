@@ -19,6 +19,7 @@ title:
         set_roles:               "Set %name%'s Account Role"
 
 crumbs:
+    show-all:                    "All Users"
     show_newest:                 "Show Newest Users"
     show_unactivated:            "Show Unactivated Users"
     show_banned:                 "Show Banned Users"
@@ -56,6 +57,9 @@ form:
     button:
         update:                  "Update"
         cancel:                  "Cancel"
+
+user:
+    all-link:                    "All"
 
 generic:
     user:

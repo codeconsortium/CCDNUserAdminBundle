@@ -14,7 +14,7 @@
 		<div class="btn-toolbar center-block text-center clearfix row">
 			<div class="btn-group" style="float:none;">
 				<a class="btn btn-default btn-xs{{- alpha is empty ? ' active':'' -}}" href="{{- path('ccdn_user_admin_member_index') -}}">
-					{{- 'generic.thead.filter.all' |trans({}, 'CCDNUserAdminBundle') -}}
+					{{- 'user.all-link' |trans({}, 'CCDNUserAdminBundle') -}}
 				</a>
 
 				{%- for letter in "A".."Z" -%}

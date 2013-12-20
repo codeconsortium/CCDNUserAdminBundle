@@ -36,7 +36,7 @@ class CrumbBuilder extends BaseCrumbBuilder
     public function addMemberIndex()
     {
         return $this->createCrumbTrail()
-            ->add('crumbs.show_all', 'ccdn_user_admin_member_index')
+            ->add('crumbs.show-all', 'ccdn_user_admin_member_index')
         ;
     }
 
