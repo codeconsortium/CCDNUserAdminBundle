@@ -5,11 +5,11 @@ namespaces:
     properties:
         username:
             - Type: { type: string, groups: [update_account] }
-            - MinLength: { limit: 4, groups: [update_account] }
+            - Length: { min: 4, groups: [update_account] }
             - NotNull: { groups: [update_account] }
         email:
             - Type: { type: string, groups: [update_account] }
-            - MinLength: { limit: 5, groups: [update_account] }
+            - Length: { min: 5, groups: [update_account] }
             - NotNull: { groups: [update_account] }
 
 #Role:
