@@ -16,5 +16,5 @@ namespaces:
 #    properties:
 #        new_role:
 #            - Type: { type: string, groups: [update_account_roles] }
-#            - MinLength: { limit: 255, groups: [update_account_roles] }
+#            - Length: { min: 255, groups: [update_account_roles] }
 #            - NotNull: { groups: [update_account_roles] }
