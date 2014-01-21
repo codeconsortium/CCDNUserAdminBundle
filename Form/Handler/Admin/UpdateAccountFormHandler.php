@@ -13,7 +13,7 @@
 
 namespace CCDNUser\AdminBundle\Form\Handler\Admin;
 
-use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -52,12 +52,12 @@ class UpdateAccountFormHandler extends BaseFormHandler
     /**
      *
      * @access public
-     * @param \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher $dispatcher
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
      * @param \Symfony\Component\Form\FormFactory                              $factory
      * @param \CCDNUser\AdminBundle\Form\Type\UpdateAccountFormType            $updateAccountFormType
      * @param \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface            $userModel
      */
-    public function __construct(ContainerAwareEventDispatcher $dispatcher, FormFactory $factory, $updateAccountFormType, ModelInterface $userModel)
+    public function __construct(EventDispatcherInterface $dispatcher, FormFactory $factory, $updateAccountFormType, ModelInterface $userModel)
     {
         $this->dispatcher = $dispatcher;
         $this->factory = $factory;
