@@ -53,9 +53,9 @@ class UpdateAccountFormHandler extends BaseFormHandler
      *
      * @access public
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
-     * @param \Symfony\Component\Form\FormFactory                              $factory
-     * @param \CCDNUser\AdminBundle\Form\Type\UpdateAccountFormType            $updateAccountFormType
-     * @param \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface            $userModel
+     * @param \Symfony\Component\Form\FormFactory                         $factory
+     * @param \CCDNUser\AdminBundle\Form\Type\UpdateAccountFormType       $updateAccountFormType
+     * @param \CCDNUser\AdminBundle\Model\FrontModel\ModelInterface       $userModel
      */
     public function __construct(EventDispatcherInterface $dispatcher, FormFactory $factory, $updateAccountFormType, ModelInterface $userModel)
     {

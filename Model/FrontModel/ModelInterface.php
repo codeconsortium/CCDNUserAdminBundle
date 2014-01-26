@@ -34,7 +34,7 @@ interface ModelInterface
     /**
      *
      * @access public
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface     $dispatcher
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface          $dispatcher
      * @param \CCDNUser\AdminBundle\Model\Component\Repository\RepositoryInterface $repository
      * @param \CCDNUser\AdminBundle\Model\Component\Manager\ManagerInterface       $manager
      */
