@@ -1,5 +1,5 @@
-Installing CCDNUser AdminBundle 2.x
-===================================
+Installing CCDNUser AdminBundle.
+================================
 
 ## Dependencies:
 
@@ -50,11 +50,14 @@ register the new bundle:
 public function registerBundles()
 {
     $bundles = array(
-		new CCDNUser\AdminBundle\CCDNUserAdminBundle(),
-		...
-	);
+        new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+        new CCDNUser\AdminBundle\CCDNUserAdminBundle(),
+        // ...
+    );
 }
 ```
+
+Notice this include KNP Paginator, which is an important dependency.
 
 ### Step 3: Update your app/config/routing.yml.
 

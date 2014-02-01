@@ -5,10 +5,9 @@ CCDNUser AdminBundle README.
 
 ## Notes: 
 
-This bundle is for the symfony framework and requires Symfony >= 2.1.x and PHP >= 5.3.2
+This bundle is for the symfony framework and requires Symfony ~2.4 and PHP >= 5.3.2
   
 This project uses Doctrine >= 2.1.x and so does not require any specific database.
-  
 
 &copy; CCDN &copy; [CodeConsortium](http://www.codeconsortium.com/)
 
@@ -28,7 +27,7 @@ For the full copyright and license information, please view the [LICENSE](http:/
 
 ## Description:
 
-This is a Admin Bundle for user management for Symfony (2.1.x).
+This is a Admin Bundle for user management for Symfony.
 
 You still need to use a user bundle of your choosing, this bundle does not provide user registration/logging capabilities etc, this bundle is decoupled from user bundle specifics.
 
